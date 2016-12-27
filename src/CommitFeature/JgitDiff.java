@@ -25,12 +25,18 @@ import org.eclipse.jgit.treewalk.AbstractTreeIterator;
 import org.eclipse.jgit.treewalk.CanonicalTreeParser;
 /*
  * 
- * Child 子版本号
- * Parent 父版本号
+ * subsystem touched
+ * directories touched
+ * number of added lines
+ * number of deleted lines
+ * file name list
+ * 
  */
 public class JgitDiff {
 	
-	public JgitDiff(String log1, String log2) {
+	public JgitDiff(String log1, String log2, String project) {
+		//System.out.println("!!!!!!!!!!!!!"+project);
+		URL="/Users/WangQL/Documents/git/";
 		NS = 0;
 		ND = new ArrayList<Integer>();
 		addNum = new ArrayList<Integer>();
@@ -39,8 +45,11 @@ public class JgitDiff {
 		fileList = new ArrayList<String>();
 		logF = log1;
 		logS = log2;
+		URL += project + "/.git";
+		//System.out.println("!!!!!!!!!!!!!"+URL);
+
 	}
-	static String URL="/Users/WangQL/Documents/git/hello-world/.git";
+	static String URL="/Users/WangQL/Documents/git/";
 	static Git git;
 	public static List<Integer> addNum;
 	public static List<Integer> delNum;
@@ -54,17 +63,18 @@ public class JgitDiff {
 	
 	public static void main(String[] args) throws Exception {
 		JgitDiff jgitDiff = new JgitDiff("32162f598a2d1a176b1ea2891d0f1d1ce36aac49",
-				"5b167221ab8bcd81d54df53d842fd2813d2cafc3");
+				"5b167221ab8bcd81d54df53d842fd2813d2cafc3", "hello-world");
 
 		//jgitDiff.diffMethod("75ae5a6240747e1a062de855f43100c655aacb11",
 			//	"576515208ce27251f22e0c571f7fd64608d83a5b");
-		jgitDiff.getInfo(logF, logS);
+		System.out.println(URL);
+		jgitDiff.getInfo();
 	}
 
-	public void getInfo(String Child, String Parent)
+	public void getInfo()
 	{
 		try {
-			git=Git.open(new File("/Users/WangQL/Documents/git/hello-world/.git"));
+			git=Git.open(new File(URL));
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
@@ -73,8 +83,8 @@ public class JgitDiff {
 		CanonicalTreeParser oldTreeIter = new CanonicalTreeParser();
 	
 		try {
-			ObjectId old = repository.resolve(Child + "^{tree}");
-			ObjectId head = repository.resolve(Parent+"^{tree}");
+			ObjectId old = repository.resolve(logS + "^{tree}");
+			ObjectId head = repository.resolve(logF+"^{tree}");
 					oldTreeIter.reset(reader, old);
 			CanonicalTreeParser newTreeIter = new CanonicalTreeParser();
 			newTreeIter.reset(reader, head);
@@ -106,7 +116,7 @@ public class JgitDiff {
                 Integer dirNum2 = getNumOfOneChar(secondFile);
                 ND.add(dirNum1);
                 ND.add(dirNum2);
-                fileList.add(firstFile.substring(firstFile.lastIndexOf('/')));
+                fileList.add(firstFile.substring(firstFile.indexOf('/')));
                 //获取文件差异位置，从而统计差异的行数，如增加行数，减少行数
                 FileHeader fileHeader = df.toFileHeader(diffEntry);
                 List<HunkHeader> hunks = (List<HunkHeader>) fileHeader.getHunks();
@@ -144,7 +154,7 @@ public class JgitDiff {
 		for(int i = 0; i < addNum.size(); i ++)
 			System.out.print(addNum.get(i) + " ");
 		System.out.print("\n");
-		System.out.print("directories touched: ");
+		System.out.print("number of deleted lines: ");
 		for(int i = 0; i < delNum.size(); i ++)
 			System.out.print(delNum.get(i) + " ");
 		System.out.print("\nfiles: ");
