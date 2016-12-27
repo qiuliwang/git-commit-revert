@@ -47,60 +47,29 @@ public class JgitDiff {
 	
 	public static void main(String[] args) throws Exception {
 		JgitDiff jgitDiff = new JgitDiff();
-		
+		addNum = new ArrayList<Integer>();
+		delNum = new ArrayList<Integer>();
+		ND = new ArrayList<Integer>();
 		//jgitDiff.diffMethod("75ae5a6240747e1a062de855f43100c655aacb11",
 			//	"576515208ce27251f22e0c571f7fd64608d83a5b");
-		jgitDiff.cal("32162f598a2d1a176b1ea2891d0f1d1ce36aac49",
+		jgitDiff.getInfo("32162f598a2d1a176b1ea2891d0f1d1ce36aac49",
 						"5b167221ab8bcd81d54df53d842fd2813d2cafc3");
-		//a/EXE1/exe1_3.cpp
-		//System.out.println(getNumOfOneChar("a/EXE1/exe1_3.cpp"));
-	}
-	/*
-	 * 
-	 */
-	
-	public void diffMethod(String Child, String Parent){
-		try {
-			git=Git.open(new File("/Users/WangQL/Documents/git/hello-world/.git"));
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
-		repository=git.getRepository();
-		ObjectReader reader = repository.newObjectReader();
-		CanonicalTreeParser oldTreeIter = new CanonicalTreeParser();
-	
-		try {
-			ObjectId old = repository.resolve(Child + "^{tree}");
-			ObjectId head = repository.resolve(Parent+"^{tree}");
-					oldTreeIter.reset(reader, old);
-			CanonicalTreeParser newTreeIter = new CanonicalTreeParser();
-			newTreeIter.reset(reader, head);
-			List<DiffEntry> diffs= git.diff()
-                    .setNewTree(newTreeIter)
-                    .setOldTree(oldTreeIter)
-                    .call();
-			
-			 ByteArrayOutputStream out = new ByteArrayOutputStream();
-			    DiffFormatter df = new DiffFormatter(out);
-			    df.setRepository(git.getRepository());
-			
-			for (DiffEntry diffEntry : diffs) {
-		         df.format(diffEntry);
-		         String diffText = out.toString();
-		         System.out.println(diffText);
-		         //analyseDiff(diffText);
-		       //  out.reset();
-			}
-		} catch (IncorrectObjectTypeException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (GitAPIException e) {
-			e.printStackTrace();
-		}
+		System.out.println("subsystem touched: " + NS);
+		System.out.print("directories touched: ");
+		for(int i = 0; i < ND.size(); i ++)
+			System.out.print(ND.get(i) + " ");
+		System.out.print("\n");
+		System.out.print("number of added lines: ");
+		for(int i = 0; i < addNum.size(); i ++)
+			System.out.print(addNum.get(i) + " ");
+		System.out.print("\n");
+		System.out.print("directories touched: ");
+		for(int i = 0; i < delNum.size(); i ++)
+			System.out.print(delNum.get(i) + " ");
+		System.out.print("\n");
 	}
 
-	public void cal(String Child, String Parent)
+	public void getInfo(String Child, String Parent)
 	{
 		try {
 			git=Git.open(new File("/Users/WangQL/Documents/git/hello-world/.git"));
@@ -140,13 +109,14 @@ public class JgitDiff {
                 String secondFile = diffFile.substring(diffFile.indexOf("b/"), diffFile.length());
                 System.out.println(firstFile);  
                 System.out.println(secondFile); 
-                Integer count1 = 0, count2 = 0;
                 
+                Integer dirNum1 = getNumOfOneChar(firstFile);
 
+                Integer dirNum2 = getNumOfOneChar(secondFile);
+                ND.add(dirNum1);
+                ND.add(dirNum2);
                 //获取文件差异位置，从而统计差异的行数，如增加行数，减少行数
-
                 FileHeader fileHeader = df.toFileHeader(diffEntry);
-
                 List<HunkHeader> hunks = (List<HunkHeader>) fileHeader.getHunks();
                 int addSize = 0;
                 int subSize = 0;
@@ -155,16 +125,13 @@ public class JgitDiff {
                 	for(Edit edit : editList){
                 		subSize += edit.getEndA()-edit.getBeginA();
                 		addSize += edit.getEndB()-edit.getBeginB();
-                		//System.out.println(edit.getEndA());
-                		//System.out.println(edit.getBeginA());
-                		//System.out.println(edit.getEndB());
-                		//System.out.println(edit.getBeginA());
                 	}
                 }
-                
-                //System.out.println("addSize="+addSize);
-                //System.out.println("subSize="+subSize);
-                //System.out.println("------------------------------end-----------------------------");
+
+                addNum.add(addSize);
+                delNum.add(subSize);
+                System.out.println("addSize="+addSize);
+                System.out.println("subSize="+subSize + "\n");
                 out.reset();  
             }
             
@@ -178,6 +145,7 @@ public class JgitDiff {
             
 	}
 	
+	//计算路径长度
 	private static Integer getNumOfOneChar(String str)
 	{
 		Integer count = 0;
