@@ -1,79 +1,82 @@
 package CommitFeature;
 
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
 
 import org.eclipse.jgit.api.CheckoutCommand;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.PullCommand;
 import org.eclipse.jgit.api.Status;
+import org.eclipse.jgit.api.errors.GitAPIException;
+import org.eclipse.jgit.api.errors.NoHeadException;
 import org.eclipse.jgit.internal.storage.file.FileRepository;
+import org.eclipse.jgit.lib.Constants;
+import org.eclipse.jgit.lib.ObjectId;
+import org.eclipse.jgit.lib.PersonIdent;
 import org.eclipse.jgit.lib.Repository;
+import org.eclipse.jgit.revwalk.RevCommit;
+import org.eclipse.jgit.revwalk.RevWalk;
+import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
 
 
 public class mytest
 {
-	public static void main(String args[])
+	public static List<String> logList;
+	public static void main(String args[]) throws NoHeadException, IOException, GitAPIException
 	{
-		//gitCheckout("/Users/WangQL/Documents/git/primer-4th/", "test");
-		gitShowStatus("/Users/WangQL/Documents/git/primer-4th/");
+		String home = "/Users/WangQL/Documents/git/";
+		String project = "Java";
+		String repGit = "/.git";
+		String gitDir = home.concat(project + repGit);
+
+		System.out.println(gitDir);
+		mytest te = new mytest();
+		te.init(gitDir);
+		for(int i = 0; i < logList.size(); i ++)
+		{
+			System.out.println(logList.get(i));
+		}
 	}
 	
-	public static void gitCheckout(String path, String version) {
-	    File RepoGitDir = new File(path + "/.git");
-	    if (!RepoGitDir.exists()) {
-	    	System.out.println("Error! Not Exists : " + RepoGitDir.getAbsolutePath());
-	    	///Users/WangQL/Documents/git/primer-4th/.git
-	    } else {
-	        Repository repo = null;
-	        try {
-	            repo = new FileRepository(RepoGitDir.getAbsolutePath());
-	            System.out.println("Checkout to 1" + version);
-
-	            Git git = new Git(repo);
-	            System.out.println("Checkout to 2" + version);
-
-	            CheckoutCommand checkout = git.checkout();
-	            checkout.setName(version);
-	            System.out.println("Checkout to 3" + version);
-
-	            checkout.call();
-	            System.out.println("Checkout to 4" + version);
-
-	            PullCommand pullCmd = git.pull();
-	            pullCmd.call();
-
-	            System.out.println("Pulled from remote repository to local repository at " + repo.getDirectory());
-	        } catch (Exception e) {
-	        	System.out.println(e.getMessage() + " :: " + RepoGitDir.getAbsolutePath());
-	        } finally {
-	            if (repo != null) {
-	                repo.close();
-	            }
-	        }
-	    }
+	public mytest()
+	{
+		logList = new ArrayList<String>();
 	}
 	
-	public static void gitShowStatus(String repoDir) {
-	    File RepoGitDir = new File(repoDir + "/.git");
-	    if (!RepoGitDir.exists()) {
-	    	System.out.println("Error! Not Exists : " + RepoGitDir.getAbsolutePath());
-	    } else {
-	        Repository repo = null;
-	        try {
-	            repo = new FileRepository(RepoGitDir.getAbsolutePath());
-	            Git    git    = new Git(repo);
-	            Status status = git.status().call();
-	            System.out.println("Git Change: " + status.getChanged());
-	            System.out.println("Git Modified: " + status.getModified());
-	            System.out.println("Git UncommittedChanges: " + status.getUncommittedChanges());
-	            System.out.println("Git Untracked: " + status.getUntracked());
-	        } catch (Exception e) {
-	        	System.out.println(e.getMessage() + " : " + repoDir);
-	        } finally {
-	            if (repo != null) {
-	                repo.close();
-	            }
-	        }
-	    }
+	private void init(String path) throws IOException, NoHeadException, GitAPIException
+	{
+		FileRepositoryBuilder builder = new FileRepositoryBuilder();
+		Repository repository = builder.setGitDir(new File(path))
+				.readEnvironment() // scan environment GIT_* variables
+				.findGitDir() // scan up the file system tree
+				.build();
+		//Respository 仓库
+		// RevWalk walk = new RevWalk(repository);
+		// RevCommit commit = walk.parseCommit(objectIdOfCommit);
+
+		//Git: API to interact with a git repository
+		Git git = new Git(repository);
+		Iterable<RevCommit> gitLog = git.log().call();
+		Iterator<RevCommit> it = gitLog.iterator();
+
+		while (it.hasNext()) {			
+			RevCommit thisLog = it.next();
+			ObjectId thisID = thisLog.getId();
+			String commitId = getCommitId(thisID.toString()); // get commit ID hashcode																 
+			logList.add(commitId);
+		}
 	}
+	
+	private static String getCommitId(String str) {
+
+		String tempDescription = str;
+		tempDescription = str.substring(7, 47);
+		return tempDescription;
+	}
+
 }

@@ -30,43 +30,35 @@ import org.eclipse.jgit.treewalk.CanonicalTreeParser;
  */
 public class JgitDiff {
 	
-	public JgitDiff() {
+	public JgitDiff(String log1, String log2) {
 		NS = 0;
 		ND = new ArrayList<Integer>();
+		addNum = new ArrayList<Integer>();
+		delNum = new ArrayList<Integer>();
+		ND = new ArrayList<Integer>();
+		fileList = new ArrayList<String>();
+		logF = log1;
+		logS = log2;
 	}
 	static String URL="/Users/WangQL/Documents/git/hello-world/.git";
 	static Git git;
-	
 	public static List<Integer> addNum;
 	public static List<Integer> delNum;
 	public static Integer NS;	//number of subsystems touched by the current change
 	public static List<Integer> ND;	//number of directories touched by the current change
 	//one commit has only one NS but many ND, addNum and delNum.
-	
+	public static List<String> fileList;
 	public static Repository repository;
+	public static String logF;
+	public static String logS;
 	
 	public static void main(String[] args) throws Exception {
-		JgitDiff jgitDiff = new JgitDiff();
-		addNum = new ArrayList<Integer>();
-		delNum = new ArrayList<Integer>();
-		ND = new ArrayList<Integer>();
+		JgitDiff jgitDiff = new JgitDiff("32162f598a2d1a176b1ea2891d0f1d1ce36aac49",
+				"5b167221ab8bcd81d54df53d842fd2813d2cafc3");
+
 		//jgitDiff.diffMethod("75ae5a6240747e1a062de855f43100c655aacb11",
 			//	"576515208ce27251f22e0c571f7fd64608d83a5b");
-		jgitDiff.getInfo("32162f598a2d1a176b1ea2891d0f1d1ce36aac49",
-						"5b167221ab8bcd81d54df53d842fd2813d2cafc3");
-		System.out.println("subsystem touched: " + NS);
-		System.out.print("directories touched: ");
-		for(int i = 0; i < ND.size(); i ++)
-			System.out.print(ND.get(i) + " ");
-		System.out.print("\n");
-		System.out.print("number of added lines: ");
-		for(int i = 0; i < addNum.size(); i ++)
-			System.out.print(addNum.get(i) + " ");
-		System.out.print("\n");
-		System.out.print("directories touched: ");
-		for(int i = 0; i < delNum.size(); i ++)
-			System.out.print(delNum.get(i) + " ");
-		System.out.print("\n");
+		jgitDiff.getInfo(logF, logS);
 	}
 
 	public void getInfo(String Child, String Parent)
@@ -111,10 +103,10 @@ public class JgitDiff {
                 System.out.println(secondFile); 
                 
                 Integer dirNum1 = getNumOfOneChar(firstFile);
-
                 Integer dirNum2 = getNumOfOneChar(secondFile);
                 ND.add(dirNum1);
                 ND.add(dirNum2);
+                fileList.add(firstFile.substring(firstFile.lastIndexOf('/')));
                 //获取文件差异位置，从而统计差异的行数，如增加行数，减少行数
                 FileHeader fileHeader = df.toFileHeader(diffEntry);
                 List<HunkHeader> hunks = (List<HunkHeader>) fileHeader.getHunks();
@@ -142,7 +134,26 @@ public class JgitDiff {
     		} catch (GitAPIException e) {
     			e.printStackTrace();
     		}
-            
+		
+		System.out.println("subsystem touched: " + NS);
+		System.out.print("directories touched: ");
+		for(int i = 0; i < ND.size(); i ++)
+			System.out.print(ND.get(i) + " ");
+		System.out.print("\n");
+		System.out.print("number of added lines: ");
+		for(int i = 0; i < addNum.size(); i ++)
+			System.out.print(addNum.get(i) + " ");
+		System.out.print("\n");
+		System.out.print("directories touched: ");
+		for(int i = 0; i < delNum.size(); i ++)
+			System.out.print(delNum.get(i) + " ");
+		System.out.print("\nfiles: ");
+        for(int i = 0; i < fileList.size(); i ++)
+        {
+        	System.out.print(fileList.get(i) + " ");
+        }
+		System.out.print("\n");
+
 	}
 	
 	//计算路径长度
@@ -158,6 +169,11 @@ public class JgitDiff {
 			localStr = localStr.substring(localStr.indexOf('/') + 1);
 		}
 		return count;
+	}
+	
+	public List<String> getFileList()
+	{
+		return fileList;
 	}
 
 	private AbstractTreeIterator prepareTreeParser(RevCommit revCommit) {

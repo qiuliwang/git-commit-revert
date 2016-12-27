@@ -27,40 +27,40 @@ public class gitLogAnalysis {
 	 * @throws GitAPIException
 	 * @throws NoHeadException
 	 */
-	static String[] projects = new String[] { "hello-world","Cpp-Primer","primer-4th","Java" };
-
-	static int projectIndex = 3;
-	static String project = projects[projectIndex];
-	static String home = "/Users/WangQL/Documents/git/";
-	static String projectHome = home+project+"/";
-	static String outputHome = home+project+"Output/";
-	static String tempCopyFileHome =outputHome+"tempFiles"; 
+	static String project;
+	static String home;
+	static String projectHome;
+	static String outputHome;
+	static String tempCopyFileHome;
 	
 	//count number of developers
 	//NDEV
-	
 	static Integer numOfDevelopers = 0;
+	
 	static List<String> nameOfDevelopers;
+	public gitLogAnalysis(String pro)
+	{
+		nameOfDevelopers = new ArrayList<String>();
+		project = pro;
+		home = "/Users/WangQL/Documents/git/";
+		projectHome = home+project+"/";
+		outputHome = home+project+"Output/";
+		tempCopyFileHome =outputHome+"tempFiles"; 
+	}
 	
 	@SuppressWarnings("deprecation")
 	public static void main(String[] args) throws IOException, NoHeadException,
 			GitAPIException {
 		// TODO Auto-generated method stub
-		gitLogAnalysis gas = new gitLogAnalysis();
-		gas.analysis(project);
-	}
-
-	
-	public gitLogAnalysis()
-	{
-		nameOfDevelopers = new ArrayList<String>();
+		gitLogAnalysis gas = new gitLogAnalysis("Java");
+		gas.analysis();
 	}
 	
-	public void analysis(String proj) throws IOException, NoHeadException, GitAPIException
+	public void analysis() throws IOException, NoHeadException, GitAPIException
 	{
 		
 		String repGit = "/.git";
-		String gitDir = home.concat(proj + repGit);
+		String gitDir = home.concat(project + repGit);
 
 		System.out.println(gitDir);
 
@@ -100,8 +100,8 @@ public class gitLogAnalysis {
 		int numberOfRevertingCommit = 0;
 		
 		//#################
-		FileWriter fwriter1 = null;
-		fwriter1 = new FileWriter("/Users/WangQL/Desktop/mess.txt");
+		//FileWriter fwriter1 = null;
+		//fwriter1 = new FileWriter("/Users/WangQL/Desktop/mess.txt");
 		while (it.hasNext()) {
 			Commit thisCommit = new Commit();
 			
@@ -123,9 +123,9 @@ public class gitLogAnalysis {
 			ObjectId thisID = thisLog.getId();
 
 			String commitId = getCommitId(thisID.toString()); // get commit ID hashcode																 
-
-			//System.out.println(msg);
-		    fwriter1.write("\n===============================\n"+msg);
+			
+			//System.out.println(commitId);
+		    //fwriter1.write("\n===============================\n"+msg);
 			thisCommit.setId(numberOfAllCommit); // index
 			thisCommit.setCommitid(commitId); // commitId
 			thisCommit.setCommitter(committerName); // committer
@@ -155,7 +155,7 @@ public class gitLogAnalysis {
 			}
 		}
 		//####################
-		fwriter1.close();
+		//fwriter1.close();
 		
 		List<Commit> allLabeledCommits = getLabeledCommits(allCommits,revertedCommitIDs);
 		
