@@ -29,21 +29,38 @@ public class gitLogAnalysis {
 	 */
 	static String[] projects = new String[] { "hello-world","Cpp-Primer","primer-4th","Java" };
 
-	static int projectIndex = 0;
+	static int projectIndex = 3;
 	static String project = projects[projectIndex];
 	static String home = "/Users/WangQL/Documents/git/";
 	static String projectHome = home+project+"/";
 	static String outputHome = home+project+"Output/";
 	static String tempCopyFileHome =outputHome+"tempFiles"; 
 	
+	//count number of developers
+	//NDEV
+	
+	static Integer numOfDevelopers = 0;
+	static List<String> nameOfDevelopers;
+	
 	@SuppressWarnings("deprecation")
 	public static void main(String[] args) throws IOException, NoHeadException,
 			GitAPIException {
 		// TODO Auto-generated method stub
+		gitLogAnalysis gas = new gitLogAnalysis();
+		gas.analysis(project);
+	}
 
+	
+	public gitLogAnalysis()
+	{
+		nameOfDevelopers = new ArrayList<String>();
+	}
+	
+	public void analysis(String proj) throws IOException, NoHeadException, GitAPIException
+	{
 		
 		String repGit = "/.git";
-		String gitDir = home.concat(project + repGit);
+		String gitDir = home.concat(proj + repGit);
 
 		System.out.println(gitDir);
 
@@ -54,9 +71,6 @@ public class gitLogAnalysis {
 		List<String> revertedCommitIDs = new ArrayList<String>();
 		List<Commit> revertedCommits = new ArrayList<Commit>();		
 		
-//		File allCommitCsv = new File(home + "\\" + project + "\\Output\\AllLog.csv");
-//		File revertingCommitCsv = new File(home + "\\" + project + "\\Output\\RevertingLog.csv");
-//		File revertedCommitCsv = new File(home + "\\" + project + "\\Output\\RevertedLog.csv");
 		File allCommitCsv = new File(home + "/" + project + "Output/AllLog.csv");
 		File revertingCommitCsv = new File(home + "/" + project + "Output/RevertingLog.csv");
 		File revertedCommitCsv = new File(home + "/" + project + "Output/RevertedLog.csv");
@@ -90,10 +104,17 @@ public class gitLogAnalysis {
 		fwriter1 = new FileWriter("/Users/WangQL/Desktop/mess.txt");
 		while (it.hasNext()) {
 			Commit thisCommit = new Commit();
-
+			
 			RevCommit thisLog = it.next();
 			PersonIdent committer = thisLog.getCommitterIdent();
 			String committerName = committer.getName();
+			//add name
+			if(!nameOfDevelopers.contains(committerName))
+			{
+				nameOfDevelopers.add(committerName);
+			}
+			
+			//System.out.println(committerName);
 			//String committerEmail = committer.getEmailAddress();
 			Date commitDate = committer.getWhen();
 			//String date = commitDate.toString();
@@ -104,8 +125,7 @@ public class gitLogAnalysis {
 			String commitId = getCommitId(thisID.toString()); // get commit ID hashcode																 
 
 			//System.out.println(msg);
-		     fwriter1.write("\n===============================\n"+msg);
-
+		    fwriter1.write("\n===============================\n"+msg);
 			thisCommit.setId(numberOfAllCommit); // index
 			thisCommit.setCommitid(commitId); // commitId
 			thisCommit.setCommitter(committerName); // committer
@@ -154,9 +174,15 @@ public class gitLogAnalysis {
 		System.out.println("Reverting commits:"+numberOfRevertingCommit);
 		System.out.println("Reverted commits:"+revertedCommits.size());				
 		
-		//jgitDiff.diffMethod(Child, Parent)				
+		//jgitDiff.diffMethod(Child, Parent)
+		//count number of developers by nameOfDevelpoers
+		numOfDevelopers = nameOfDevelopers.size();
+		System.out.println(numOfDevelopers);
+		for(int i = 0; i < nameOfDevelopers.size(); i ++)
+		{
+			System.out.println(nameOfDevelopers.get(i) + " ");
+		}
 	}
-
 	
 	// get regulizedMsg 
 	private static String csvHandlerStr(String str) {
