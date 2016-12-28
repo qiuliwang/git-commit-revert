@@ -34,32 +34,31 @@ public class analysis
 	public static String project = "git-commit-revert";
 	public static String repGit = "/.git";
 	public static String gitDir = home.concat(project + repGit);
+	public static Git git;
 
 	public static void main(String args[]) throws NoHeadException, IOException, GitAPIException
 	{
 		
-		analysis te = new analysis();
-		te.init(gitDir);
-		te.getAllInfo();
+//		analysis te = new analysis("/Users/WangQL/Documents/git", "Java");
+//		System.out.println(gitDir);
+//		te.init(gitDir);
+
+		//te.getAllInfo();
 	}
 	
-	public analysis()
+	public analysis(String hom, String pro, Git ogit, List<String> Logs)
 	{
-		logList = new ArrayList<String>();
+		logList = Logs;
 		fileList = new ArrayList<String>();
 		diffList = new ArrayList<String>();
 		ages = new ArrayList<Integer>();
-		home = "/Users/WangQL/Documents/git/";
-		project = "git-commit-revert";
-		repGit = "/.git";
-		gitDir = home.concat(project + repGit);
+		git = ogit;
 	}
 	
-	private void getAllInfo()
+	public void getAllInfo()
 	{
-
-		JgitDiff dif = new JgitDiff(logList.get(0), logList.get(1), project);
-		dif.getInfo();
+		JgitDiff dif = new JgitDiff(git);
+		dif.getInfo(logList.get(0), logList.get(1));
 		fileList = dif.getFileList();
 		
 		System.out.println("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
@@ -73,13 +72,12 @@ public class analysis
 			{
 				System.out.println(i);
 				List<String> localFiles = new ArrayList<String>();
-				JgitDiff Diff = new JgitDiff(logList.get(i), logList.get(i + 1), project);
-				Diff.getInfo();
-				localFiles = Diff.getFileList();
-				for(int k = 0; k < localFiles.size(); k ++)
-				{
-					System.out.print(localFiles.get(k));
-				}
+				dif.getInfo(logList.get(i), logList.get(i + 1));
+				localFiles = dif.getFileList();
+//				for(int k = 0; k < localFiles.size(); k ++)
+//				{
+//					System.out.print(localFiles.get(k));
+//				}
 				System.out.print("\n");
 				if(localFiles.retainAll(cpFile))
 				{
@@ -93,36 +91,4 @@ public class analysis
 			}
 		}
 	}
-	
-	private void init(String path) throws IOException, NoHeadException, GitAPIException
-	{
-		FileRepositoryBuilder builder = new FileRepositoryBuilder();
-		Repository repository = builder.setGitDir(new File(path))
-				.readEnvironment() // scan environment GIT_* variables
-				.findGitDir() // scan up the file system tree
-				.build();
-		//Respository 仓库
-		// RevWalk walk = new RevWalk(repository);
-		// RevCommit commit = walk.parseCommit(objectIdOfCommit);
-
-		//Git: API to interact with a git repository
-		Git git = new Git(repository);
-		Iterable<RevCommit> gitLog = git.log().call();
-		Iterator<RevCommit> it = gitLog.iterator();
-
-		while (it.hasNext()) {			
-			RevCommit thisLog = it.next();
-			ObjectId thisID = thisLog.getId();
-			String commitId = getCommitId(thisID.toString()); // get commit ID hashcode																 
-			logList.add(commitId);
-		}
-	}
-	
-	private static String getCommitId(String str) {
-
-		String tempDescription = str;
-		tempDescription = str.substring(7, 47);
-		return tempDescription;
-	}
-
 }

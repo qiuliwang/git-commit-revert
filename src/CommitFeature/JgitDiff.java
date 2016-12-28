@@ -34,7 +34,7 @@ import org.eclipse.jgit.treewalk.CanonicalTreeParser;
  */
 public class JgitDiff {
 	
-	public JgitDiff(String log1, String log2, String project) {
+	public JgitDiff(Git ogit) {
 		URL="/Users/WangQL/Documents/git/";
 		NS = 0;
 		ND = new ArrayList<Integer>();
@@ -42,9 +42,7 @@ public class JgitDiff {
 		delNum = new ArrayList<Integer>();
 		ND = new ArrayList<Integer>();
 		fileList = new ArrayList<String>();
-		logF = log1;
-		logS = log2;
-		URL += project + "/.git";
+		git = ogit;
 	}
 	static String URL="/Users/WangQL/Documents/git/";
 	static Git git;
@@ -55,30 +53,24 @@ public class JgitDiff {
 	//one commit has only one NS but many ND, addNum and delNum.
 	public static List<String> fileList;
 	public static Repository repository;
-	public static String logF;
-	public static String logS;
+//	public static String logF;
+//	public static String logS;
 	
 	public static void main(String[] args) throws Exception {
-		JgitDiff jgitDiff = new JgitDiff("32162f598a2d1a176b1ea2891d0f1d1ce36aac49",
-				"5b167221ab8bcd81d54df53d842fd2813d2cafc3", "hello-world");
+//		JgitDiff jgitDiff = new JgitDiff("32162f598a2d1a176b1ea2891d0f1d1ce36aac49",
+//				"5b167221ab8bcd81d54df53d842fd2813d2cafc3", "hello-world");
 
 		//jgitDiff.diffMethod("75ae5a6240747e1a062de855f43100c655aacb11",
 			//	"576515208ce27251f22e0c571f7fd64608d83a5b");
-		System.out.println(URL);
-		jgitDiff.getInfo();
+		//System.out.println(URL);
+		//jgitDiff.getInfo();
 	}
 
-	public void getInfo()
+	public void getInfo(String logS, String logF)
 	{
-		try {
-			git=Git.open(new File(URL));
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
 		repository=git.getRepository();
 		ObjectReader reader = repository.newObjectReader();
-		CanonicalTreeParser oldTreeIter = new CanonicalTreeParser();
-	
+		CanonicalTreeParser oldTreeIter = new CanonicalTreeParser();	
 		try {
 			ObjectId old = repository.resolve(logS + "^{tree}");
 			ObjectId head = repository.resolve(logF+"^{tree}");
