@@ -24,7 +24,7 @@ import org.eclipse.jgit.revwalk.RevWalk;
 import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
 
 
-public class mytest
+public class analysis
 {
 	public static List<String> logList;
 	public static List<String> fileList;
@@ -38,13 +38,12 @@ public class mytest
 	public static void main(String args[]) throws NoHeadException, IOException, GitAPIException
 	{
 		
-		mytest te = new mytest();
+		analysis te = new analysis();
 		te.init(gitDir);
-
-		
+		te.getAllInfo();
 	}
 	
-	public mytest()
+	public analysis()
 	{
 		logList = new ArrayList<String>();
 		fileList = new ArrayList<String>();
@@ -56,7 +55,7 @@ public class mytest
 		gitDir = home.concat(project + repGit);
 	}
 	
-	private void analysis()
+	private void getAllInfo()
 	{
 
 		JgitDiff dif = new JgitDiff(logList.get(0), logList.get(1), project);

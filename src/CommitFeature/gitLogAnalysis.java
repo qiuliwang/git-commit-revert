@@ -52,7 +52,7 @@ public class gitLogAnalysis {
 	public static void main(String[] args) throws IOException, NoHeadException,
 			GitAPIException {
 		// TODO Auto-generated method stub
-		gitLogAnalysis gas = new gitLogAnalysis("Java");
+		gitLogAnalysis gas = new gitLogAnalysis("hello-world");
 		gas.analysis();
 	}
 	
@@ -175,7 +175,9 @@ public class gitLogAnalysis {
 		System.out.println("Reverted commits:"+revertedCommits.size());				
 		
 		//jgitDiff.diffMethod(Child, Parent)
-		//count number of developers by nameOfDevelpoers
+		//count number of developers by nameOfDevelpoers	
+		System.out.println("count for developers:");
+
 		numOfDevelopers = nameOfDevelopers.size();
 		System.out.println(numOfDevelopers);
 		for(int i = 0; i < nameOfDevelopers.size(); i ++)

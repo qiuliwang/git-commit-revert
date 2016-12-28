@@ -35,7 +35,6 @@ import org.eclipse.jgit.treewalk.CanonicalTreeParser;
 public class JgitDiff {
 	
 	public JgitDiff(String log1, String log2, String project) {
-		//System.out.println("!!!!!!!!!!!!!"+project);
 		URL="/Users/WangQL/Documents/git/";
 		NS = 0;
 		ND = new ArrayList<Integer>();
@@ -46,8 +45,6 @@ public class JgitDiff {
 		logF = log1;
 		logS = log2;
 		URL += project + "/.git";
-		//System.out.println("!!!!!!!!!!!!!"+URL);
-
 	}
 	static String URL="/Users/WangQL/Documents/git/";
 	static Git git;
