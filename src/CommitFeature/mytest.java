@@ -47,10 +47,10 @@ public class mytest
 	
 	public static void main(String args[]) throws NoHeadException, IOException, GitAPIException
 	{
-		mytest mt = new mytest("Java");
+		mytest mt = new mytest("git-commit-revert");
 		mt.getAllLogs();
-		JgitDiff dif = new JgitDiff(git);
-		dif.getInfo(logList.get(0), logList.get(1));
+		//JgitDiff dif = new JgitDiff(git);
+		//dif.getInfo(logList.get(0), logList.get(1));
 		analysis ana = new analysis(git, logList);
 		ana.getAllInfo();
 	}
