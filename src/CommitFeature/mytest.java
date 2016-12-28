@@ -60,7 +60,7 @@ public class mytest
 		mt.getAllLogs();
 		JgitDiff dif = new JgitDiff(git);
 		dif.getInfo(logList.get(0), logList.get(1));
-		analysis ana = new analysis(home, project, git, logList);
+		analysis ana = new analysis(git, logList);
 		ana.getAllInfo();
 	}
 	

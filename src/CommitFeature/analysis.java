@@ -23,34 +23,26 @@ import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.revwalk.RevWalk;
 import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
 
+/*
+ * calculate the distance between two logs 
+ */
 
 public class analysis
 {
 	public static List<String> logList;
-	public static List<String> fileList;
 	public static List<String> diffList;
+	public static List<String> fileList;
 	public static List<Integer> ages;
-	public static String home = "/Users/WangQL/Documents/git/";
-	public static String project = "git-commit-revert";
-	public static String repGit = "/.git";
-	public static String gitDir = home.concat(project + repGit);
 	public static Git git;
 
 	public static void main(String args[]) throws NoHeadException, IOException, GitAPIException
 	{
-		
-//		analysis te = new analysis("/Users/WangQL/Documents/git", "Java");
-//		System.out.println(gitDir);
-//		te.init(gitDir);
 
-		//te.getAllInfo();
 	}
 	
-	public analysis(String hom, String pro, Git ogit, List<String> Logs)
+	public analysis(Git ogit, List<String> Logs)
 	{
 		logList = Logs;
-		fileList = new ArrayList<String>();
-		diffList = new ArrayList<String>();
 		ages = new ArrayList<Integer>();
 		git = ogit;
 	}
@@ -74,10 +66,6 @@ public class analysis
 				List<String> localFiles = new ArrayList<String>();
 				dif.getInfo(logList.get(i), logList.get(i + 1));
 				localFiles = dif.getFileList();
-//				for(int k = 0; k < localFiles.size(); k ++)
-//				{
-//					System.out.print(localFiles.get(k));
-//				}
 				System.out.print("\n");
 				if(localFiles.retainAll(cpFile))
 				{
