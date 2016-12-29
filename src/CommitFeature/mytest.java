@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
@@ -52,8 +53,8 @@ public class mytest
 	{
 		mytest mt = new mytest("Java");
 		mt.getAllLogs();
-		//JgitDiff dif = new JgitDiff(git);
-		//dif.getInfo(logList.get(0), logList.get(1));
+		JgitDiff dif = new JgitDiff(git);
+		dif.getInfo(logList.get(0), logList.get(1));
 		//analysis ana = new analysis(git, logList);
 		//ana.getAllInfo();
 		mt.showAllDevelopers();
@@ -80,16 +81,21 @@ public class mytest
 		}
 	}
 	
-	public void showAllDevelopers()
+	private void showAllDevelopers()
 	{
 		//遍历map中的键
 
 		for (String key : map.keySet()) {
 
-		    System.out.print("Name = " + key + "|| ");
+		    System.out.print("Name : " + key + "|| ");
 		    System.out.println("commit count = " + map.get(key));
 		}
 
+	}
+	
+	public HashMap<String, Integer> getMap()
+	{
+		return map;
 	}
 	
 	private static String getCommitId(String str) {

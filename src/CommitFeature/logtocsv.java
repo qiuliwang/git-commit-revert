@@ -109,11 +109,6 @@ public class logtocsv {
 			RevCommit thisLog = it.next();
 			PersonIdent committer = thisLog.getCommitterIdent();
 			String committerName = committer.getName();
-			//add name
-			if(!nameOfDevelopers.contains(committerName))
-			{
-				nameOfDevelopers.add(committerName);
-			}
 			
 			//System.out.println(committerName);
 			//String committerEmail = committer.getEmailAddress();
