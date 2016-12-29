@@ -1,7 +1,6 @@
 package CommitFeature;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -32,15 +31,13 @@ public class logtocsv {
 	static String projectHome;
 	static String outputHome;
 	static String tempCopyFileHome;
-	static Git git;
-	static Repository repository;
 	
 	//count number of developers
 	//NDEV
 	static Integer numOfDevelopers = 0;
 	
 	static List<String> nameOfDevelopers;
-	public logtocsv(String pro, Git ogit, Repository rep)
+	public logtocsv(String pro)
 	{
 		nameOfDevelopers = new ArrayList<String>();
 		project = pro;
@@ -48,28 +45,27 @@ public class logtocsv {
 		projectHome = home+project+"/";
 		outputHome = home+project+"Output/";
 		tempCopyFileHome =outputHome+"tempFiles"; 
-		git = ogit;
-		repository = rep;
-		System.out.println(home+project);
 	}
 	
 	@SuppressWarnings("deprecation")
 	public static void main(String[] args) throws IOException, NoHeadException,
 			GitAPIException {
 		// TODO Auto-generated method stub
-		//gitLogAnalysis gas = new gitLogAnalysis("hello-world");
-		//gas.analysis();
+		//gitLogAnalysis gas = new gitLogAnalysis("git-commit-revert");
+		gitLogAnalysis gas = new gitLogAnalysis("Java");
+
+		gas.analysis();
 	}
 	
 	public void analysis() throws IOException, NoHeadException, GitAPIException
 	{
 		
-//		String repGit = "/.git";
-//		String gitDir = home.concat(project + repGit);
-//
-//		System.out.println(gitDir);
-//
-//		
+		String repGit = "/.git";
+		String gitDir = home.concat(project + repGit);
+
+		System.out.println(gitDir);
+
+		
 		List<Commit> allCommits = new ArrayList<Commit>();
 		List<String> revertingCommitIDs = new ArrayList<String>();
 		List<Commit> revertingCommits = new ArrayList<Commit>();	
@@ -81,17 +77,17 @@ public class logtocsv {
 		File revertedCommitCsv = new File(home + "/" + project + "Output/RevertedLog.csv");
 		CSV_handler operateCsv = new CSV_handler();
 
-//		FileRepositoryBuilder builder = new FileRepositoryBuilder();
-//		Repository repository = builder.setGitDir(new File(gitDir))
-//				.readEnvironment() // scan environment GIT_* variables
-//				.findGitDir() // scan up the file system tree
-//				.build();
+		FileRepositoryBuilder builder = new FileRepositoryBuilder();
+		Repository repository = builder.setGitDir(new File(gitDir))
+				.readEnvironment() // scan environment GIT_* variables
+				.findGitDir() // scan up the file system tree
+				.build();
 		//Respository 仓库
-		//RevWalk walk = new RevWalk(repository);
-		//RevCommit commit = walk.parseCommit(objectIdOfCommit);
+		// RevWalk walk = new RevWalk(repository);
+		// RevCommit commit = walk.parseCommit(objectIdOfCommit);
 
 		//Git: API to interact with a git repository
-		//Git git = new Git(repository);
+		Git git = new Git(repository);
 
 		ObjectId head = repository.resolve(Constants.HEAD);
 		//RevWalk: Walks a commit graph and produces the matching commits in order.
@@ -170,7 +166,7 @@ public class logtocsv {
 		
 		revertedCommits = getSubCommits(featuredAllCommits, revertedCommitIDs);
 		revertingCommits  = getSubCommits(featuredAllCommits, revertingCommitIDs);
-
+		
 		operateCsv.writeCommitsToCsvWithoutMsg(allCommitCsv, allCommits);
 		operateCsv.writeCommitsToCsvWithoutMsg(revertingCommitCsv, revertingCommits);
 		operateCsv.writeCommitsToCsvWithoutMsg(revertedCommitCsv, revertedCommits);
@@ -181,7 +177,7 @@ public class logtocsv {
 		
 		//jgitDiff.diffMethod(Child, Parent)
 		//count number of developers by nameOfDevelpoers	
-		System.out.print("count for developers:");
+		System.out.println("count for developers:");
 
 		numOfDevelopers = nameOfDevelopers.size();
 		System.out.println(numOfDevelopers);
@@ -189,7 +185,6 @@ public class logtocsv {
 		{
 			System.out.println(nameOfDevelopers.get(i) + " ");
 		}
-
 	}
 	
 	// get regulizedMsg 
@@ -260,6 +255,4 @@ public class logtocsv {
 		}
 		return labeledAllCommits;
 	}
-	
-	
 }

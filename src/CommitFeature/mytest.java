@@ -49,10 +49,10 @@ public class mytest
 	{
 		mytest mt = new mytest("git-commit-revert");
 		mt.getAllLogs();
-		//JgitDiff dif = new JgitDiff(git);
-		//dif.getInfo(logList.get(0), logList.get(1));
-		analysis ana = new analysis(git, logList);
-		ana.getAllInfo();
+		JgitDiff dif = new JgitDiff(git);
+		dif.getInfo(logList.get(0), logList.get(1));
+		//analysis ana = new analysis(git, logList);
+		//ana.getAllInfo();
 	}
 	
 	private void getAllLogs() throws IOException, NoHeadException, GitAPIException
