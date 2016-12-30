@@ -23,6 +23,29 @@ public class Commit {
 	private int numberOfHigh = 0;
 	private int numberOfCrucial = 0;
 	
+
+	private int addlines = 0;
+	private int dellines = 0;
+	private int subSystem = 0;
+	
+	public int getSubSystem() {
+		return subSystem;
+	}
+	public void setSubSystem(int subSystem) {
+		this.subSystem = subSystem;
+	}
+	public int getAddlines() {
+		return addlines;
+	}
+	public void setAddlines(int addlines) {
+		this.addlines = addlines;
+	}
+	public int getDellines() {
+		return dellines;
+	}
+	public void setDellines(int dellines) {
+		this.dellines = dellines;
+	}
 	
 	public int getNumberOfLow() {
 		return numberOfLow;

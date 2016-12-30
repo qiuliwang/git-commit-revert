@@ -43,6 +43,7 @@ public class JgitDiff {
 		ND = new ArrayList<Integer>();
 		fileList = new ArrayList<String>();
 		git = ogit;
+		SubSystem = new ArrayList<String>();
 	}
 	static String URL="/Users/WangQL/Documents/git/";
 	static Git git;
@@ -53,6 +54,7 @@ public class JgitDiff {
 	//one commit has only one NS but many ND, addNum and delNum.
 	public static List<String> fileList;
 	public static Repository repository;
+	public static List<String> SubSystem;
 //	public static String logF;
 //	public static String logS;
 	
@@ -68,7 +70,13 @@ public class JgitDiff {
 
 	public void getInfo(String logS, String logF)
 	{
+		ND.clear();
+		NS = 0;
+		addNum.clear();
+		delNum.clear();
+		fileList.clear();
 		repository=git.getRepository();
+		SubSystem.clear();
 		ObjectReader reader = repository.newObjectReader();
 		CanonicalTreeParser oldTreeIter = new CanonicalTreeParser();	
 		try {
@@ -89,7 +97,7 @@ public class JgitDiff {
             //System.out.println("------------------------------start-----------------------------");
             //每一个diffEntry都是第个文件版本之间的变动差异
             for (DiffEntry diffEntry : diffs) { 
-            	NS ++;
+            	//NS ++;
             	//打印文件差异具体内容
                 df.format(diffEntry);  
 
@@ -98,13 +106,28 @@ public class JgitDiff {
                 System.out.println(diffFile);  
                 String firstFile = diffFile.substring(diffFile.indexOf("a/"), diffFile.indexOf("b/") - 1);
                 String secondFile = diffFile.substring(diffFile.indexOf("b/"), diffFile.length());
-                System.out.println(firstFile);  
-                System.out.println(secondFile); 
+                //System.out.println(firstFile);  
+                //System.out.println(secondFile); 
                 
-                Integer dirNum1 = getNumOfOneChar(firstFile);
-                Integer dirNum2 = getNumOfOneChar(secondFile);
-                ND.add(dirNum1);
-                ND.add(dirNum2);
+                String subString = firstFile.substring(firstFile.indexOf("a/") + 2, firstFile.length());
+                try{
+                	subString = subString.substring(0, subString.indexOf("/"));
+                }
+                catch(Exception e)
+                {
+                	;
+                }
+                //System.out.println("SSS "+ subString);
+                if(!SubSystem.contains(subString))
+                {
+                	SubSystem.add(subString);
+                }
+                //String subsys = 
+                
+//                Integer dirNum1 = getNumOfOneChar(firstFile);
+//                Integer dirNum2 = getNumOfOneChar(secondFile);
+//                ND.add(dirNum1);
+//                ND.add(dirNum2);
                 fileList.add(firstFile.substring(firstFile.indexOf('/')));
                 //获取文件差异位置，从而统计差异的行数，如增加行数，减少行数
                 FileHeader fileHeader = df.toFileHeader(diffEntry);
@@ -121,8 +144,8 @@ public class JgitDiff {
 
                 addNum.add(addSize);
                 delNum.add(subSize);
-                System.out.println("addSize="+addSize);
-                System.out.println("subSize="+subSize + "\n");
+                //System.out.println("addSize="+addSize);
+                //System.out.println("subSize="+subSize + "\n");
                 out.reset();  
             }
             
@@ -134,25 +157,40 @@ public class JgitDiff {
     			e.printStackTrace();
     		}
 		
-		System.out.println("subsystem touched: " + NS);
-		System.out.print("directories touched: ");
-		for(int i = 0; i < ND.size(); i ++)
-			System.out.print(ND.get(i) + " ");
-		System.out.print("\n");
-		System.out.print("number of added lines: ");
-		for(int i = 0; i < addNum.size(); i ++)
-			System.out.print(addNum.get(i) + " ");
-		System.out.print("\n");
-		System.out.print("number of deleted lines: ");
-		for(int i = 0; i < delNum.size(); i ++)
-			System.out.print(delNum.get(i) + " ");
-		System.out.print("\nfiles: ");
-        for(int i = 0; i < fileList.size(); i ++)
-        {
-        	System.out.print(fileList.get(i) + " ");
-        }
-		System.out.print("\n");
+		//System.out.println("subsystem touched: " + NS);
+//		System.out.print("directories touched: ");
+//		for(int i = 0; i < ND.size(); i ++)
+//			System.out.print(ND.get(i) + " ");
+//		System.out.print("\n");
+//		System.out.print("number of added lines: ");
+//		for(int i = 0; i < addNum.size(); i ++)
+//			System.out.print(addNum.get(i) + " ");
+//		System.out.print("\n");
+//		System.out.print("number of deleted lines: ");
+//		for(int i = 0; i < delNum.size(); i ++)
+//			System.out.print(delNum.get(i) + " ");
+//		System.out.print("\nfiles: ");
+//        for(int i = 0; i < fileList.size(); i ++)
+//        {
+//        	System.out.print(fileList.get(i) + " ");
+//        }
+//		System.out.print("\n");
 
+	}
+	
+	public Integer getSubSystem()
+	{
+		return SubSystem.size();
+	}
+	
+	public Integer getAddLines()
+	{
+		return addNum.get(0);
+	}
+	
+	public Integer getDelLines()
+	{
+		return delNum.get(0);
 	}
 	
 	//计算路径长度

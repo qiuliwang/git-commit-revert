@@ -51,7 +51,7 @@ public class gitLogAnalysis {
 	public static void main(String[] args) throws IOException, NoHeadException,
 			GitAPIException {
 		// TODO Auto-generated method stub
-		gitLogAnalysis gas = new gitLogAnalysis("hello-world");
+		gitLogAnalysis gas = new gitLogAnalysis("Java");
 		gas.analysis();
 	}
 	

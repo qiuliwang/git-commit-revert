@@ -97,10 +97,13 @@ public class DiffCommit {
 
 	public List<Commit> getFeaturedAllCommits(List<Commit> allCommits)
 			throws IncorrectObjectTypeException, GitAPIException, IOException {
+		
+		JgitDiff dif = new JgitDiff(git);
 		// TODO Auto-generated method stub
 		for (int i = allCommits.size() - 1; i > 0; i--) {
 			Commit oldCommit = allCommits.get(i);
 			Commit newCommit = allCommits.get(i - 1);
+			
 			int numberOfAddFiles = 0;
 			int numberOfDeleteFiles = 0;
 			int numberOfModifyFiles = 0;
@@ -113,7 +116,17 @@ public class DiffCommit {
 
 			String newCommitId = newCommit.getCommitid();
 			String oldCommitId = oldCommit.getCommitid();
+			
 			List<DiffEntry> thisDiffs = diffMethod(oldCommitId, newCommitId);
+			dif.getInfo(oldCommitId, newCommitId);
+			int addlines = dif.getAddLines();
+			int dellines = dif.getDelLines();
+			//System.out.println(addlines);
+			//System.out.println(dellines);
+			newCommit.setAddlines(addlines);
+			newCommit.setDellines(dellines);
+			int subSys = dif.getSubSystem();
+			newCommit.setSubSystem(subSys);
 
 			for (DiffEntry diffEntry : thisDiffs) {
 				FileDiffEntry thisFileDiffEntry = getFileDiffEntry(diffEntry);
