@@ -128,8 +128,8 @@ public class gitLogAnalysis {
 				//hmp.
 			}
 			
-			thisCommit.setAges(hmp.get(committerName));
-			
+			thisCommit.setExp(hmp.get(committerName));
+			thisCommit.setNDEV(hmp.size());
 			//System.out.println(committerName);
 			//String committerEmail = committer.getEmailAddress();
 			Date commitDate = committer.getWhen();

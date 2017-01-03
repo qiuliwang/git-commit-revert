@@ -26,24 +26,42 @@ public class Commit {
 
 	private int addlines = 0;
 	private int dellines = 0;
-	private int subSystem = 0;
-	private int ages = 0;
+	private int subSystemNum = 0;
+	private int EXP = 0;
+	private int NDEV = 0;
+	private int NF = 0;
 	
-	public int getAges()
+	public int getNF() {
+		return NF;
+	}
+
+	public void setNF(int nF) {
+		NF = nF;
+	}
+
+	public int getNDEV() {
+		return NDEV;
+	}
+
+	public void setNDEV(int nDEV) {
+		NDEV = nDEV;
+	}
+	
+	public int getExp()
 	{
-		return ages;
+		return EXP;
 	}
 	
-	public void setAges(int ages)
+	public void setExp(int ages)
 	{
-		this.ages = ages;
+		this.EXP = ages;
 	}
 	
-	public int getSubSystem() {
-		return subSystem;
+	public int getSubSystemNum() {
+		return subSystemNum;
 	}
-	public void setSubSystem(int subSystem) {
-		this.subSystem = subSystem;
+	public void setSubSystemNum(int subSystem) {
+		this.subSystemNum = subSystem;
 	}
 	public int getAddlines() {
 		return addlines;

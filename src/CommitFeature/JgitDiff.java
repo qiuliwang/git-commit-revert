@@ -100,7 +100,6 @@ public class JgitDiff {
             	//NS ++;
             	//打印文件差异具体内容
                 df.format(diffEntry);  
-                
                 String diffText = out.toString("UTF-8"); 
                 String diffFile = diffText.substring(0, diffText.indexOf('\n'));
                 //System.out.println(diffFile);  
@@ -128,7 +127,7 @@ public class JgitDiff {
 //                Integer dirNum2 = getNumOfOneChar(secondFile);
 //                ND.add(dirNum1);
 //                ND.add(dirNum2);
-                fileList.add(firstFile.substring(firstFile.indexOf('/')));
+                fileList.add(firstFile.substring(firstFile.lastIndexOf('/') + 1));
                 //获取文件差异位置，从而统计差异的行数，如增加行数，减少行数
                 FileHeader fileHeader = df.toFileHeader(diffEntry);
                 List<HunkHeader> hunks = (List<HunkHeader>) fileHeader.getHunks();
@@ -172,15 +171,30 @@ public class JgitDiff {
 //		System.out.print("\nfiles: ");
 //        for(int i = 0; i < fileList.size(); i ++)
 //        {
-//        	System.out.print(fileList.get(i) + " ");
+//        	System.out.println(fileList.get(i) + " ");
 //        }
 //		System.out.print("\n");
 
 	}
 	
-	public Integer getSubSystem()
+	public List<String> getSubSystem()
+	{
+		return SubSystem;
+	}
+	
+	public Integer getNF()
+	{
+		return fileList.size();
+	}
+	
+	public Integer getSubSystemNum()
 	{
 		return SubSystem.size();
+	}
+	
+	public List<String> getSubSysList()
+	{
+		return SubSystem;
 	}
 	
 	public Integer getAddLines()

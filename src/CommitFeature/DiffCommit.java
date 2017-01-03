@@ -3,6 +3,7 @@ package CommitFeature;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.jgit.api.Git;
@@ -24,9 +25,11 @@ import ch.uzh.ifi.seal.changedistiller.model.entities.SourceCodeChange;
 public class DiffCommit {
 
 	private Git git;
+	public List<String> subSysList;
 
 	public DiffCommit(Git git) {
 		this.git = git;
+		subSysList = new ArrayList<String>();
 	}
 
 	// static String URL = "F:/commitdata/jenkins/.git";
@@ -125,8 +128,8 @@ public class DiffCommit {
 			//System.out.println(dellines);
 			newCommit.setAddlines(addlines);
 			newCommit.setDellines(dellines);
-			int subSys = dif.getSubSystem();
-			newCommit.setSubSystem(subSys);
+			int subSys = dif.getSubSystemNum();
+			newCommit.setSubSystemNum(subSys);
 
 			for (DiffEntry diffEntry : thisDiffs) {
 				FileDiffEntry thisFileDiffEntry = getFileDiffEntry(diffEntry);

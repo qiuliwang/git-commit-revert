@@ -82,10 +82,11 @@ public class CSV_handler {
 		// TODO Auto-generated method stub
 		List<String[]> content = new ArrayList<String[]>();
 		String[] header = 	{ "id", "AddFiles", "ModifyFiles","DeleteFiles","RenameFiles","LowLines","MediumLines",
-				"HighLines","CrucialLines","Label","AddLines", "DelLines","SubSystem","Commiter","Ages" };
+				"HighLines","CrucialLines","Label","AddLines", "DelLines","SubSystem","Commiter","EXP","NDEV",
+				"NF"};
 		for (int i = 0; i < commits.size(); i++) {
 			Commit thisCommit = commits.get(i);
-			String[] thisContent = new String[15];
+			String[] thisContent = new String[17];
 			thisContent[0] = Integer.toString(thisCommit.getId()); // index
 			thisContent[1] = Integer.toString(thisCommit.getAddFiles()); 
 			thisContent[2] =  Integer.toString(thisCommit.getModifyFiles());
@@ -98,9 +99,11 @@ public class CSV_handler {
 			thisContent[9] =  Integer.toString(thisCommit.getLabel());
 			thisContent[10] = Integer.toString(thisCommit.getAddlines());
 			thisContent[11] = Integer.toString(thisCommit.getDellines());
-			thisContent[12] = Integer.toString(thisCommit.getSubSystem());
+			thisContent[12] = Integer.toString(thisCommit.getSubSystemNum());
 			thisContent[13] = thisCommit.getCommitter();
-			thisContent[14] = Integer.toString(thisCommit.getAges());
+			thisContent[14] = Integer.toString(thisCommit.getExp());
+			thisContent[15] = Integer.toString(thisCommit.getNDEV());
+			thisContent[16] = Integer.toString(thisCommit.getNF());
 			content.add(thisContent);
 		}
 		writeToCsv(file, header, content);
