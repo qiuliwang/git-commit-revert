@@ -50,22 +50,14 @@ public class JgitDiff {
 	public static List<Integer> addNum;
 	public static List<Integer> delNum;
 	public static Integer NS;	//number of subsystems touched by the current change
-	public static List<Integer> ND;	//number of directories touched by the current change
-	//one commit has only one NS but many ND, addNum and delNum.
+	public static List<Integer> ND;	//number of directories touched by the current change //one commit has only one NS but many ND, addNum and delNum.
 	public static List<String> fileList;
 	public static Repository repository;
 	public static List<String> SubSystem;
-//	public static String logF;
-//	public static String logS;
+
 	
 	public static void main(String[] args) throws Exception {
-//		JgitDiff jgitDiff = new JgitDiff("32162f598a2d1a176b1ea2891d0f1d1ce36aac49",
-//				"5b167221ab8bcd81d54df53d842fd2813d2cafc3", "hello-world");
 
-		//jgitDiff.diffMethod("75ae5a6240747e1a062de855f43100c655aacb11",
-			//	"576515208ce27251f22e0c571f7fd64608d83a5b");
-		//System.out.println(URL);
-		//jgitDiff.getInfo();
 	}
 
 	public void getInfo(String logS, String logF)
@@ -94,7 +86,6 @@ public class JgitDiff {
             //设置比较器为忽略空白字符对比（Ignores all whitespace）
             df.setDiffComparator(RawTextComparator.WS_IGNORE_ALL);
             df.setRepository(git.getRepository()); 
-            //System.out.println("------------------------------start-----------------------------");
             //每一个diffEntry都是第个文件版本之间的变动差异
             for (DiffEntry diffEntry : diffs) { 
             	//NS ++;
@@ -102,11 +93,8 @@ public class JgitDiff {
                 df.format(diffEntry);  
                 String diffText = out.toString("UTF-8"); 
                 String diffFile = diffText.substring(0, diffText.indexOf('\n'));
-                //System.out.println(diffFile);  
                 String firstFile = diffFile.substring(diffFile.indexOf("a/"), diffFile.indexOf("b/") - 1);
                 String secondFile = diffFile.substring(diffFile.indexOf("b/"), diffFile.length());
-                //System.out.println(firstFile);  
-                //System.out.println(secondFile); 
                 
                 String subString = firstFile.substring(firstFile.indexOf("a/") + 2, firstFile.length());
                 try{
@@ -116,17 +104,10 @@ public class JgitDiff {
                 {
                 	;
                 }
-                //System.out.println("SSS "+ subString);
                 if(!SubSystem.contains(subString))
                 {
                 	SubSystem.add(subString);
                 }
-                //String subsys = 
-                
-//                Integer dirNum1 = getNumOfOneChar(firstFile);
-//                Integer dirNum2 = getNumOfOneChar(secondFile);
-//                ND.add(dirNum1);
-//                ND.add(dirNum2);
                 fileList.add(firstFile.substring(firstFile.lastIndexOf('/') + 1));
                 //获取文件差异位置，从而统计差异的行数，如增加行数，减少行数
                 FileHeader fileHeader = df.toFileHeader(diffEntry);
@@ -140,11 +121,8 @@ public class JgitDiff {
                 		addSize += edit.getEndB()-edit.getBeginB();
                 	}
                 }
-
                 addNum.add(addSize);
                 delNum.add(subSize);
-                //System.out.println("addSize="+addSize);
-                //System.out.println("subSize="+subSize + "\n");
                 out.reset();  
             }
             
@@ -155,26 +133,6 @@ public class JgitDiff {
     		} catch (GitAPIException e) {
     			e.printStackTrace();
     		}
-		
-		//System.out.println("subsystem touched: " + NS);
-//		System.out.print("directories touched: ");
-//		for(int i = 0; i < ND.size(); i ++)
-//			System.out.print(ND.get(i) + " ");
-//		System.out.print("\n");
-//		System.out.print("number of added lines: ");
-//		for(int i = 0; i < addNum.size(); i ++)
-//			System.out.print(addNum.get(i) + " ");
-//		System.out.print("\n");
-//		System.out.print("number of deleted lines: ");
-//		for(int i = 0; i < delNum.size(); i ++)
-//			System.out.print(delNum.get(i) + " ");
-//		System.out.print("\nfiles: ");
-//        for(int i = 0; i < fileList.size(); i ++)
-//        {
-//        	System.out.println(fileList.get(i) + " ");
-//        }
-//		System.out.print("\n");
-
 	}
 	
 	public List<String> getSubSystem()
@@ -215,7 +173,6 @@ public class JgitDiff {
 		for(int i = 0; i < str.length(); i ++)
 		{
 			if(localStr.indexOf('/') == -1) break;
-			//System.out.println(localStr.indexOf('/'));
 			count ++;
 			localStr = localStr.substring(localStr.indexOf('/') + 1);
 		}

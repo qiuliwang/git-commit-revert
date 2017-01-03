@@ -8,7 +8,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-import java.util.Map.Entry;
 
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
@@ -56,7 +55,6 @@ public class gitLogAnalysis {
 	@SuppressWarnings("deprecation")
 	public static void main(String[] args) throws IOException, NoHeadException,
 			GitAPIException {
-		// TODO Auto-generated method stub
 		gitLogAnalysis gas = new gitLogAnalysis("Java");
 		gas.analysis();
 	}
@@ -86,13 +84,8 @@ public class gitLogAnalysis {
 				.readEnvironment() // scan environment GIT_* variables
 				.findGitDir() // scan up the file system tree
 				.build();
-		//Respository 仓库
-		// RevWalk walk = new RevWalk(repository);
-		// RevCommit commit = walk.parseCommit(objectIdOfCommit);
-
-		//Git: API to interact with a git repository
 		Git git = new Git(repository);
-
+		
 		ObjectId head = repository.resolve(Constants.HEAD);
 		//RevWalk: Walks a commit graph and produces the matching commits in order.
 		RevWalk walk = new RevWalk(repository);
@@ -103,10 +96,7 @@ public class gitLogAnalysis {
 
 		int numberOfAllCommit = 1;
 		int numberOfRevertingCommit = 0;
-		
-		//#################
-		//FileWriter fwriter1 = null;
-		//fwriter1 = new FileWriter("/Users/WangQL/Desktop/mess.txt");
+
 		while (it.hasNext()) {
 			Commit thisCommit = new Commit();
 			
@@ -125,31 +115,20 @@ public class gitLogAnalysis {
 			else
 			{
 				hmp.put(committerName, hmp.get(committerName)+ 1);				
-				//hmp.
 			}
 			
 			thisCommit.setExp(hmp.get(committerName));
 			thisCommit.setNDEV(hmp.size());
-			//System.out.println(committerName);
-			//String committerEmail = committer.getEmailAddress();
 			Date commitDate = committer.getWhen();
-			//String date = commitDate.toString();
 			String msg = thisLog.getFullMessage();
 			String regulizedMsg = csvHandlerStr(msg);
 			ObjectId thisID = thisLog.getId();
 
-			String commitId = getCommitId(thisID.toString()); // get commit ID hashcode																 
-			
-			//System.out.println(commitId);
-		    //fwriter1.write("\n===============================\n"+msg);
-			thisCommit.setId(numberOfAllCommit); // index
+			String commitId = getCommitId(thisID.toString()); // get commit ID hashcode																 			thisCommit.setId(numberOfAllCommit); // index
 			thisCommit.setCommitid(commitId); // commitId
 			thisCommit.setCommitter(committerName); // committer
 			thisCommit.setTime(commitDate); // date
-			thisCommit.setLabel(0); // label, 
-																// 0, default 
-																// 1, reverted 
-																// 2, reverting
+			thisCommit.setLabel(0); // label, 0, default ,  1, reverted ,  2, reverting
 			thisCommit.setRevertedId(""); // revertedCommitId default null
 			thisCommit.setMsg(regulizedMsg); // full msg
 
@@ -170,12 +149,8 @@ public class gitLogAnalysis {
 				allCommits.add(thisCommit);
 			}
 		}
-		//####################
-		//fwriter1.close();
 		
 		List<Commit> allLabeledCommits = getLabeledCommits(allCommits,revertedCommitIDs);
-		
-		// git.log().add(head).addPath("F:/hadooplog.txt").call();
 		DiffCommit jgitDiff = new DiffCommit(git);
 		List<Commit> featuredAllCommits = jgitDiff.getFeaturedAllCommits(allLabeledCommits);
 		
@@ -189,23 +164,6 @@ public class gitLogAnalysis {
 		System.out.println("Total commits:"+Integer.toString(numberOfAllCommit-1));
 		System.out.println("Reverting commits:"+numberOfRevertingCommit);
 		System.out.println("Reverted commits:"+revertedCommits.size());				
-		
-		//jgitDiff.diffMethod(Child, Parent)
-		//count number of developers by nameOfDevelpoers	
-		System.out.println("count for developers:");
-
-		numOfDevelopers = nameOfDevelopers.size();
-		System.out.println(numOfDevelopers);
-		for(int i = 0; i < nameOfDevelopers.size(); i ++)
-		{
-			System.out.println(nameOfDevelopers.get(i) + " ");
-		}
-		System.out.println("test for hashmap:");
-		Set<String> set = hmp.keySet();
-        //使用for增强来取出key和value
-        for (String item : set) {
-          System.out.println("committer：" + item + ";Value：" + hmp.get(item));
-        }
 		
 	}
 	
@@ -250,7 +208,6 @@ public class gitLogAnalysis {
 			for (int j=0; j < subCommitIDs.size();j++){			
 				String thisSubId = subCommitIDs.get(j);
 				if (thisCommitId.equals(thisSubId)){
-					//thisCommit.setLabel(1);
 					subCommits.add(thisCommit);
 				}
 			}
@@ -270,7 +227,6 @@ public class gitLogAnalysis {
 				String thisrevertedId = revertedCommitIDs.get(j);
 				if (thisCommitId.equals(thisrevertedId)){
 					thisCommit.setLabel(1);
-					//subCommits.add(thisCommit);
 				}
 			}
 			labeledAllCommits.add(thisCommit);

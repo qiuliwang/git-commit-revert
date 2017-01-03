@@ -32,19 +32,10 @@ public class DiffCommit {
 		subSysList = new ArrayList<String>();
 	}
 
-	// static String URL = "F:/commitdata/jenkins/.git";
-	// static Git git;
-	// public static Repository repository;
-
 	public static void main(String[] args) {
-		// DiffCommit jgitDiff = new DiffCommit();
-
-		// jgitDiff.diffMethod("9fe07a75968a81f803661c4be548ab60c9baf5fb","29893354a52efac20efcb4e0e91723f3bd889059");
+		
 	}
 
-	/* 
-	     *  
-	     */
 	// child commit, parent commit
 	public List<DiffEntry> diffMethod(String Child, String Parent)
 			throws GitAPIException, IncorrectObjectTypeException, IOException {
@@ -60,10 +51,6 @@ public class DiffCommit {
 		CanonicalTreeParser newTreeIter = new CanonicalTreeParser();
 		newTreeIter.reset(reader, head);
 
-		// List<DiffEntry> diffs =
-		// git.diff().setOutputStream(out).setNewTree(newTreeIter)
-		// .setOldTree(oldTreeIter).call();
-
 		OutputStream outputStream = NullOutputStream.INSTANCE;
 		DiffFormatter formatter = new DiffFormatter(outputStream);
 		formatter.setRepository(git.getRepository());
@@ -76,11 +63,8 @@ public class DiffCommit {
 
 	public FileDiffEntry getFileDiffEntry(DiffEntry diffEntry)
 			throws IOException {
-
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		FileDiffEntry thisFileDiffEntry = new FileDiffEntry();
-		// String newMode= newFileMode.toString();
-		// String newdir = diffEntry.getPath(Side.NEW);
 		String oldPath = diffEntry.getOldPath();
 		String newPath = diffEntry.getNewPath();
 		ChangeType cType = diffEntry.getChangeType();
@@ -100,9 +84,7 @@ public class DiffCommit {
 
 	public List<Commit> getFeaturedAllCommits(List<Commit> allCommits)
 			throws IncorrectObjectTypeException, GitAPIException, IOException {
-		
 		JgitDiff dif = new JgitDiff(git);
-		// TODO Auto-generated method stub
 		for (int i = allCommits.size() - 1; i > 0; i--) {
 			Commit oldCommit = allCommits.get(i);
 			Commit newCommit = allCommits.get(i - 1);
@@ -124,8 +106,6 @@ public class DiffCommit {
 			dif.getInfo(oldCommitId, newCommitId);
 			int addlines = dif.getAddLines();
 			int dellines = dif.getDelLines();
-			//System.out.println(addlines);
-			//System.out.println(dellines);
 			newCommit.setAddlines(addlines);
 			newCommit.setDellines(dellines);
 			int subSys = dif.getSubSystemNum();
@@ -176,23 +156,8 @@ public class DiffCommit {
 
 						for (SourceCodeChange change : changes) {
 							numberOfLineChanges = numberOfLineChanges + 1;
-							// System.out.println("change " +index+
-							// " summary:");
-							// String changeStr = change.toString();
-							// System.out.println("1. changedCode:"+changeStr);
-							// ChangeType thisType = change.getChangeType();
-							// System.out.println("2. type:"+thisType.toString());
-							// SourceCodeEntity thisEntity =
-							// change.getChangedEntity();
-							// System.out.println("3. entityType:"+thisEntity.getType().toString());
-							// String thisLabel = change.getLabel();
-							// System.out.println("4. label:"+thisLabel.toString());
 							SignificanceLevel thisLevel = change
 									.getSignificanceLevel();
-							// System.out.println("5. level:"+thisLevel.toString());
-							// SourceCodeEntity parentEntity =
-							// change.getParentEntity();
-							// see Javadocs for more information
 							String thisLevelString = thisLevel.toString();
 							if (thisLevelString.equals("LOW")) {
 								numberOfLow = numberOfLow + 1;
@@ -205,8 +170,6 @@ public class DiffCommit {
 							} else {
 							}
 
-							// String changeLabel = change.getLabel();
-							// System.out.println("4. label:"+changeLabel.toString());
 						}
 					}
 					 checker.deleteFile(oldCopyPath);

@@ -21,7 +21,7 @@ public class CSV_handler {
 		;
 		CsvListReader reader = new CsvListReader(new FileReader(file),
 				CsvPreference.EXCEL_PREFERENCE);
-		reader.getCSVHeader(true);// ȥ��ͷ���ֶ�����
+		reader.getCSVHeader(true);
 		List<String> line = new ArrayList<String>();
 		while ((line = reader.read()) != null) {
 			content.add(line.toArray(new String[] {}));
