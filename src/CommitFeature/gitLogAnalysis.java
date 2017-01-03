@@ -4,8 +4,11 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
+import java.util.Map.Entry;
 
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
@@ -37,6 +40,9 @@ public class gitLogAnalysis {
 	static Integer numOfDevelopers = 0;
 	
 	static List<String> nameOfDevelopers;
+	
+	static HashMap<String, Integer> hmp = new HashMap<String, Integer>();
+	
 	public gitLogAnalysis(String pro)
 	{
 		nameOfDevelopers = new ArrayList<String>();
@@ -112,6 +118,17 @@ public class gitLogAnalysis {
 			{
 				nameOfDevelopers.add(committerName);
 			}
+			if(!hmp.containsKey(committerName))
+			{
+				hmp.put(committerName, 1);
+			}
+			else
+			{
+				hmp.put(committerName, hmp.get(committerName)+ 1);				
+				//hmp.
+			}
+			
+			thisCommit.setAges(hmp.get(committerName));
 			
 			//System.out.println(committerName);
 			//String committerEmail = committer.getEmailAddress();
@@ -183,6 +200,13 @@ public class gitLogAnalysis {
 		{
 			System.out.println(nameOfDevelopers.get(i) + " ");
 		}
+		System.out.println("test for hashmap:");
+		Set<String> set = hmp.keySet();
+        //使用for增强来取出key和value
+        for (String item : set) {
+          System.out.println("committer：" + item + ";Value：" + hmp.get(item));
+        }
+		
 	}
 	
 	// get regulizedMsg 

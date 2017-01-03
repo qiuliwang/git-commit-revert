@@ -27,6 +27,17 @@ public class Commit {
 	private int addlines = 0;
 	private int dellines = 0;
 	private int subSystem = 0;
+	private int ages = 0;
+	
+	public int getAges()
+	{
+		return ages;
+	}
+	
+	public void setAges(int ages)
+	{
+		this.ages = ages;
+	}
 	
 	public int getSubSystem() {
 		return subSystem;

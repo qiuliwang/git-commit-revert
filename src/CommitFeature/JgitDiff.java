@@ -100,10 +100,10 @@ public class JgitDiff {
             	//NS ++;
             	//打印文件差异具体内容
                 df.format(diffEntry);  
-
+                
                 String diffText = out.toString("UTF-8"); 
                 String diffFile = diffText.substring(0, diffText.indexOf('\n'));
-                System.out.println(diffFile);  
+                //System.out.println(diffFile);  
                 String firstFile = diffFile.substring(diffFile.indexOf("a/"), diffFile.indexOf("b/") - 1);
                 String secondFile = diffFile.substring(diffFile.indexOf("b/"), diffFile.length());
                 //System.out.println(firstFile);  

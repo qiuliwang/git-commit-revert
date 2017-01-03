@@ -82,10 +82,10 @@ public class CSV_handler {
 		// TODO Auto-generated method stub
 		List<String[]> content = new ArrayList<String[]>();
 		String[] header = 	{ "id", "AddFiles", "ModifyFiles","DeleteFiles","RenameFiles","LowLines","MediumLines",
-				"HighLines","CrucialLines","Label","AddLines", "DelLines","SubSystem","Commiter" };
+				"HighLines","CrucialLines","Label","AddLines", "DelLines","SubSystem","Commiter","Ages" };
 		for (int i = 0; i < commits.size(); i++) {
 			Commit thisCommit = commits.get(i);
-			String[] thisContent = new String[14];
+			String[] thisContent = new String[15];
 			thisContent[0] = Integer.toString(thisCommit.getId()); // index
 			thisContent[1] = Integer.toString(thisCommit.getAddFiles()); 
 			thisContent[2] =  Integer.toString(thisCommit.getModifyFiles());
@@ -100,6 +100,7 @@ public class CSV_handler {
 			thisContent[11] = Integer.toString(thisCommit.getDellines());
 			thisContent[12] = Integer.toString(thisCommit.getSubSystem());
 			thisContent[13] = thisCommit.getCommitter();
+			thisContent[14] = Integer.toString(thisCommit.getAges());
 			content.add(thisContent);
 		}
 		writeToCsv(file, header, content);
