@@ -28,8 +28,8 @@ public class gitLogAnalysis {
 	 * @throws GitAPIException
 	 * @throws NoHeadException
 	 */
-	static String project;
-	static String home;
+	public static String project;
+	public static String home;
 	static String projectHome;
 	static String outputHome;
 	static String tempCopyFileHome;
