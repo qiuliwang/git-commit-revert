@@ -4,6 +4,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.eclipse.jgit.api.Git;
@@ -30,15 +31,8 @@ import ch.uzh.ifi.seal.changedistiller.model.entities.SourceCodeChange;
 public class DiffCommit {
 
 	private Git git;
-	//public List<String> subSysList;
-	//public List<Integer> addNum;
-	//public List<Integer> delNum;
-
 	public DiffCommit(Git git) {
 		this.git = git;
-//		subSysList = new ArrayList<String>();
-//		addNum = new ArrayList<Integer>();
-//		delNum = new ArrayList<Integer>();
 	}
 
 	public static void main(String[] args) {
@@ -102,6 +96,8 @@ public class DiffCommit {
 		List<String> subSysList = new ArrayList<String>();
 		List<Integer> addNum = new ArrayList<Integer>();
 		List<Integer> delNum = new ArrayList<Integer>();
+		List<String> dirs = new ArrayList<String>();
+		HashMap<String, Integer> uniqueChange = new HashMap<String, Integer>();
 		
 		for (int i = allCommits.size() - 1; i > 0; i--) {
 			//System.out.println("==================");
@@ -109,6 +105,8 @@ public class DiffCommit {
 			fileList.clear();
 			addNum.clear();
 			delNum.clear();
+			dirs.clear();
+			
 			Commit oldCommit = allCommits.get(i);
 			Commit newCommit = allCommits.get(i - 1);
 			
@@ -126,14 +124,6 @@ public class DiffCommit {
 			String oldCommitId = oldCommit.getCommitid();
 			
 			List<DiffEntry> thisDiffs = diffMethod(oldCommitId, newCommitId);
-			
-//			dif.getInfo(oldCommitId, newCommitId);
-//			int addlines = dif.getAddLines();
-//			int dellines = dif.getDelLines();
-//			newCommit.setAddlines(addlines);
-//			newCommit.setDellines(dellines);
-//			int subSys = dif.getSubSystemNum();
-//			newCommit.setSubSystemNum(subSys);
 
 			for (DiffEntry diffEntry : thisDiffs) {
 				ByteArrayOutputStream out = new ByteArrayOutputStream();  
@@ -224,11 +214,20 @@ public class DiffCommit {
 	            }
 	            
 	            String file = firstFile.substring(firstFile.lastIndexOf("/") + 1);
-	            System.out.println(subString);
+	            
+	            String dir = firstFile.substring(0, firstFile.lastIndexOf("/"));
+	            //System.out.println(dir);
+	            //ND
+	            if(!dirs.contains(dir))
+	            {
+	            	dirs.add(dir);
+	            }
+
 	            if(!fileList.contains(file))
 	            {
 	            	fileList.add(file);
 	            }
+	            
 	            FileHeader fileHeader = df.toFileHeader(diffEntry);
                 List<HunkHeader> hunks = (List<HunkHeader>) fileHeader.getHunks();
                 int addSize = 0;
@@ -257,6 +256,25 @@ public class DiffCommit {
 			newCommit.setAddlines(sum(addNum));
 			newCommit.setDellines(sum(delNum));
 			newCommit.setNF(fileList.size());
+			newCommit.setND(dirs.size());
+			
+			if(fileList.size() == 1)
+			{
+				//System.out.println(fileList.get(0) + "ddd");
+				if(!uniqueChange.containsKey(fileList.get(0)))
+				{
+					uniqueChange.put(fileList.get(0), 1);
+				}
+				else
+				{
+					uniqueChange.put(fileList.get(0), uniqueChange.get(fileList.get(0)) + 1);
+				}
+				newCommit.setNUC(uniqueChange.get(fileList.get(0)));
+			}
+			else
+			{
+				newCommit.setNUC(0);
+			}
 		}
 		return allCommits;
 	}

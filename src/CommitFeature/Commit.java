@@ -30,7 +30,28 @@ public class Commit {
 	private int EXP = 0;
 	private int NDEV = 0;
 	private int NF = 0;
+	private int NUC = 0;
 	
+	private int ND = 0;
+	
+	
+	
+	public int getND() {
+		return ND;
+	}
+
+	public void setND(int nD) {
+		ND = nD;
+	}
+
+	public int getNUC() {
+		return NUC;
+	}
+
+	public void setNUC(int nUC) {
+		NUC = nUC;
+	}
+
 	public int getNF() {
 		return NF;
 	}
@@ -47,12 +68,12 @@ public class Commit {
 		NDEV = nDEV;
 	}
 	
-	public int getExp()
+	public int getEXP()
 	{
 		return EXP;
 	}
 	
-	public void setExp(int ages)
+	public void setEXP(int ages)
 	{
 		this.EXP = ages;
 	}

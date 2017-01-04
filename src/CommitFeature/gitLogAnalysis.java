@@ -42,7 +42,7 @@ public class gitLogAnalysis {
 	
 	static HashMap<String, Integer> hmp = new HashMap<String, Integer>();
 	
-	public gitLogAnalysis(String pro)
+	public gitLogAnalysis(String pro) throws NoHeadException, IOException, GitAPIException
 	{
 		nameOfDevelopers = new ArrayList<String>();
 		project = pro;
@@ -50,13 +50,13 @@ public class gitLogAnalysis {
 		projectHome = home+project+"/";
 		outputHome = home+project+"Output/";
 		tempCopyFileHome =outputHome+"tempFiles"; 
+		this.analysis();
 	}
 	
 	@SuppressWarnings("deprecation")
 	public static void main(String[] args) throws IOException, NoHeadException,
 			GitAPIException {
 		gitLogAnalysis gas = new gitLogAnalysis("Java");
-		gas.analysis();
 	}
 	
 	public void analysis() throws IOException, NoHeadException, GitAPIException
@@ -114,11 +114,12 @@ public class gitLogAnalysis {
 			}
 			else
 			{
-				hmp.put(committerName, hmp.get(committerName)+ 1);				
+				hmp.put(committerName, hmp.get(committerName) + 1);				
 			}
 			
-			thisCommit.setExp(hmp.get(committerName));
+			thisCommit.setEXP(hmp.get(committerName));
 			thisCommit.setNDEV(hmp.size());
+			
 			Date commitDate = committer.getWhen();
 			String msg = thisLog.getFullMessage();
 			String regulizedMsg = csvHandlerStr(msg);
@@ -126,6 +127,7 @@ public class gitLogAnalysis {
 
 			String commitId = getCommitId(thisID.toString()); // get commit ID hashcode																 			thisCommit.setId(numberOfAllCommit); // index
 			thisCommit.setCommitid(commitId); // commitId
+			//System.out.println(commitId);
 			thisCommit.setCommitter(committerName); // committer
 			thisCommit.setTime(commitDate); // date
 			thisCommit.setLabel(0); // label, 0, default ,  1, reverted ,  2, reverting
