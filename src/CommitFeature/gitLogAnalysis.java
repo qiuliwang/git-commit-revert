@@ -57,6 +57,7 @@ public class gitLogAnalysis {
 	public static void main(String[] args) throws IOException, NoHeadException,
 			GitAPIException {
 		gitLogAnalysis gas = new gitLogAnalysis("Java");
+		gas.analysis();
 	}
 	
 	public void analysis() throws IOException, NoHeadException, GitAPIException

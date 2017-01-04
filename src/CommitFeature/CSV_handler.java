@@ -81,31 +81,30 @@ public class CSV_handler {
 			List<Commit> commits) throws IOException {
 		// TODO Auto-generated method stub
 		List<String[]> content = new ArrayList<String[]>();
-		String[] header = 	{ "id", "AddFiles", "ModifyFiles","DeleteFiles","RenameFiles","LowLines","MediumLines",
-				"HighLines","CrucialLines","Label","AddLines", "DelLines","SubSystem","Commiter","EXP","NDEV",
-				"NF", "ND","NUC"};
+		String[] header = 	{ "AddFiles", "ModifyFiles","DeleteFiles","RenameFiles","LowLines","MediumLines",
+				"HighLines","CrucialLines","DelLines", "AddLines","SubSystem","EXP","NDEV",
+				"NF", "ND","NUC","Label"};
 		for (int i = 0; i < commits.size(); i++) {
 			Commit thisCommit = commits.get(i);
-			String[] thisContent = new String[19];
-			thisContent[0] = Integer.toString(thisCommit.getId()); // index
-			thisContent[1] = Integer.toString(thisCommit.getAddFiles()); 
-			thisContent[2] =  Integer.toString(thisCommit.getModifyFiles());
-			thisContent[3] =  Integer.toString(thisCommit.getDeleteFiles());
-			thisContent[4] =  Integer.toString(thisCommit.getRenameFiles()); 
-			thisContent[5] = Integer.toString(thisCommit.getNumberOfLow()); 
-			thisContent[6] =  Integer.toString(thisCommit.getNumberOfMedium()); 
-			thisContent[7] =  Integer.toString(thisCommit.getNumberOfHigh());
-			thisContent[8] =  Integer.toString(thisCommit.getNumberOfCrucial());
-			thisContent[9] =  Integer.toString(thisCommit.getLabel());
-			thisContent[10] = Integer.toString(thisCommit.getAddlines());
-			thisContent[11] = Integer.toString(thisCommit.getDellines());
-			thisContent[12] = Integer.toString(thisCommit.getSubSystemNum());
-			thisContent[13] = thisCommit.getCommitter();
-			thisContent[14] = Integer.toString(thisCommit.getEXP());
-			thisContent[15] = Integer.toString(thisCommit.getNDEV());
-			thisContent[16] = Integer.toString(thisCommit.getNF());
-			thisContent[17] = Integer.toString(thisCommit.getND());
-			thisContent[18] = Integer.toString(thisCommit.getNUC());
+			String[] thisContent = new String[17];
+			thisContent[0] = Integer.toString(thisCommit.getAddFiles()); 
+			thisContent[1] =  Integer.toString(thisCommit.getModifyFiles());
+			thisContent[2] =  Integer.toString(thisCommit.getDeleteFiles());
+			thisContent[3] =  Integer.toString(thisCommit.getRenameFiles()); 
+			thisContent[4] = Integer.toString(thisCommit.getNumberOfLow()); 
+			thisContent[5] =  Integer.toString(thisCommit.getNumberOfMedium()); 
+			thisContent[6] =  Integer.toString(thisCommit.getNumberOfHigh());
+			thisContent[7] =  Integer.toString(thisCommit.getNumberOfCrucial());
+			thisContent[8] = Integer.toString(thisCommit.getDellines());
+			thisContent[9] = Integer.toString(thisCommit.getAddlines());
+			thisContent[10] = Integer.toString(thisCommit.getSubSystemNum());
+			thisContent[11] = Integer.toString(thisCommit.getEXP());
+			thisContent[12] = Integer.toString(thisCommit.getNDEV());
+			thisContent[13] = Integer.toString(thisCommit.getNF());
+			thisContent[14] = Integer.toString(thisCommit.getND());
+			thisContent[15] = Integer.toString(thisCommit.getNUC());
+			thisContent[16] =  Integer.toString(thisCommit.getLabel());
+
 			content.add(thisContent);
 		}
 		writeToCsv(file, header, content);
