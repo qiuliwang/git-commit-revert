@@ -50,7 +50,7 @@ public class gitLogAnalysis {
 		projectHome = home+project+"/";
 		outputHome = home+project+"Output/";
 		tempCopyFileHome =outputHome+"tempFiles"; 
-		this.analysis();
+		//this.analysis();
 	}
 	
 	@SuppressWarnings("deprecation")

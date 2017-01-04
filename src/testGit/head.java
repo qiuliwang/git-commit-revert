@@ -16,6 +16,7 @@ public class head {
 		System.out.print("Enter: ");
 		String project;
 		double percent;
+		CommitFeature.gitLogAnalysis analysis;
 		
 		Scanner in=new Scanner(System.in);
 		int ans = in.nextInt();
@@ -27,7 +28,8 @@ public class head {
 				case 1:
 					System.out.print("Project: ");
 					project = in.next();
-					CommitFeature.gitLogAnalysis analysis = new CommitFeature.gitLogAnalysis(project);
+					analysis = new CommitFeature.gitLogAnalysis(project);
+					analysis.analysis();
 					break;
 				case 2: System.out.println("2"); break;
 				case 3: System.out.println("3"); break;
