@@ -2,6 +2,7 @@ package CommitFeature;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -103,6 +104,19 @@ public class gitLogAnalysis {
 			
 			RevCommit thisLog = it.next();
 			PersonIdent committer = thisLog.getCommitterIdent();
+
+			//get commit date
+//			        String res;
+//			        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//			        long lt = new Long(thisLog.getCommitTime());
+//			        Date date = new Date(lt * 1000);
+//			        res = simpleDateFormat.format(date);
+//			        res = res.substring(0, res.indexOf(' '));
+			 //1328007600000   
+			 //1377669704
+			//System.out.println(res);
+			//thisCommit.setDate(res);
+			
 			String committerName = committer.getName();
 			//add name
 			if(!nameOfDevelopers.contains(committerName))

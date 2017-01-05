@@ -34,8 +34,28 @@ public class Commit {
 	
 	private int ND = 0;
 	
+	private String date = "";
+	
+	private double entropy = 0;
 	
 	
+	
+	public double getEntropy() {
+		return entropy;
+	}
+
+	public void setEntropy(double entropy) {
+		this.entropy = entropy;
+	}
+
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
+
 	public int getND() {
 		return ND;
 	}

@@ -43,10 +43,11 @@ public class readFile {
 	        loader.setNominalAttributes("15");
 	        loader.setNominalAttributes("16");
 	        loader.setNominalAttributes("17");
+	        loader.setNominalAttributes("18");
 
 	        
 	        Instances data = loader.getDataSet();
-	        data.setClassIndex(16);
+	        data.setClassIndex(17);
 	        
 	        
 

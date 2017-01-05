@@ -98,6 +98,8 @@ public class DiffCommit {
 		List<Integer> delNum = new ArrayList<Integer>();
 		List<String> dirs = new ArrayList<String>();
 		HashMap<String, Integer> uniqueChange = new HashMap<String, Integer>();
+		//HashMap<String,Integer> sExp = new HashMap<String, Integer>();
+		//Integer sexpAns = 0;
 		
 		for (int i = allCommits.size() - 1; i > 0; i--) {
 			//System.out.println("==================");
@@ -106,6 +108,7 @@ public class DiffCommit {
 			addNum.clear();
 			delNum.clear();
 			dirs.clear();
+			//sexpAns = 0;
 			
 			Commit oldCommit = allCommits.get(i);
 			Commit newCommit = allCommits.get(i - 1);
@@ -208,6 +211,7 @@ public class DiffCommit {
 	            {
 	            	;
 	            }
+	            
 	            if(!subSysList.contains(subString))
 	            {
 	            	subSysList.add(subString);
@@ -228,6 +232,19 @@ public class DiffCommit {
 	            	fileList.add(file);
 	            }
 	            
+//	            String sexpString = subString + newCommit.getCommitter();
+	            
+	            //sexp
+//	            if(!sExp.containsKey(sexpString))
+//	            {
+//	            	sExp.put(sexpString, 1);
+//	            }
+//	            else
+//	            {
+//	            	sExp.put(sexpString, sExp.get(sexpString) + 1);
+//	            }
+//	            sexpAns = sExp.get(sexpString);
+	            
 	            FileHeader fileHeader = df.toFileHeader(diffEntry);
                 List<HunkHeader> hunks = (List<HunkHeader>) fileHeader.getHunks();
                 int addSize = 0;
@@ -239,8 +256,14 @@ public class DiffCommit {
                 		addSize += edit.getEndB()-edit.getBeginB();
                 	}
                 }
-                addNum.add(addSize);
-                delNum.add(subSize);
+                if(addSize != 0)
+                {
+                	addNum.add(addSize);
+                }
+                if(subSize != 0)
+                {
+                	delNum.add(subSize);
+                }
 			}
 			//newCommit.setf
 			newCommit.setAddFiles(numberOfAddFiles);
@@ -257,6 +280,7 @@ public class DiffCommit {
 			newCommit.setDellines(sum(delNum));
 			newCommit.setNF(fileList.size());
 			newCommit.setND(dirs.size());
+			newCommit.setEntropy(entropy(addNum, delNum));
 			
 			if(fileList.size() == 1)
 			{
@@ -277,6 +301,48 @@ public class DiffCommit {
 			}
 		}
 		return allCommits;
+	}
+	
+	private double entropy(List<Integer> addLines, List<Integer>delLines)
+	{
+		double ent = 0;
+		
+		double allLines = sum(addLines) + sum(delLines);
+		//System.out.println("aaaaaaaaaaaaaaaaaaa:"+allLines);
+		if(allLines != 0)
+		{
+			//System.out.println(addLines.size());
+			//System.out.println(delLines.size());
+			if(addLines.size() != 0)
+			{
+				for(int i = 0; i < addLines.size(); i ++)
+				{
+					double temp = addLines.get(i) / allLines;
+					ent += temp * log(temp);
+				}
+			}
+			if(delLines.size() != 0)
+			{
+				for(int i = 0; i < delLines.size(); i ++)
+				{
+					double temp = delLines.get(i) / allLines;
+					ent += temp * log(temp);
+				}
+			}
+			//System.out.println(ent);
+		}
+		if(ent == 0)
+		{
+			return ent;
+		}
+		else{
+			return -ent;
+		}
+	}
+	
+	private double log(double a)
+	{
+		return Math.log(a) / Math.log(2);
 	}
 
 	private Integer sum(List<Integer> arr)
