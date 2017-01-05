@@ -66,7 +66,7 @@ public class start {
 		int trainSize = trainData.numInstances();
 		int testSize = testData.numInstances();
 		
-		smote sm = new smote(trainData, 1000);
+		smote sm = new smote(trainData, 100);
 		Instances smoteTraindata = sm.localdata;	
 		
 		

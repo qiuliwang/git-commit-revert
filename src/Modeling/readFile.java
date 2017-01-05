@@ -25,32 +25,30 @@ public class readFile {
 	        // load CSV
 	        CSVLoader loader = new CSVLoader();
 	        loader.setSource(new File(csvfilename));
-	       
-	        loader.setNominalAttributes("1");
-	        loader.setNominalAttributes("2");
-	        loader.setNominalAttributes("3");
-	        loader.setNominalAttributes("4");
-	        loader.setNominalAttributes("5");
-	        loader.setNominalAttributes("6");
-	        loader.setNominalAttributes("7");
-	        loader.setNominalAttributes("8");
-	        loader.setNominalAttributes("9");
-	        loader.setNominalAttributes("10");
-	        loader.setNominalAttributes("11");
-	        loader.setNominalAttributes("12");
-	        loader.setNominalAttributes("13");
-	        loader.setNominalAttributes("14");
-	        loader.setNominalAttributes("15");
-	        loader.setNominalAttributes("16");
-	        loader.setNominalAttributes("17");
+	        //loader.setNominalAttributes("0");
+//	        loader.setNominalAttributes("1");
+//	        loader.setNominalAttributes("2");
+//	        loader.setNominalAttributes("3");
+//	        loader.setNominalAttributes("4");
+//	        loader.setNominalAttributes("5");
+//	        loader.setNominalAttributes("6");
+//	        loader.setNominalAttributes("7");
+//	        loader.setNominalAttributes("8");
+//	        loader.setNominalAttributes("9");
+//	        loader.setNominalAttributes("10");
+//	        loader.setNominalAttributes("11");
+//	        loader.setNominalAttributes("12");
+//	        loader.setNominalAttributes("13");
+//	        loader.setNominalAttributes("14");
+//	        loader.setNominalAttributes("15");
+//	        loader.setNominalAttributes("16");
+//	        loader.setNominalAttributes("17");
 	        loader.setNominalAttributes("18");
 
 	        
 	        Instances data = loader.getDataSet();
 	        data.setClassIndex(17);
 	        
-	        
-
 	        // save ARFF
 	        ArffSaver saver = new ArffSaver();
 	        saver.setInstances(data);
