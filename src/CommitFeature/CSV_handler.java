@@ -83,10 +83,10 @@ public class CSV_handler {
 		List<String[]> content = new ArrayList<String[]>();
 		String[] header = 	{ "AddFiles", "ModifyFiles","DeleteFiles","RenameFiles","LowLines","MediumLines",
 				"HighLines","CrucialLines","DelLines", "AddLines","SubSystem","EXP","NDEV",
-				"NF", "ND","NUC", "Entropy", "Label"};
+				"NF", "ND","NUC", "Entropy", "Conf", "Label"};
 		for (int i = 0; i < commits.size(); i++) {
 			Commit thisCommit = commits.get(i);
-			String[] thisContent = new String[18];
+			String[] thisContent = new String[19];
 			thisContent[0] = Integer.toString(thisCommit.getAddFiles()); 
 			thisContent[1] =  Integer.toString(thisCommit.getModifyFiles());
 			thisContent[2] =  Integer.toString(thisCommit.getDeleteFiles());
@@ -104,7 +104,8 @@ public class CSV_handler {
 			thisContent[14] = Integer.toString(thisCommit.getND());
 			thisContent[15] = Integer.toString(thisCommit.getNUC());
 			thisContent[16] = Double.toString(thisCommit.getEntropy());
-			thisContent[17] =  Integer.toString(thisCommit.getLabel());
+			thisContent[17] = Integer.toString(thisCommit.getConf());
+			thisContent[18] =  Integer.toString(thisCommit.getLabel());
 
 			content.add(thisContent);
 		}

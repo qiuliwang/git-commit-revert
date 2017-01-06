@@ -220,7 +220,6 @@ public class DiffCommit {
 	            }
 	            
 	            String file = firstFile.substring(firstFile.lastIndexOf("/") + 1);
-	            
 	            String dir = firstFile.substring(0, firstFile.lastIndexOf("/"));
 	            //System.out.println(dir);
 	            //ND
@@ -234,18 +233,6 @@ public class DiffCommit {
 	            	fileList.add(file);
 	            }
 	            
-//	            String sexpString = subString + newCommit.getCommitter();
-	            
-	            //sexp
-//	            if(!sExp.containsKey(sexpString))
-//	            {
-//	            	sExp.put(sexpString, 1);
-//	            }
-//	            else
-//	            {
-//	            	sExp.put(sexpString, sExp.get(sexpString) + 1);
-//	            }
-//	            sexpAns = sExp.get(sexpString);
 	            
 	            FileHeader fileHeader = df.toFileHeader(diffEntry);
                 List<HunkHeader> hunks = (List<HunkHeader>) fileHeader.getHunks();
@@ -285,6 +272,7 @@ public class DiffCommit {
 			newCommit.setEntropy(entropy(addNum, delNum));
 			//System.out.println("zzz   "+getNDEV(fileList, newCommit.getCommitter(), NDEV));
 			newCommit.setNDEV(getNDEV(fileList, newCommit.getCommitter(), NDEV));
+			newCommit.setConf(getConf(fileList));
 			
 			if(fileList.size() == 1)
 			{
@@ -305,6 +293,22 @@ public class DiffCommit {
 			}
 		}
 		return allCommits;
+	}
+	
+	private static Integer getConf(List<String> fileList)
+	{
+		Integer ans = 0;
+		
+		for(int i = 0; i < fileList.size(); i ++)
+		{
+			if(fileList.get(i).contains(".xml") || fileList.get(i).contains(".classpath")
+					 || fileList.get(i).contains(".project"))
+			{
+				ans ++;
+			}
+		}
+		
+		return ans;
 	}
 	
 	//using hashmap, <fileName, commiterString>

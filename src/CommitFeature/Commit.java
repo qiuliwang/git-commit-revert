@@ -30,16 +30,21 @@ public class Commit {
 	private int EXP = 0;
 	private int NDEV = 0;
 	private int NF = 0;
-	private int NUC = 0;
-	
-	private int ND = 0;
-	
-	private String date = "";
-	
+	private int NUC = 0;	
+	private int ND = 0;	
+	private String date = "";	
 	private double entropy = 0;
+	private Integer conf = 0;
 	
 	
-	
+	public Integer getConf() {
+		return conf;
+	}
+
+	public void setConf(Integer conf) {
+		this.conf = conf;
+	}
+
 	public double getEntropy() {
 		return entropy;
 	}

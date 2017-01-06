@@ -57,7 +57,8 @@ public class gitLogAnalysis {
 	@SuppressWarnings("deprecation")
 	public static void main(String[] args) throws IOException, NoHeadException,
 			GitAPIException {
-		gitLogAnalysis gas = new gitLogAnalysis("myFirstRep");
+		gitLogAnalysis gas = new gitLogAnalysis("Java");
+		//myFirstRep
 		gas.analysis();
 	}
 	
