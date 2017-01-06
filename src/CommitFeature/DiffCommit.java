@@ -5,7 +5,9 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
@@ -98,7 +100,7 @@ public class DiffCommit {
 		List<Integer> delNum = new ArrayList<Integer>();
 		List<String> dirs = new ArrayList<String>();
 		HashMap<String, Integer> uniqueChange = new HashMap<String, Integer>();
-		//HashMap<String,Integer> sExp = new HashMap<String, Integer>();
+		HashMap<String,String> NDEV = new HashMap<String, String>();
 		//Integer sexpAns = 0;
 		
 		for (int i = allCommits.size() - 1; i > 0; i--) {
@@ -281,6 +283,8 @@ public class DiffCommit {
 			newCommit.setNF(fileList.size());
 			newCommit.setND(dirs.size());
 			newCommit.setEntropy(entropy(addNum, delNum));
+			//System.out.println("zzz   "+getNDEV(fileList, newCommit.getCommitter(), NDEV));
+			newCommit.setNDEV(getNDEV(fileList, newCommit.getCommitter(), NDEV));
 			
 			if(fileList.size() == 1)
 			{
@@ -301,6 +305,59 @@ public class DiffCommit {
 			}
 		}
 		return allCommits;
+	}
+	
+	//using hashmap, <fileName, commiterString>
+	//commiter is like: commiter1&commiter2&commiter3&
+	//count &, you can get number of commiters of this files, means commiters who changed this file
+	private static Integer getNDEV(List<String> fileList, String commiter, HashMap<String,String> hmp)
+	{
+		Integer ans = 0;
+		
+		for(int i = 0; i < fileList.size(); i ++)
+		{
+			String temp = fileList.get(i);
+			if(hmp.containsKey(temp))
+			{
+				if(!hmp.get(temp).contains(commiter))
+				{
+					hmp.put(temp, hmp.get(temp) + commiter + "&");
+				}
+			}
+			else
+			{
+				hmp.put(temp, commiter + "&");
+			}
+		}
+		
+//		Set<String> se = hmp.keySet();
+//		Iterator<String> it = se.iterator();  
+//		while (it.hasNext()) {  
+//		  String str = it.next();  
+//		  System.out.println("ddd   "+hmp.get(str));  
+//		  System.out.println("ccc   "+countCommiters(hmp.get(str)));  
+//
+//		}  
+		
+		for(int i = 0; i < fileList.size(); i ++)
+		{
+			ans += countCommiters(hmp.get(fileList.get(i)));
+		}
+		
+		return ans;
+	}
+	
+	private static Integer countCommiters(String names)
+	{
+		Integer ans = 0;
+		String local = names;
+		while(local.contains("&"))
+		{
+			local = local.substring(local.indexOf("&") + 1, local.length());
+			ans ++;
+		}
+		
+		return ans;
 	}
 	
 	private double entropy(List<Integer> addLines, List<Integer>delLines)

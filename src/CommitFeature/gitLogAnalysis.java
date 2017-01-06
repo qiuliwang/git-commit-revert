@@ -57,7 +57,7 @@ public class gitLogAnalysis {
 	@SuppressWarnings("deprecation")
 	public static void main(String[] args) throws IOException, NoHeadException,
 			GitAPIException {
-		gitLogAnalysis gas = new gitLogAnalysis("Java");
+		gitLogAnalysis gas = new gitLogAnalysis("myFirstRep");
 		gas.analysis();
 	}
 	
@@ -133,7 +133,7 @@ public class gitLogAnalysis {
 			}
 			
 			thisCommit.setEXP(hmp.get(committerName));
-			thisCommit.setNDEV(hmp.size());
+			//thisCommit.setNDEV(hmp.size());
 			
 			Date commitDate = committer.getWhen();
 			String msg = thisLog.getFullMessage();
@@ -151,7 +151,7 @@ public class gitLogAnalysis {
 
 			// reverting label, if it is a reverting commit, label as 1
 			if (msg.indexOf("This reverts commit") > 0) {
-				thisCommit.setLabel(2);
+				thisCommit.setLabel(0);
 				numberOfRevertingCommit = numberOfRevertingCommit + 1;
 				String revertedCommitId = getRevertedCommitId(regulizedMsg);
 				thisCommit.setRevertedId(revertedCommitId);
