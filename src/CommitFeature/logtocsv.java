@@ -96,7 +96,7 @@ public class logtocsv {
 		RevCommit commit = walk.parseCommit(head);
 		Iterable<RevCommit> gitLog = git.log().call();
 		Iterator<RevCommit> it = gitLog.iterator();
-
+		walk.close();
 		int numberOfAllCommit = 1;
 		int numberOfRevertingCommit = 0;
 		

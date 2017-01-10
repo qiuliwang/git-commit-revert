@@ -106,7 +106,7 @@ public class gitLogAnalysis {
 
 		int numberOfAllCommit = 1;
 		int numberOfRevertingCommit = 0;
-
+		walk.close();
 		while (it.hasNext()) {
 			Commit thisCommit = new Commit();
 			

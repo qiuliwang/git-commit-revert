@@ -39,7 +39,7 @@ public class gitStatus {
 
 	            PullCommand pullCmd = git.pull();
 	            pullCmd.call();
-
+	            git.close();
 	            System.out.println("Pulled from remote repository to local repository at " + repo.getDirectory());
 	        } catch (Exception e) {
 	        	System.out.println(e.getMessage() + " :: " + RepoGitDir.getAbsolutePath());
@@ -65,6 +65,7 @@ public class gitStatus {
 	            System.out.println("Git Modified: " + status.getModified());
 	            System.out.println("Git UncommittedChanges: " + status.getUncommittedChanges());
 	            System.out.println("Git Untracked: " + status.getUntracked());
+	            git.close();
 	        } catch (Exception e) {
 	        	System.out.println(e.getMessage() + " : " + repoDir);
 	        } finally {

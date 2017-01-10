@@ -26,7 +26,7 @@ public class start {
 	
 	public static void main(String args[])
 	{
-		start st = new start("Java");
+		start st = new start("hbase");
 		try {
 			st.write();
 		} catch (Exception e) {

@@ -55,6 +55,7 @@ public class CheckOutFile {
 					System.out.println(bytesum);
 					fs.write(buffer, 0, byteread);
 				}
+				fs.close();
 				inStream.close();
 			}
 		} catch (Exception e) {
@@ -67,7 +68,7 @@ public class CheckOutFile {
     public boolean deleteFile(String sPath) {
         boolean flag = false;
         File file = new File(sPath);
-        // Â·¾¶ÎªÎÄ¼þÇÒ²»Îª¿ÕÔò½øÐÐÉ¾³ý
+        // Â·ï¿½ï¿½Îªï¿½Ä¼ï¿½ï¿½Ò²ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¾ï¿½ï¿½
         if (file.isFile() && file.exists()) {
             file.delete();
             flag = true;

@@ -140,6 +140,7 @@ public class CSV_handler {
 		for (String line = br.readLine(); line != null; line = br.readLine()) {
 			outputText += line;
 		}
+		br.close();
 		return outputText;
 	}
 

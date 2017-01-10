@@ -60,7 +60,7 @@ public class DiffCommit {
 		DiffFormatter formatter = new DiffFormatter(outputStream);
 		formatter.setRepository(git.getRepository());
 		formatter.setDetectRenames(true);
-
+		formatter.close();
 		List<DiffEntry> diffs = formatter.scan(oldTreeIter, newTreeIter);
 
 		return diffs;
@@ -168,7 +168,7 @@ public class DiffCommit {
 				else{//COPY
 					
 				}
-
+				df.close();
 				String oldFilePath = thisFileDiffEntry.getOldPath();
 				String newFilePath = thisFileDiffEntry.getNewPath();
 

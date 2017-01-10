@@ -52,7 +52,7 @@ public class testCheckOut {
 		String copyPath = oldPath.replaceAll("/","_");
 		File tempFile = new File(tempDir+"/"+copyPath); 
         Copy(home+oldPath,tempDir+copyPath); 
-	
+        git.close();
 		//System.out.println(crResult.size());
 	}
 
@@ -71,6 +71,7 @@ public class testCheckOut {
 					System.out.println(bytesum);
 					fs.write(buffer, 0, byteread);
 				}
+				fs.close();
 				inStream.close();
 			}
 		} catch (Exception e) {
