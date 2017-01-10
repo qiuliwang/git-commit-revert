@@ -39,13 +39,13 @@ public class gitLogAnalysis {
 	//NDEV
 	static Integer numOfDevelopers = 0;
 	
-	static List<String> nameOfDevelopers;
+	//static List<String> nameOfDevelopers;
 	
-	static HashMap<String, Integer> hmp = new HashMap<String, Integer>();
+	//static HashMap<String, Integer> hmp = new HashMap<String, Integer>();
 	
 	public gitLogAnalysis(String pro) throws NoHeadException, IOException, GitAPIException
 	{
-		nameOfDevelopers = new ArrayList<String>();
+		//nameOfDevelopers = new ArrayList<String>();
 		project = pro;
 		home = "/Users/WangQL/Documents/git/";
 		projectHome = home+project+"/";
@@ -57,9 +57,16 @@ public class gitLogAnalysis {
 	@SuppressWarnings("deprecation")
 	public static void main(String[] args) throws IOException, NoHeadException,
 			GitAPIException {
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss-SSS");//设置日期格式
+		String time1 = df.format(new Date()).toString();// new Date()为获取当前系统时间
 		gitLogAnalysis gas = new gitLogAnalysis("Java");
-		//myFirstRep
+		//myFirstRep  camel
 		gas.analysis();
+		
+		String time2 = df.format(new Date()).toString();
+		System.out.println(time1);
+		System.out.println(time2);
+
 	}
 	
 	public void analysis() throws IOException, NoHeadException, GitAPIException
@@ -120,20 +127,20 @@ public class gitLogAnalysis {
 			
 			String committerName = committer.getName();
 			//add name
-			if(!nameOfDevelopers.contains(committerName))
-			{
-				nameOfDevelopers.add(committerName);
-			}
-			if(!hmp.containsKey(committerName))
-			{
-				hmp.put(committerName, 1);
-			}
-			else
-			{
-				hmp.put(committerName, hmp.get(committerName) + 1);				
-			}
+//			if(!nameOfDevelopers.contains(committerName))
+//			{
+//				nameOfDevelopers.add(committerName);
+//			}
+//			if(!hmp.containsKey(committerName))
+//			{
+//				hmp.put(committerName, 1);
+//			}
+//			else
+//			{
+//				hmp.put(committerName, hmp.get(committerName) + 1);				
+//			}
 			
-			thisCommit.setEXP(hmp.get(committerName));
+			//thisCommit.setEXP(hmp.get(committerName));
 			//thisCommit.setNDEV(hmp.size());
 			
 			Date commitDate = committer.getWhen();
@@ -149,7 +156,7 @@ public class gitLogAnalysis {
 			thisCommit.setLabel(0); // label, 0, default ,  1, reverted ,  2, reverting
 			thisCommit.setRevertedId(""); // revertedCommitId default null
 			thisCommit.setMsg(regulizedMsg); // full msg
-
+			//thisCommit.setCommitter(committer);
 			// reverting label, if it is a reverting commit, label as 1
 			if (msg.indexOf("This reverts commit") > 0) {
 				thisCommit.setLabel(0);

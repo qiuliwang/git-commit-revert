@@ -101,9 +101,12 @@ public class DiffCommit {
 		List<String> dirs = new ArrayList<String>();
 		HashMap<String, Integer> uniqueChange = new HashMap<String, Integer>();
 		HashMap<String,String> NDEV = new HashMap<String, String>();
+		HashMap<String, Integer> hmp = new HashMap<String, Integer>();
+		List<String> developer = new ArrayList<String>();
 		//Integer sexpAns = 0;
-		
+		int dddxxx = 0;
 		for (int i = allCommits.size() - 1; i > 0; i--) {
+		//for(int i = 0; i < allCommits.size() - 1; i ++) {
 			//System.out.println("==================");
 			subSysList.clear();
 			fileList.clear();
@@ -114,11 +117,23 @@ public class DiffCommit {
 			
 			Commit oldCommit = allCommits.get(i);
 			Commit newCommit = allCommits.get(i - 1);
+			//Commit oldCommit = allCommits.get(i + 1);
+			//Commit newCommit = allCommits.get(i);
+			String commiter = newCommit.getCommitter();
+			if(!hmp.containsKey(commiter))
+			{
+				hmp.put(commiter, 1);
+			}
+			else
+			{
+				hmp.put(commiter, hmp.get(commiter) + 1);
+			}
 			
 			int numberOfAddFiles = 0;
 			int numberOfDeleteFiles = 0;
 			int numberOfModifyFiles = 0;
 			int numberOfRenameFiles = 0;
+			int numberOfCopyFiles = 0;
 			int numberOfLineChanges = 0;
 			int numberOfLow = 0;
 			int numberOfMedium = 0;
@@ -129,14 +144,14 @@ public class DiffCommit {
 			String oldCommitId = oldCommit.getCommitid();
 			
 			List<DiffEntry> thisDiffs = diffMethod(oldCommitId, newCommitId);
-
+			FileDiffEntry thisFileDiffEntry;
 			for (DiffEntry diffEntry : thisDiffs) {
 				ByteArrayOutputStream out = new ByteArrayOutputStream();  
 				DiffFormatter df = new DiffFormatter(out); 
 				df.setDiffComparator(RawTextComparator.WS_IGNORE_ALL);
 	            df.setRepository(git.getRepository()); 
 	            
-				FileDiffEntry thisFileDiffEntry = getFileDiffEntry(diffEntry);
+				 thisFileDiffEntry = getFileDiffEntry(diffEntry);
 				String thisType = thisFileDiffEntry.getType();
 				
 				if (thisType.equals("ADD")) {
@@ -147,7 +162,11 @@ public class DiffCommit {
 					numberOfRenameFiles = numberOfRenameFiles + 1;
 				} else if (thisType.equals("DELETE")) {
 					numberOfDeleteFiles = numberOfDeleteFiles + 1;
-				} else {
+				} else if (thisType.equals("COPY")) {
+					numberOfCopyFiles ++;
+				}
+				else{//COPY
+					
 				}
 
 				String oldFilePath = thisFileDiffEntry.getOldPath();
@@ -259,7 +278,7 @@ public class DiffCommit {
 			newCommit.setDeleteFiles(numberOfDeleteFiles);
 			newCommit.setRenameFiles(numberOfRenameFiles);
 			newCommit.setModifyFiles(numberOfModifyFiles);
-
+			newCommit.setCopyFiles(numberOfCopyFiles);
 			newCommit.setNumberOfLow(numberOfLow);
 			newCommit.setNumberOfMedium(numberOfMedium);
 			newCommit.setNumberOfHigh(numberOfHigh);
@@ -273,6 +292,8 @@ public class DiffCommit {
 			//System.out.println("zzz   "+getNDEV(fileList, newCommit.getCommitter(), NDEV));
 			newCommit.setNDEV(getNDEV(fileList, newCommit.getCommitter(), NDEV));
 			newCommit.setConf(getConf(fileList));
+			newCommit.setEXP(hmp.get(commiter));
+			//newCommit.setEXP(dddxxx ++);
 			
 			if(fileList.size() == 1)
 			{
@@ -316,7 +337,7 @@ public class DiffCommit {
 	//count &, you can get number of commiters of this files, means commiters who changed this file
 	private static Integer getNDEV(List<String> fileList, String commiter, HashMap<String,String> hmp)
 	{
-		Integer ans = 0;
+		//Integer ans = 0;
 		
 		for(int i = 0; i < fileList.size(); i ++)
 		{
@@ -333,35 +354,41 @@ public class DiffCommit {
 				hmp.put(temp, commiter + "&");
 			}
 		}
-		
-//		Set<String> se = hmp.keySet();
-//		Iterator<String> it = se.iterator();  
-//		while (it.hasNext()) {  
-//		  String str = it.next();  
-//		  System.out.println("ddd   "+hmp.get(str));  
-//		  System.out.println("ccc   "+countCommiters(hmp.get(str)));  
-//
-//		}  
-		
+
+		List<String> conta = new ArrayList<String>();
 		for(int i = 0; i < fileList.size(); i ++)
 		{
-			ans += countCommiters(hmp.get(fileList.get(i)));
+			List<String> temp = countCommiters(hmp.get(fileList.get(i)));
+			for(int j = 0; j < temp.size(); j ++)
+			{
+				if(conta.contains(temp.get(j)))
+				{
+					
+				}
+				else
+				{
+					conta.add(temp.get(j));
+				}
+			}
 		}
 		
-		return ans;
+		return conta.size();
 	}
 	
-	private static Integer countCommiters(String names)
+	private static List<String> countCommiters(String names)
 	{
+		List<String> namels = new ArrayList<String>();
 		Integer ans = 0;
 		String local = names;
 		while(local.contains("&"))
 		{
+			String temp = local.substring(0, local.indexOf("&"));
+			namels.add(temp);
 			local = local.substring(local.indexOf("&") + 1, local.length());
 			ans ++;
 		}
 		
-		return ans;
+		return namels;
 	}
 	
 	private double entropy(List<Integer> addLines, List<Integer>delLines)

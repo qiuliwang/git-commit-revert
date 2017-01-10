@@ -16,7 +16,7 @@ public class Commit {
 	private int addFiles;
 	private int deleteFiles;
 	private int renameFiles;
-	
+	private int copyFiles;
 	// fine-grained features
 	private int numberOfLow;
 	private int numberOfMedium = 0;
@@ -37,6 +37,14 @@ public class Commit {
 	private Integer conf = 0;
 	
 	
+	public int getCopyFiles() {
+		return copyFiles;
+	}
+
+	public void setCopyFiles(int copyFiles) {
+		this.copyFiles = copyFiles;
+	}
+
 	public Integer getConf() {
 		return conf;
 	}
