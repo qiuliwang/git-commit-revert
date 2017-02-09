@@ -27,105 +27,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="module-library">
-      <library name="changedistiller-0.0.1-SNAPSHOT-jar-with-dependencies.jar">
-        <CLASSES>
-          <root url="jar://$USER_HOME$/OneDrive/Documents/Lab/commit/git-commit-revert/changedistiller-0.0.1-SNAPSHOT-jar-with-dependencies.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="changedistiller-0.0.1-SNAPSHOT-javadoc.jar">
-        <CLASSES>
-          <root url="jar://$USER_HOME$/OneDrive/Documents/Lab/commit/git-commit-revert/changedistiller-0.0.1-SNAPSHOT-javadoc.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="changedistiller-0.0.1-SNAPSHOT-sources.jar">
-        <CLASSES>
-          <root url="jar://$USER_HOME$/OneDrive/Documents/Lab/commit/git-commit-revert/changedistiller-0.0.1-SNAPSHOT-sources.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="changedistiller-0.0.1-SNAPSHOT.jar">
-        <CLASSES>
-          <root url="jar://$USER_HOME$/OneDrive/Documents/Lab/commit/git-commit-revert/changedistiller-0.0.1-SNAPSHOT.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="log4j-1.2.17.jar">
-        <CLASSES>
-          <root url="jar://$USER_HOME$/OneDrive/Documents/Lab/commit/git-commit-revert/log4j-1.2.17.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="org.eclipse.jgit-4.5.0.201609210915-r-javadoc.jar">
-        <CLASSES>
-          <root url="jar://$USER_HOME$/OneDrive/Documents/Lab/commit/git-commit-revert/org.eclipse.jgit-4.5.0.201609210915-r-javadoc.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="org.eclipse.jgit-4.5.0.201609210915-r.jar">
-        <CLASSES>
-          <root url="jar://$USER_HOME$/OneDrive/Documents/Lab/commit/git-commit-revert/org.eclipse.jgit-4.5.0.201609210915-r.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="slf4j-api-1.7.12.jar">
-        <CLASSES>
-          <root url="jar://$USER_HOME$/OneDrive/Documents/Lab/commit/git-commit-revert/slf4j-api-1.7.12.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="slf4j-log4j12-1.7.21.jar">
-        <CLASSES>
-          <root url="jar://$USER_HOME$/OneDrive/Documents/Lab/commit/git-commit-revert/slf4j-log4j12-1.7.21.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="SuperCSV-1.52.jar">
-        <CLASSES>
-          <root url="jar://$USER_HOME$/OneDrive/Documents/Lab/commit/git-commit-revert/SuperCSV-1.52.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="weka-stable-3.6.10.jar">
-        <CLASSES>
-          <root url="jar://$USER_HOME$/OneDrive/Documents/Lab/commit/weka-stable-3.6.10.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
       <library name="cup-11a.jar">
         <CLASSES>
           <root url="jar://$MODULE_DIR$/cup-11a.jar!/" />
@@ -134,6 +35,26 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="changedistiller-0.0.1-SNAPSHOT-jar-with-dependencies" level="project" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/jar/changedistiller-0.0.1-SNAPSHOT-jar-with-dependencies.jar!/" />
+          <root url="jar://$MODULE_DIR$/jar/changedistiller-0.0.1-SNAPSHOT.jar!/" />
+          <root url="jar://$MODULE_DIR$/jar/log4j-1.2.17.jar!/" />
+          <root url="jar://$MODULE_DIR$/jar/org.eclipse.jgit-4.5.0.201609210915-r.jar!/" />
+          <root url="jar://$MODULE_DIR$/jar/slf4j-api-1.7.12.jar!/" />
+          <root url="jar://$MODULE_DIR$/jar/slf4j-log4j12-1.7.21.jar!/" />
+          <root url="jar://$MODULE_DIR$/jar/SuperCSV-1.52.jar!/" />
+          <root url="jar://$MODULE_DIR$/jar/weka-stable-3.6.10.jar!/" />
+        </CLASSES>
+        <JAVADOC>
+          <root url="jar://$MODULE_DIR$/jar/changedistiller-0.0.1-SNAPSHOT-javadoc.jar!/" />
+          <root url="jar://$MODULE_DIR$/jar/org.eclipse.jgit-4.5.0.201609210915-r-javadoc.jar!/" />
+        </JAVADOC>
+        <SOURCES>
+          <root url="jar://$MODULE_DIR$/jar/changedistiller-0.0.1-SNAPSHOT-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
   </component>
 </module>

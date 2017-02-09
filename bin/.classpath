@@ -14,5 +14,6 @@
 	<classpathentry kind="lib" path="/Users/WangQL/OneDrive/Documents/Lab/commit/git-commit-revert/SuperCSV-1.52.jar"/>
 	<classpathentry kind="lib" path="/Users/WangQL/OneDrive/Documents/Lab/commit/weka-stable-3.6.10.jar"/>
 	<classpathentry kind="lib" path="/Users/WangQL/Documents/git/git-commit-revert/bin/cup-11a.jar"/>
+	<classpathentry kind="lib" path="/Users/WangQL/Documents/git/git-commit-revert/out/artifacts/git_commit_revert_jar/git-commit-revert.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
