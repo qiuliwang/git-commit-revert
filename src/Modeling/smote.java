@@ -29,7 +29,7 @@ public class smote {
 				localdata = weka.filters.Filter.useFilter(data, localsmote);
 //			}
 
-			per = cal(localdata);
+			//per = cal(localdata);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

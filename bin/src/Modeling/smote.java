@@ -18,18 +18,18 @@ public class smote {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		//localsmote.setPercentage(percent);
+		localsmote.setPercentage(percent);
 
 		try {
-			double per = cal(data);
-
-			if(per > 2 || per < 0.5);
-			{
-				localsmote.setPercentage(100);
+//			double per = cal(data);
+//
+//			if(per > 2 || per < 0.5);
+//			{
+				//localsmote.setPercentage(100);
 				localdata = weka.filters.Filter.useFilter(data, localsmote);
-			}
+//			}
 
-			per = cal(localdata);
+			//per = cal(localdata);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
