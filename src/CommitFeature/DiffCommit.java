@@ -322,8 +322,9 @@ public class DiffCommit {
 		
 		for(int i = 0; i < fileList.size(); i ++)
 		{
-			if(fileList.get(i).contains(".xml") || fileList.get(i).contains(".classpath")
-					 || fileList.get(i).contains(".project"))
+			//if(fileList.get(i).contains(".xml") || fileList.get(i).contains(".classpath")
+			//		 || fileList.get(i).contains(".project"))
+			if(fileList.get(i).contains("pom.xml"))
 			{
 				ans ++;
 			}

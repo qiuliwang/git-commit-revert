@@ -87,30 +87,36 @@ public class CSV_handler {
 		for (int i = 0; i < commits.size(); i++) {
 			Commit thisCommit = commits.get(i);
 			String[] thisContent = new String[20];
-			thisContent[0] = Integer.toString(thisCommit.getAddFiles()); 
-			thisContent[1] =  Integer.toString(thisCommit.getModifyFiles());
-			thisContent[2] =  Integer.toString(thisCommit.getDeleteFiles());
-			thisContent[3] =  Integer.toString(thisCommit.getRenameFiles()); 
-			thisContent[4] = Integer.toString(thisCommit.getCopyFiles());
-			thisContent[5] = Integer.toString(thisCommit.getNumberOfLow()); 
-			thisContent[6] =  Integer.toString(thisCommit.getNumberOfMedium()); 
-			thisContent[7] =  Integer.toString(thisCommit.getNumberOfHigh());
-			thisContent[8] =  Integer.toString(thisCommit.getNumberOfCrucial());
-			thisContent[9] = Integer.toString(thisCommit.getDellines());
-			thisContent[10] = Integer.toString(thisCommit.getAddlines());
-			thisContent[11] = Integer.toString(thisCommit.getSubSystemNum());
-			thisContent[12] = Integer.toString(thisCommit.getEXP());
-			thisContent[13] = Integer.toString(thisCommit.getNDEV());
-			thisContent[14] = Integer.toString(thisCommit.getNF());
-			thisContent[15] = Integer.toString(thisCommit.getND());
-			thisContent[16] = Integer.toString(thisCommit.getNUC());
-			thisContent[17] = Double.toString(thisCommit.getEntropy());
-			thisContent[18] = Integer.toString(thisCommit.getConf());
+			
+			thisContent[0] = Double.toString(logNormalization((thisCommit.getAddFiles()))); 
+			thisContent[1] =  Double.toString(logNormalization((thisCommit.getModifyFiles())));
+			thisContent[2] =  Double.toString(logNormalization((thisCommit.getDeleteFiles())));
+			thisContent[3] =  Double.toString(logNormalization((thisCommit.getRenameFiles()))); 
+			thisContent[4] = Double.toString(logNormalization((thisCommit.getCopyFiles())));
+			thisContent[5] = Double.toString(logNormalization((thisCommit.getNumberOfLow()))); 
+			thisContent[6] =  Double.toString(logNormalization((thisCommit.getNumberOfMedium()))); 
+			thisContent[7] =  Double.toString(logNormalization((thisCommit.getNumberOfHigh())));
+			thisContent[8] =  Double.toString(logNormalization((thisCommit.getNumberOfCrucial())));
+			thisContent[9] = Double.toString(logNormalization((thisCommit.getDellines())));
+			thisContent[10] = Double.toString(logNormalization((thisCommit.getAddlines())));
+			thisContent[11] = Double.toString(logNormalization((thisCommit.getSubSystemNum())));
+			thisContent[12] = Double.toString(logNormalization((thisCommit.getEXP())));
+			thisContent[13] = Double.toString(logNormalization((thisCommit.getNDEV())));
+			thisContent[14] = Double.toString(logNormalization((thisCommit.getNF())));
+			thisContent[15] = Double.toString(logNormalization((thisCommit.getND())));
+			thisContent[16] = Double.toString(logNormalization((thisCommit.getNUC())));
+			thisContent[17] = Double.toString(logNormalization((thisCommit.getEntropy())));
+			thisContent[18] = Double.toString(logNormalization((thisCommit.getConf())));
 			thisContent[19] =  Integer.toString(thisCommit.getLabel());
 
 			content.add(thisContent);
 		}
 		writeToCsv(file, header, content);
+	}
+	
+	public double logNormalization (double metricValue)
+	{
+		return java.lang.Math.log(metricValue+1);
 	}
 	
 

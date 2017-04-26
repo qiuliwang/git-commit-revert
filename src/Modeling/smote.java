@@ -8,9 +8,10 @@ public class smote {
 	{
 
 	}
-	public smote(Instances data, double percent)
-	{
 
+	
+	public smote(Instances data, double percent, int neighbors)
+	{		
 		SMOTE localsmote = new SMOTE();
 		try {
 			localsmote.setInputFormat(data);
@@ -19,17 +20,9 @@ public class smote {
 			e.printStackTrace();
 		}
 		localsmote.setPercentage(percent);
-
+		localsmote.setNearestNeighbors(neighbors);
 		try {
-//			double per = cal(data);
-//
-//			if(per > 2 || per < 0.5);
-//			{
-				//localsmote.setPercentage(100);
-				localdata = weka.filters.Filter.useFilter(data, localsmote);
-//			}
-
-			//per = cal(localdata);
+			localdata = weka.filters.Filter.useFilter(data, localsmote);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

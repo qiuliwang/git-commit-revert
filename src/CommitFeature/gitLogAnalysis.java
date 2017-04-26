@@ -43,11 +43,11 @@ public class gitLogAnalysis {
 	
 	//static HashMap<String, Integer> hmp = new HashMap<String, Integer>();
 	
-	public gitLogAnalysis(String pro) throws NoHeadException, IOException, GitAPIException
+	public gitLogAnalysis(String homeUrl, String pro) throws NoHeadException, IOException, GitAPIException
 	{
 		//nameOfDevelopers = new ArrayList<String>();
 		project = pro;
-		home = "/Users/WangQL/Documents/git/";
+		home = homeUrl;
 		projectHome = home+project+"/";
 		outputHome = home+project+"Output/";
 		tempCopyFileHome =outputHome+"tempFiles"; 
@@ -59,7 +59,7 @@ public class gitLogAnalysis {
 			GitAPIException {
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss-SSS");//设置日期格式
 		String time1 = df.format(new Date()).toString();// new Date()为获取当前系统时间
-		gitLogAnalysis gas = new gitLogAnalysis("Java");
+		gitLogAnalysis gas = new gitLogAnalysis(home, "Java");
 		//myFirstRep  camel
 		gas.analysis();
 		
@@ -84,9 +84,14 @@ public class gitLogAnalysis {
 		List<String> revertedCommitIDs = new ArrayList<String>();
 		List<Commit> revertedCommits = new ArrayList<Commit>();		
 		
-		File allCommitCsv = new File(home + "/" + project + "Output/AllLog.csv");
-		File revertingCommitCsv = new File(home + "/" + project + "Output/RevertingLog.csv");
-		File revertedCommitCsv = new File(home + "/" + project + "Output/RevertedLog.csv");
+		File allCommitCsv = new File(home + "/" + project + "Output/AllCommits.csv");
+		File revertingCommitCsv = new File(home + "/" + project + "Output/RevertingCommits.csv");
+		File revertedCommitCsv = new File(home + "/" + project + "Output/RevertedCommits.csv");
+		
+		File allCommitMessageCsv = new File(home + "/" + project + "Output/AllCommitsMessage.csv");
+		File revertingCommitMessageCsv = new File(home + "/" + project + "Output/RevertingCommitsMessage.csv");
+		File revertedCommitMessageCsv = new File(home + "/" + project + "Output/RevertedCommitsMessage.csv");
+		
 		CSV_handler operateCsv = new CSV_handler();
 
 		FileRepositoryBuilder builder = new FileRepositoryBuilder();
@@ -186,6 +191,11 @@ public class gitLogAnalysis {
 		operateCsv.writeCommitsToCsvWithoutMsg(revertingCommitCsv, revertingCommits);
 		operateCsv.writeCommitsToCsvWithoutMsg(revertedCommitCsv, revertedCommits);
 
+		operateCsv.writeCommitsMsgsToCsv(allCommitMessageCsv, allCommits);
+		operateCsv.writeCommitsMsgsToCsv(revertingCommitMessageCsv, revertingCommits);
+		operateCsv.writeCommitsMsgsToCsv(revertedCommitMessageCsv, revertedCommits);
+
+		
 		System.out.println("Total commits:"+Integer.toString(numberOfAllCommit-1));
 		System.out.println("Reverting commits:"+numberOfRevertingCommit);
 		System.out.println("Reverted commits:"+revertedCommits.size());				

@@ -2,18 +2,17 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="/Users/WangQL/OneDrive/Documents/Lab/commit/git-commit-revert/changedistiller-0.0.1-SNAPSHOT-jar-with-dependencies.jar"/>
-	<classpathentry kind="lib" path="/Users/WangQL/OneDrive/Documents/Lab/commit/git-commit-revert/changedistiller-0.0.1-SNAPSHOT-javadoc.jar"/>
-	<classpathentry kind="lib" path="/Users/WangQL/OneDrive/Documents/Lab/commit/git-commit-revert/changedistiller-0.0.1-SNAPSHOT-sources.jar"/>
-	<classpathentry kind="lib" path="/Users/WangQL/OneDrive/Documents/Lab/commit/git-commit-revert/changedistiller-0.0.1-SNAPSHOT.jar"/>
-	<classpathentry kind="lib" path="/Users/WangQL/OneDrive/Documents/Lab/commit/git-commit-revert/log4j-1.2.17.jar"/>
-	<classpathentry kind="lib" path="/Users/WangQL/OneDrive/Documents/Lab/commit/git-commit-revert/org.eclipse.jgit-4.5.0.201609210915-r-javadoc.jar"/>
-	<classpathentry kind="lib" path="/Users/WangQL/OneDrive/Documents/Lab/commit/git-commit-revert/org.eclipse.jgit-4.5.0.201609210915-r.jar"/>
-	<classpathentry kind="lib" path="/Users/WangQL/OneDrive/Documents/Lab/commit/git-commit-revert/slf4j-api-1.7.12.jar"/>
-	<classpathentry kind="lib" path="/Users/WangQL/OneDrive/Documents/Lab/commit/git-commit-revert/slf4j-log4j12-1.7.21.jar"/>
-	<classpathentry kind="lib" path="/Users/WangQL/OneDrive/Documents/Lab/commit/git-commit-revert/SuperCSV-1.52.jar"/>
-	<classpathentry kind="lib" path="/Users/WangQL/OneDrive/Documents/Lab/commit/weka-stable-3.6.10.jar"/>
-	<classpathentry kind="lib" path="/Users/WangQL/Documents/git/git-commit-revert/bin/cup-11a.jar"/>
-	<classpathentry kind="lib" path="/Users/WangQL/Documents/git/git-commit-revert/out/artifacts/git_commit_revert_jar/git-commit-revert.jar"/>
+	<classpathentry kind="lib" path="C:/Users/ym/workspace/git-commit-revert/changedistiller-0.0.1-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="C:/Users/ym/workspace/git-commit-revert/changedistiller-0.0.1-SNAPSHOT-jar-with-dependencies.jar"/>
+	<classpathentry kind="lib" path="C:/Users/ym/workspace/git-commit-revert/changedistiller-0.0.1-SNAPSHOT-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Users/ym/workspace/git-commit-revert/changedistiller-0.0.1-SNAPSHOT-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/ym/workspace/git-commit-revert/cup-11a.jar"/>
+	<classpathentry kind="lib" path="C:/Users/ym/workspace/git-commit-revert/log4j-1.2.17.jar"/>
+	<classpathentry kind="lib" path="C:/Users/ym/workspace/git-commit-revert/org.eclipse.jgit-4.5.0.201609210915-r.jar"/>
+	<classpathentry kind="lib" path="C:/Users/ym/workspace/git-commit-revert/org.eclipse.jgit-4.5.0.201609210915-r-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Users/ym/workspace/git-commit-revert/slf4j-api-1.7.12.jar"/>
+	<classpathentry kind="lib" path="C:/Users/ym/workspace/git-commit-revert/slf4j-log4j12-1.7.21.jar"/>
+	<classpathentry kind="lib" path="C:/Users/ym/workspace/git-commit-revert/SuperCSV-1.52.jar"/>
+	<classpathentry kind="lib" path="C:/Users/ym/workspace/git-commit-revert/weka-stable-3.6.10.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -20,59 +20,7 @@ public class readFile {
 	Instances data;
 	public static void main(String args[])
     {
-        readFile fg = new readFile();
-        List<String> fileName;
 
-        fileName = traverseFolder1("/Users/WangQL/Documents/MATLAB/Experiment1-14/data/new");
-        int plus = 0;
-        int minus = 0;
-        for(int i = 0; i < fileName.size(); i ++)
-        {
-            plus = 0;
-            minus = 0;
-            try {
-                Instances temp = fg.getData(fileName.get(i));
-                System.out.println(temp.numInstances());
-                smote st = new smote(temp, 100);
-                Instances temp2 = st.getSmoteData();
-                System.out.println(temp2.numInstances());
-//                int a = 0, b = 0;
-//                for(int j = 0; j < temp.numInstances(); j ++)
-//                {
-//                    //System.out.println(temp.instance(j));
-//                   //temp.instance(j).classValue());
-//                    if(temp.instance(j).classValue() == 0.0)
-//                    {
-//                        minus ++;
-//                    }
-//                    else
-//                    {
-//                        plus ++;
-//                    }
-//                }
-//                System.out.println("0.0:" + minus);
-//                System.out.println("1.0:" + plus);
-//                //System.out.println("per:" + (double)a / b);
-//                if((double)a / b > 1)
-//                {
-//                    smote st = new smote(temp, 100);
-//                    Instances inner = st.getSmoteData();
-//                    inner.setClassIndex(inner.numAttributes() - 1);
-//
-//                }
-//                else if((double)b / a > 1)
-//                {
-//
-//                }
-                System.out.println("~~~~~~~~~~~~~~");
-
-            }
-            catch(Exception e)
-            {
-
-            }
-        }
-        System.out.println("per:" + (double)minus / plus);
 
     }
 
@@ -145,11 +93,13 @@ public class readFile {
 //	        loader.setNominalAttributes("15");
 //	        loader.setNominalAttributes("16");
 //	        loader.setNominalAttributes("17");
+	       // loader.
 	        loader.setNominalAttributes("20");
 
 	        
 	        Instances data = loader.getDataSet();
-	        data.setClassIndex(17);
+	        data.setClassIndex(20);
+	        
 	        
 	        // save ARFF
 	        ArffSaver saver = new ArffSaver();

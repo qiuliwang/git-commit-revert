@@ -17,6 +17,7 @@ public class Commit {
 	private int deleteFiles;
 	private int renameFiles;
 	private int copyFiles;
+	
 	// fine-grained features
 	private int numberOfLow;
 	private int numberOfMedium = 0;
@@ -26,15 +27,18 @@ public class Commit {
 
 	private int addlines = 0;
 	private int dellines = 0;
-	private int subSystemNum = 0;
-	private int EXP = 0;
-	private int NDEV = 0;
-	private int NF = 0;
-	private int NUC = 0;	
-	private int ND = 0;	
+	private int subSystemNum = 0; //The number of subsystems touched in a change
+	private int EXP = 0;      //Developers experience, i.e., the number of submitted changes currently.
+	private int NDEV = 0;       //The number of developers that changed the files in a change
+	private int NF = 0;         //The number of files touched in a change
+	private int NUC = 0;	   //The number of unique last changes to the files
+	private int ND = 0;	        //The number of directories touched in a change
+
 	private String date = "";	
-	private double entropy = 0;
-	private Integer conf = 0;
+	private double entropy = 0;  //Distribution across the touched files.
+
+	private Integer conf = 0;    // The number of configure files touched in a change
+
 	
 	
 	public int getCopyFiles() {
