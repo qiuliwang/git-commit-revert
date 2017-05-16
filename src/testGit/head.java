@@ -8,14 +8,14 @@ import org.eclipse.jgit.api.errors.NoHeadException;
 
 public class head {
 	public static void main(String args[]) throws Exception {
-		String home = "F:/commitdata/";
+		String home = "D:/CommitData/";
 		String[] projects = new String[] { "testgit", "hadoop", "hbase", "hibernate-search", "jenkins", "karaf" };
-		int projectIndex =  0;
+		int projectIndex =  2;
 		String project = projects[projectIndex];
 		double testRate = 0.2;
 
-		boolean preprocess = true;
-		boolean modeling = false;
+		boolean preprocess = false;
+		boolean modeling = true;
 
 		if (preprocess) {
 			CommitFeature.gitLogAnalysis analysis = new CommitFeature.gitLogAnalysis(home, project);

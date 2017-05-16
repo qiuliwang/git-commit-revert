@@ -35,13 +35,13 @@ public class readFile {
 			File[] files = file.listFiles();
 			for (File file2 : files) {
 				if (file2.isDirectory()) {
-					System.out.println("文件夹:" + file2.getAbsolutePath());
+					System.out.println("鏂囦欢澶�:" + file2.getAbsolutePath());
 					list.add(file2);
                     folderNum++;
 				} else {
 				    String filename = file2.getAbsolutePath();
 				    if(filename.contains(".arff")) {
-                        System.out.println("文件:" + filename);
+                        System.out.println("鏂囦欢:" + filename);
                         fileNum++;
                         fileNames.add(filename);
                         //Instances temp =
@@ -54,19 +54,19 @@ public class readFile {
 				files = temp_file.listFiles();
 				for (File file2 : files) {
 					if (file2.isDirectory()) {
-						System.out.println("文件夹:" + file2.getAbsolutePath());
+						System.out.println("鏂囦欢澶�:" + file2.getAbsolutePath());
 						list.add(file2);
                         folderNum++;
 					} else {
-						System.out.println("文件:" + file2.getAbsolutePath());
+						System.out.println("鏂囦欢:" + file2.getAbsolutePath());
                         fileNum++;
 					}
 				}
 			}
 		} else {
-			System.out.println("文件不存在!");
+			System.out.println("鏂囦欢涓嶅瓨鍦�!");
 		}
-		System.out.println("文件夹共有:" + folderNum + ",文件共有:" + fileNum);
+		System.out.println("鏂囦欢澶瑰叡鏈�:" + folderNum + ",鏂囦欢鍏辨湁:" + fileNum);
         return fileNames;
 	}
 	
@@ -98,7 +98,7 @@ public class readFile {
 
 	        
 	        Instances data = loader.getDataSet();
-	        data.setClassIndex(20);
+	        data.setClassIndex(19);
 	        
 	        
 	        // save ARFF

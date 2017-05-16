@@ -43,8 +43,8 @@ public class start {
 		//CommitFeature.gitLogAnalysis ans = new CommitFeature.gitLogAnalysis("Java");
 		//String home = "/Users/WangQL/Documents/git/";
 		readFile re = new readFile();		
-		String inputCSV = home + project + "Output/AllLog.csv";
-		String outputArff = home + project + "Output/AllLog.arff";
+		String inputCSV = home + project + "Output/AllCommits.csv";
+		String outputArff = home + project + "Output/AllCommits.arff";
 		re.CSVtoARFF(inputCSV, outputArff);		
 		Instances data = re.getData(outputArff);
 		System.out.println(inputCSV);

@@ -43,7 +43,7 @@ public class gitLogAnalysis {
 	
 	//static HashMap<String, Integer> hmp = new HashMap<String, Integer>();
 	
-	public gitLogAnalysis(String homeUrl, String pro) throws NoHeadException, IOException, GitAPIException
+	public gitLogAnalysis(String homeUrl, String pro) throws IOException
 	{
 		//nameOfDevelopers = new ArrayList<String>();
 		project = pro;
@@ -55,10 +55,10 @@ public class gitLogAnalysis {
 	}
 	
 	@SuppressWarnings("deprecation")
-	public static void main(String[] args) throws IOException, NoHeadException,
-			GitAPIException {
-		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss-SSS");//设置日期格式
-		String time1 = df.format(new Date()).toString();// new Date()为获取当前系统时间
+	public static void main(String[] args) throws IOException, NoHeadException, GitAPIException
+			 {
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss-SSS");//璁剧疆鏃ユ湡鏍煎紡
+		String time1 = df.format(new Date()).toString();// new Date()涓鸿幏鍙栧綋鍓嶇郴缁熸椂闂�
 		gitLogAnalysis gas = new gitLogAnalysis(home, "Java");
 		//myFirstRep  camel
 		gas.analysis();
