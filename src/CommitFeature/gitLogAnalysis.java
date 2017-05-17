@@ -59,7 +59,8 @@ public class gitLogAnalysis {
 			 {
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss-SSS");//璁剧疆鏃ユ湡鏍煎紡
 		String time1 = df.format(new Date()).toString();// new Date()涓鸿幏鍙栧綋鍓嶇郴缁熸椂闂�
-		gitLogAnalysis gas = new gitLogAnalysis(home, "Java");
+		//C:\Users\WangQL\Documents\Code\Java
+		gitLogAnalysis gas = new gitLogAnalysis("C:/Users/WangQL/Documents/Code/", "Java");
 		//myFirstRep  camel
 		gas.analysis();
 		
@@ -155,7 +156,12 @@ public class gitLogAnalysis {
 
 			String commitId = getCommitId(thisID.toString()); // get commit ID hashcode																 			thisCommit.setId(numberOfAllCommit); // index
 			thisCommit.setCommitid(commitId); // commitId
-			//System.out.println(commitId);
+			
+			//precess message here
+			//System.out.println("message: "+msg + "\n===================\n");
+			
+			
+			
 			thisCommit.setCommitter(committerName); // committer
 			thisCommit.setTime(commitDate); // date
 			thisCommit.setLabel(0); // label, 0, default ,  1, reverted ,  2, reverting
