@@ -52,7 +52,7 @@ public class logtocsv {
 			GitAPIException {
 		// TODO Auto-generated method stub
 		//gitLogAnalysis gas = new gitLogAnalysis("git-commit-revert");
-		gitLogAnalysis gas = new gitLogAnalysis("Java");
+		gitLogAnalysis gas = new gitLogAnalysis("","Java");
 
 		gas.analysis();
 	}
