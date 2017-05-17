@@ -150,41 +150,41 @@ public class CSV_handler {
 		return outputText;
 	}
 
-	public static void main(String[] args) throws IOException {
-		CSV_handler operateCsv = new CSV_handler();
-		File file = new File("D://firebird-input2.csv");
-		// List<String[]> content = operateCsv.getDetailFromFile(file);
-		// String[] header = operateCsv.getHeaderFromFile(file);
-		// for(String[] str : content) {
-		// for(int i = 0; i < str.length; i++) {
-		// System.out.println(str[i]);
-		// }
-		// }
-		// File file1 = new File("D:/����-����.csv");
-		// operateCsv.writeToCsv(file1, header, content);
-		// operateCsv.writeHeaderToCsv(file1, header);
-		// operateCsv.writeContentToCsv(file1, content);
-		String[] headers = { "project", "number", "content" };
-		List<String[]> contents = new ArrayList<String[]>();
-
-		String root = "D:";
-		String project = "firebird";
-
-		String[] urls = new String[10727]; //
-		for (int j = 0; j < 10727; j++) {
-			String[] messages = new String[3];
-			urls[j] = root + "\\input" + (j + 5) + ".txt";
-			messages[0] = project;
-			messages[1] = "" + (j + 1);
-			messages[2] = operateCsv.getTxtContent(urls[j]);
-			if (j == 6737)
-				System.out.println(messages[2]);
-			contents.add(messages);
-		}
-
-		operateCsv.writeToCsv(file, headers, contents);
-
-	}
-
+//	public static void main(String[] args) throws IOException {
+//		CSV_handler operateCsv = new CSV_handler();
+//		File file = new File("D://firebird-input2.csv");
+//		// List<String[]> content = operateCsv.getDetailFromFile(file);
+//		// String[] header = operateCsv.getHeaderFromFile(file);
+//		// for(String[] str : content) {
+//		// for(int i = 0; i < str.length; i++) {
+//		// System.out.println(str[i]);
+//		// }
+//		// }
+//		// File file1 = new File("D:/����-����.csv");
+//		// operateCsv.writeToCsv(file1, header, content);
+//		// operateCsv.writeHeaderToCsv(file1, header);
+//		// operateCsv.writeContentToCsv(file1, content);
+//		String[] headers = { "project", "number", "content" };
+//		List<String[]> contents = new ArrayList<String[]>();
+//
+//		String root = "D:";
+//		String project = "firebird";
+//
+//		String[] urls = new String[10727]; //
+//		for (int j = 0; j < 10727; j++) {
+//			String[] messages = new String[3];
+//			urls[j] = root + "\\input" + (j + 5) + ".txt";
+//			messages[0] = project;
+//			messages[1] = "" + (j + 1);
+//			messages[2] = operateCsv.getTxtContent(urls[j]);
+//			if (j == 6737)
+//				System.out.println(messages[2]);
+//			contents.add(messages);
+//		}
+//
+//		operateCsv.writeToCsv(file, headers, contents);
+//
+//	}
+//
 
 }

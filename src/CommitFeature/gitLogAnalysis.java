@@ -57,8 +57,8 @@ public class gitLogAnalysis {
 	@SuppressWarnings("deprecation")
 	public static void main(String[] args) throws IOException, NoHeadException, GitAPIException
 			 {
-		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss-SSS");//璁剧疆鏃ユ湡鏍煎紡
-		String time1 = df.format(new Date()).toString();// new Date()涓鸿幏鍙栧綋鍓嶇郴缁熸椂闂�
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss-SSS");
+		String time1 = df.format(new Date()).toString();//
 		//C:\Users\WangQL\Documents\Code\Java
 		gitLogAnalysis gas = new gitLogAnalysis("C:/Users/WangQL/Documents/Code/", "Java");
 		//myFirstRep  camel
