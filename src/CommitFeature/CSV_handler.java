@@ -83,10 +83,13 @@ public class CSV_handler {
 		List<String[]> content = new ArrayList<String[]>();
 		String[] header = 	{ "AddFiles", "ModifyFiles","DeleteFiles", "RenameFiles", "CopyFiles","LowLines","MediumLines",
 				"HighLines","CrucialLines","DelLines", "AddLines","SubSystem","EXP","NDEV",
-				"NF", "ND","NUC", "Entropy", "Conf", "Label"};
+				"NF", "ND","NUC", "Entropy", "Conf","msg_length", "has_bug", "has_feature","has_improve",
+				"has_document", "has_refactor", "Label"};
+		
+		
 		for (int i = 0; i < commits.size(); i++) {
 			Commit thisCommit = commits.get(i);
-			String[] thisContent = new String[20];
+			String[] thisContent = new String[26];
 			
 			thisContent[0] = Double.toString(logNormalization((thisCommit.getAddFiles()))); 
 			thisContent[1] =  Double.toString(logNormalization((thisCommit.getModifyFiles())));
@@ -107,7 +110,14 @@ public class CSV_handler {
 			thisContent[16] = Double.toString(logNormalization((thisCommit.getNUC())));
 			thisContent[17] = Double.toString(logNormalization((thisCommit.getEntropy())));
 			thisContent[18] = Double.toString(logNormalization((thisCommit.getConf())));
-			thisContent[19] =  Integer.toString(thisCommit.getLabel());
+			thisContent[19] = Double.toString(logNormalization((thisCommit.getMsg_length())));
+			thisContent[20] = Double.toString(logNormalization((thisCommit.getTextHasBug())));
+			thisContent[21] = Double.toString(logNormalization((thisCommit.getTestHasFeature())));
+			thisContent[22] = Double.toString(logNormalization((thisCommit.getTextHasImprove())));
+			thisContent[23] = Double.toString(logNormalization((thisCommit.getTextHasDocument())));
+			thisContent[24] = Double.toString(logNormalization((thisCommit.getTextHasRefactor())));
+			
+			thisContent[25] =  Integer.toString(thisCommit.getLabel());
 
 			content.add(thisContent);
 		}

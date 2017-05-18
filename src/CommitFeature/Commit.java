@@ -39,8 +39,62 @@ public class Commit {
 
 	private Integer conf = 0;    // The number of configure files touched in a change
 
+	//WangQL 2017/5/18
+	private int textHasBug = 0;  //description of this code change contains word "bug"
+	private int testHasFeature = 0; //description of this code change contains word "feature"
+	private int textHasImprove = 0; //description of this code change contains word "improve"
+	private int textHasDocument = 0;//description of this code change contains word "document"
+	private int textHasRefactor = 0;//description of this code change contains word "refactor"
+	private int msg_length = 0;   //length of description
 	
-	
+	public int getTextHasRefactor() {
+		return textHasRefactor;
+	}
+
+	public void setTextHasRefactor(int textHasRefactor) {
+		this.textHasRefactor = textHasRefactor;
+	}
+
+	public int getMsg_length() {
+		return msg_length;
+	}
+
+	public void setMsg_length(int msg_length) {
+		this.msg_length = msg_length;
+	}
+
+	public int getTextHasBug() {
+		return textHasBug;
+	}
+
+	public void setTextHasBug(int textHasBug) {
+		this.textHasBug = textHasBug;
+	}
+
+	public int getTestHasFeature() {
+		return testHasFeature;
+	}
+
+	public void setTestHasFeature(int testHasFeature) {
+		this.testHasFeature = testHasFeature;
+	}
+
+	public int getTextHasImprove() {
+		return textHasImprove;
+	}
+
+	public void setTextHasImprove(int textHasImprove) {
+		this.textHasImprove = textHasImprove;
+	}
+
+	public int getTextHasDocument() {
+		return textHasDocument;
+	}
+
+	public void setTextHasDocument(int textHasDocument) {
+		this.textHasDocument = textHasDocument;
+	}
+
 	public int getCopyFiles() {
 		return copyFiles;
 	}

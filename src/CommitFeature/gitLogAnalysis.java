@@ -159,15 +159,44 @@ public class gitLogAnalysis {
 			
 			//precess message here
 			//System.out.println("message: "+msg + "\n===================\n");
-			
-			
-			
+			if(msg.contains("bug"))
+			{
+				thisCommit.setTextHasBug(1);
+			}
+			if(msg.contains("feature"))
+			{
+				thisCommit.setTestHasFeature(1);
+			}
+			if(msg.contains("impoove"))
+			{
+				thisCommit.setTextHasImprove(1);
+			}
+			if(msg.contains("document"))
+			{
+				thisCommit.setTextHasDocument(1);
+			}
+			if(msg.contains("refactor"))
+				thisCommit.setTextHasRefactor(1);
+
+			//count number of space set length
+			int spaceNum = 0;
+			for(int i = 0; i < msg.length(); i ++)
+			{
+				if(msg.charAt(i) == ' ')
+				{
+					spaceNum ++;
+				}
+			}
+			thisCommit.setMsg_length(spaceNum);
+
 			thisCommit.setCommitter(committerName); // committer
 			thisCommit.setTime(commitDate); // date
 			thisCommit.setLabel(0); // label, 0, default ,  1, reverted ,  2, reverting
 			thisCommit.setRevertedId(""); // revertedCommitId default null
-			thisCommit.setMsg(regulizedMsg); // full msg
+			
+			//thisCommit.setMsg(regulizedMsg); // full msg useless message
 			//thisCommit.setCommitter(committer);
+			
 			// reverting label, if it is a reverting commit, label as 1
 			if (msg.indexOf("This reverts commit") > 0) {
 				thisCommit.setLabel(0);
