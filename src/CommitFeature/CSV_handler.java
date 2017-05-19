@@ -84,12 +84,13 @@ public class CSV_handler {
 		String[] header = 	{ "AddFiles", "ModifyFiles","DeleteFiles", "RenameFiles", "CopyFiles","LowLines","MediumLines",
 				"HighLines","CrucialLines","DelLines", "AddLines","SubSystem","EXP","NDEV",
 				"NF", "ND","NUC", "Entropy", "Conf","msg_length", "has_bug", "has_feature","has_improve",
-				"has_document", "has_refactor", "Label"};
+				"has_document", "has_refactor","language_num", "language_num", "Label"};
 		
 		
 		for (int i = 0; i < commits.size(); i++) {
 			Commit thisCommit = commits.get(i);
-			String[] thisContent = new String[26];
+			//notice that set the length of the array
+			String[] thisContent = new String[28];
 			
 			thisContent[0] = Double.toString(logNormalization((thisCommit.getAddFiles()))); 
 			thisContent[1] =  Double.toString(logNormalization((thisCommit.getModifyFiles())));
@@ -116,8 +117,10 @@ public class CSV_handler {
 			thisContent[22] = Double.toString(logNormalization((thisCommit.getTextHasImprove())));
 			thisContent[23] = Double.toString(logNormalization((thisCommit.getTextHasDocument())));
 			thisContent[24] = Double.toString(logNormalization((thisCommit.getTextHasRefactor())));
-			
-			thisContent[25] =  Integer.toString(thisCommit.getLabel());
+			thisContent[25] = Double.toString(logNormalization((thisCommit.getLanguage_num())));
+			thisContent[26] = Double.toString(logNormalization((thisCommit.getFile_type_num())));
+
+			thisContent[27] =  Integer.toString(thisCommit.getLabel());
 
 			content.add(thisContent);
 		}

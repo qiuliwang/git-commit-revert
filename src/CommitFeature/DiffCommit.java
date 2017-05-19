@@ -33,6 +33,18 @@ import ch.uzh.ifi.seal.changedistiller.model.entities.SourceCodeChange;
 public class DiffCommit {
 
 	private Git git;
+	
+	List<String> codeList = new ArrayList<String>(){{
+	    add(".java");
+	    add(".cpp");
+	    add(".c");
+	    add(".py");
+	    add(".cs");
+	    add(".aspx");
+	    add(".js");
+	    add(".html");
+	    }};
+	
 	public DiffCommit(Git git) {
 		this.git = git;
 	}
@@ -99,6 +111,11 @@ public class DiffCommit {
 		List<Integer> addNum = new ArrayList<Integer>();
 		List<Integer> delNum = new ArrayList<Integer>();
 		List<String> dirs = new ArrayList<String>();
+		
+		//WangQL 2017/5/19
+		List<String> fileType = new ArrayList<>();   //file type
+		List<String> codeType = new ArrayList<>();   //code type
+		
 		HashMap<String, Integer> uniqueChange = new HashMap<String, Integer>();
 		HashMap<String,String> NDEV = new HashMap<String, String>();
 		HashMap<String, Integer> hmp = new HashMap<String, Integer>();
@@ -113,6 +130,8 @@ public class DiffCommit {
 			addNum.clear();
 			delNum.clear();
 			dirs.clear();
+			fileType.clear();
+			codeType.clear();
 			//sexpAns = 0;
 			
 			Commit oldCommit = allCommits.get(i);
@@ -240,7 +259,20 @@ public class DiffCommit {
 	            
 	            String file = firstFile.substring(firstFile.lastIndexOf("/") + 1);
 	            String dir = firstFile.substring(0, firstFile.lastIndexOf("/"));
-	            //System.out.println(dir);
+	            String fileTP = file.substring(file.indexOf('.'), file.length());
+	            System.out.println(fileTP);
+	            
+	            //file type and code type
+	            if(!fileType.contains(fileTP))
+	            {
+	            	fileType.add(fileTP); 
+	            }
+	            
+	            if(codeList.contains(fileTP) && !codeType.contains(fileTP))
+	            {
+	            	codeType.add(fileTP);
+	            }
+	            
 	            //ND
 	            if(!dirs.contains(dir))
 	            {
@@ -274,6 +306,8 @@ public class DiffCommit {
                 }
 			}
 			//newCommit.setf
+			newCommit.setLanguage_num(codeType.size());
+			newCommit.setFile_type_num(fileType.size());
 			newCommit.setAddFiles(numberOfAddFiles);
 			newCommit.setDeleteFiles(numberOfDeleteFiles);
 			newCommit.setRenameFiles(numberOfRenameFiles);

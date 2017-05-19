@@ -100,7 +100,6 @@ public class logtocsv {
 		int numberOfAllCommit = 1;
 		int numberOfRevertingCommit = 0;
 		
-		//#################
 		//FileWriter fwriter1 = null;
 		//fwriter1 = new FileWriter("/Users/WangQL/Desktop/mess.txt");
 		while (it.hasNext()) {

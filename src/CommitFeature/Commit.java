@@ -47,6 +47,25 @@ public class Commit {
 	private int textHasRefactor = 0;//description of this code change contains word "refactor"
 	private int msg_length = 0;   //length of description
 	
+	//WangQL 2017/5/19
+	private int file_type_num = 0; //number of file types in this code change
+	private int language_num = 0;  //number of programming languageused in this code change
+	public int getFile_type_num() {
+		return file_type_num;
+	}
+
+	public int getLanguage_num() {
+		return language_num;
+	}
+
+	public void setLanguage_num(int language_num) {
+		this.language_num = language_num;
+	}
+
+	public void setFile_type_num(int file_type_num) {
+		this.file_type_num = file_type_num;
+	}
+
 	public int getTextHasRefactor() {
 		return textHasRefactor;
 	}
