@@ -138,7 +138,9 @@ public class DiffCommit {
 			Commit newCommit = allCommits.get(i - 1);
 			//Commit oldCommit = allCommits.get(i + 1);
 			//Commit newCommit = allCommits.get(i);
+			
 			String commiter = newCommit.getCommitter();
+			newCommit.getDate();
 			if(!hmp.containsKey(commiter))
 			{
 				hmp.put(commiter, 1);

@@ -93,14 +93,14 @@ public class CSV_handler {
 			String[] thisContent = new String[28];
 			
 			thisContent[0] = Double.toString(logNormalization((thisCommit.getAddFiles()))); 
-			thisContent[1] =  Double.toString(logNormalization((thisCommit.getModifyFiles())));
-			thisContent[2] =  Double.toString(logNormalization((thisCommit.getDeleteFiles())));
-			thisContent[3] =  Double.toString(logNormalization((thisCommit.getRenameFiles()))); 
+			thisContent[1] = Double.toString(logNormalization((thisCommit.getModifyFiles())));
+			thisContent[2] = Double.toString(logNormalization((thisCommit.getDeleteFiles())));
+			thisContent[3] = Double.toString(logNormalization((thisCommit.getRenameFiles()))); 
 			thisContent[4] = Double.toString(logNormalization((thisCommit.getCopyFiles())));
 			thisContent[5] = Double.toString(logNormalization((thisCommit.getNumberOfLow()))); 
-			thisContent[6] =  Double.toString(logNormalization((thisCommit.getNumberOfMedium()))); 
-			thisContent[7] =  Double.toString(logNormalization((thisCommit.getNumberOfHigh())));
-			thisContent[8] =  Double.toString(logNormalization((thisCommit.getNumberOfCrucial())));
+			thisContent[6] = Double.toString(logNormalization((thisCommit.getNumberOfMedium()))); 
+			thisContent[7] = Double.toString(logNormalization((thisCommit.getNumberOfHigh())));
+			thisContent[8] = Double.toString(logNormalization((thisCommit.getNumberOfCrucial())));
 			thisContent[9] = Double.toString(logNormalization((thisCommit.getDellines())));
 			thisContent[10] = Double.toString(logNormalization((thisCommit.getAddlines())));
 			thisContent[11] = Double.toString(logNormalization((thisCommit.getSubSystemNum())));

@@ -47,8 +47,38 @@ public class Commit {
 	private int textHasRefactor = 0;//description of this code change contains word "refactor"
 	private int msg_length = 0;   //length of description
 	
+	//Owner Experience
+	private int change_num = 0;;  //number of prior code changes submitted by the owner of this code change
+	private int recent_change_num = 0; //number of prior code changes submitted by the owner of this code change
+										//that is counted according to our weighting scheme in recent 120 days
+	private int subsystem_change_num = 0;  //number of prior code changes submitted by the owner of this code change, 
+										//that contain at least ont subsystem affected by this code chage
+	
 	//WangQL 2017/5/19
 	private int file_type_num = 0; //number of file types in this code change
+	public int getChange_num() {
+		return change_num;
+	}
+
+	public void setChange_num(int change_num) {
+		this.change_num = change_num;
+	}
+
+	public int getRecent_change_num() {
+		return recent_change_num;
+	}
+
+	public void setRecent_change_num(int recent_change_num) {
+		this.recent_change_num = recent_change_num;
+	}
+
+	public int getSubsystem_change_num() {
+		return subsystem_change_num;
+	}
+
+	public void setSubsystem_change_num(int subsystem_change_num) {
+		this.subsystem_change_num = subsystem_change_num;
+	}
 	private int language_num = 0;  //number of programming languageused in this code change
 	public int getFile_type_num() {
 		return file_type_num;
