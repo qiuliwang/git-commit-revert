@@ -38,6 +38,7 @@ public class DiffCommit {
 	    add(".java");
 	    add(".cpp");
 	    add(".c");
+	    add(".h");
 	    add(".py");
 	    add(".cs");
 	    add(".aspx");
@@ -262,7 +263,7 @@ public class DiffCommit {
 	            String file = firstFile.substring(firstFile.lastIndexOf("/") + 1);
 	            String dir = firstFile.substring(0, firstFile.lastIndexOf("/"));
 	            String fileTP = file.substring(file.indexOf('.'), file.length());
-	            System.out.println(fileTP);
+	            //System.out.println(fileTP);
 	            
 	            //file type and code type
 	            if(!fileType.contains(fileTP))
@@ -272,6 +273,7 @@ public class DiffCommit {
 	            
 	            if(codeList.contains(fileTP) && !codeType.contains(fileTP))
 	            {
+	            	//System.out.println(fileTP);
 	            	codeType.add(fileTP);
 	            }
 	            
@@ -307,6 +309,20 @@ public class DiffCommit {
                 	delNum.add(subSize);
                 }
 			}
+			
+			if(addNum.size() == 0 && delNum.size() != 0)
+			{
+				newCommit.setSegs_deleted_num(sum(delNum));
+			}
+			else if(addNum.size() != 0 && delNum.size() == 0)
+			{
+				newCommit.setSegs_added_num(sum(addNum));
+			}
+			else if(addNum.size() != 0 && delNum.size() != 0)
+			{
+				newCommit.setSegs_update_num(sum(delNum) + sum(addNum));
+			}
+			
 			//newCommit.setf
 			newCommit.setLanguage_num(codeType.size());
 			newCommit.setFile_type_num(fileType.size());

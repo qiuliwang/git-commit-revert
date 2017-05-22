@@ -56,6 +56,38 @@ public class Commit {
 	
 	//WangQL 2017/5/19
 	private int file_type_num = 0; //number of file types in this code change
+	
+	//WangQL 2017/5/22
+	private int segs_added_num = 0; //number of added_code_segs in this code change
+	private int segs_deleted_num = 0; //number of deleted_code_segs in this code change
+	private int segs_update_num = 0;  //number of update_code_segs in this code change
+	
+	
+	
+	public int getSegs_added_num() {
+		return segs_added_num;
+	}
+
+	public void setSegs_added_num(int segs_added_num) {
+		this.segs_added_num = segs_added_num;
+	}
+
+	public int getSegs_deleted_num() {
+		return segs_deleted_num;
+	}
+
+	public void setSegs_deleted_num(int segs_deleted_num) {
+		this.segs_deleted_num = segs_deleted_num;
+	}
+
+	public int getSegs_update_num() {
+		return segs_update_num;
+	}
+
+	public void setSegs_update_num(int segs_update_num) {
+		this.segs_update_num = segs_update_num;
+	}
+
 	public int getChange_num() {
 		return change_num;
 	}

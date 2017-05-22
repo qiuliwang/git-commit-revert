@@ -60,7 +60,9 @@ public class gitLogAnalysis {
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss-SSS");
 		String time1 = df.format(new Date()).toString();//
 		//C:\Users\WangQL\Documents\Code\Java
-		gitLogAnalysis gas = new gitLogAnalysis("C:/Users/WangQL/Documents/Code/", "Java");
+		//gitLogAnalysis gas = new gitLogAnalysis("C:/Users/WangQL/Documents/Code/", "Java");
+		gitLogAnalysis gas = new gitLogAnalysis("/Users/WangQL/Documents/git/", "Java");
+
 		//myFirstRep  camel
 		gas.analysis();
 		
@@ -156,9 +158,12 @@ public class gitLogAnalysis {
 
 			String commitId = getCommitId(thisID.toString()); // get commit ID hashcode																 			thisCommit.setId(numberOfAllCommit); // index
 			thisCommit.setCommitid(commitId); // commitId
+			int logYear = commitDate.getYear() + 1900;
+			int logMonth = commitDate.getMonth() + 1;
+			int logDay = commitDate.getDate();
+			//process message here
+			//System.out.println("message: "+ logMonth + "\n===================\n");
 			
-			//precess message here
-			//System.out.println("message: "+msg + "\n===================\n");
 			if(msg.contains("bug"))
 			{
 				thisCommit.setTextHasBug(1);
