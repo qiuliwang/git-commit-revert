@@ -134,22 +134,6 @@ public class gitLogAnalysis {
 			//thisCommit.setDate(res);
 			
 			String committerName = committer.getName();
-			//add name
-//			if(!nameOfDevelopers.contains(committerName))
-//			{
-//				nameOfDevelopers.add(committerName);
-//			}
-//			if(!hmp.containsKey(committerName))
-//			{
-//				hmp.put(committerName, 1);
-//			}
-//			else
-//			{
-//				hmp.put(committerName, hmp.get(committerName) + 1);				
-//			}
-			
-			//thisCommit.setEXP(hmp.get(committerName));
-			//thisCommit.setNDEV(hmp.size());
 			
 			Date commitDate = committer.getWhen();
 			String msg = thisLog.getFullMessage();
