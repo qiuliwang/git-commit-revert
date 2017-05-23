@@ -62,8 +62,17 @@ public class Commit {
 	private int segs_deleted_num = 0; //number of deleted_code_segs in this code change
 	private int segs_update_num = 0;  //number of update_code_segs in this code change
 	
+	//WangQL 2017/5/23
+	private int changes_files_modified = 0; //number of files in this code change were modified before
 	
-	
+	public int getChanges_files_modified() {
+		return changes_files_modified;
+	}
+
+	public void setChanges_files_modified(int changes_files_modified) {
+		this.changes_files_modified = changes_files_modified;
+	}
+
 	public int getSegs_added_num() {
 		return segs_added_num;
 	}

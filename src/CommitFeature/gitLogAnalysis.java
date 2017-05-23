@@ -142,9 +142,9 @@ public class gitLogAnalysis {
 
 			String commitId = getCommitId(thisID.toString()); // get commit ID hashcode																 			thisCommit.setId(numberOfAllCommit); // index
 			thisCommit.setCommitid(commitId); // commitId
-			int logYear = commitDate.getYear() + 1900;
-			int logMonth = commitDate.getMonth() + 1;
-			int logDay = commitDate.getDate();
+//			int logYear = commitDate.getYear() + 1900;
+//			int logMonth = commitDate.getMonth() + 1;
+//			int logDay = commitDate.getDate();
 			//process message here
 			//System.out.println("message: "+ logMonth + "\n===================\n");
 			
@@ -183,7 +183,7 @@ public class gitLogAnalysis {
 			thisCommit.setLabel(0); // label, 0, default ,  1, reverted ,  2, reverting
 			thisCommit.setRevertedId(""); // revertedCommitId default null
 			
-			//thisCommit.setMsg(regulizedMsg); // full msg useless message
+			thisCommit.setMsg(regulizedMsg); // full message
 			//thisCommit.setCommitter(committer);
 			
 			// reverting label, if it is a reverting commit, label as 1

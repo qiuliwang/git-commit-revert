@@ -121,6 +121,10 @@ public class DiffCommit {
 		HashMap<String,String> NDEV = new HashMap<String, String>();
 		HashMap<String, Integer> hmp = new HashMap<String, Integer>();
 		List<String> developer = new ArrayList<String>();
+		
+		//WangQL 2017/5/23
+		HashMap<String, Integer> changes_files_modified = new HashMap<String, Integer>();
+		
 		//Integer sexpAns = 0;
 		int dddxxx = 0;
 		for (int i = allCommits.size() - 1; i > 0; i--) {
@@ -288,6 +292,14 @@ public class DiffCommit {
 	            	fileList.add(file);
 	            }
 	            
+	            if(!changes_files_modified.keySet().contains(file))
+	            {
+	            	changes_files_modified.put(file, 1);
+	            }
+	            else
+	            {
+	            	changes_files_modified.put(file, changes_files_modified.get(file) + 1);
+	            }
 	            
 	            FileHeader fileHeader = df.toFileHeader(diffEntry);
                 List<HunkHeader> hunks = (List<HunkHeader>) fileHeader.getHunks();
@@ -323,7 +335,16 @@ public class DiffCommit {
 				newCommit.setSegs_update_num(sum(delNum) + sum(addNum));
 			}
 			
+			//changes_files_modified
+			int file_changes = 0;
+			
+			for(String tmp:fileList){
+				if(changes_files_modified.keySet().contains(tmp))
+					file_changes += changes_files_modified.get(tmp);
+			}
+			
 			//newCommit.setf
+			newCommit.setChanges_files_modified(file_changes);
 			newCommit.setLanguage_num(codeType.size());
 			newCommit.setFile_type_num(fileType.size());
 			newCommit.setAddFiles(numberOfAddFiles);
