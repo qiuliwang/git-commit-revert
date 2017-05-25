@@ -3,6 +3,7 @@ package CommitFeature;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -122,6 +123,9 @@ public class DiffCommit {
 		HashMap<String, Integer> hmp = new HashMap<String, Integer>();
 		List<String> developer = new ArrayList<String>();
 		
+		//WangQL 2017/5/25
+		HashMap<String, List<Date>> recent_modify = new HashMap<>();
+		
 		//WangQL 2017/5/23
 		HashMap<String, Integer> changes_files_modified = new HashMap<String, Integer>();
 		
@@ -145,6 +149,24 @@ public class DiffCommit {
 			//Commit newCommit = allCommits.get(i);
 			
 			String commiter = newCommit.getCommitter();
+			
+			//String time = newCommit.getDate();
+			//System.out.println(time);
+			
+			//recent modify records
+			Date commitDate = newCommit.getTime();
+			if(!recent_modify.keySet().contains(commiter))
+			{
+				List<Date> dates = new ArrayList<>();
+				dates.add(commitDate);
+				recent_modify.put(commiter, dates);
+			}
+			else {
+				recent_modify.get(commiter).add(commitDate);
+			}
+			
+			refreshDate(recent_modify.get(commiter));
+			
 			newCommit.getDate();
 			if(!hmp.containsKey(commiter))
 			{
@@ -516,5 +538,40 @@ public class DiffCommit {
 		}
 		
 		return ans;
+	}
+	
+	private void refreshDate(List<Date> date)
+	{
+		Date head = date.get(0);
+		Date tail = date.get(date.size() - 1);
+		int distance = countDate(head, tail);
+		System.out.println(head.toString() + " " + tail.toString());
+		System.out.println(distance);
+		
+		
+	}
+	
+	//count days given to dates
+	@SuppressWarnings("deprecation")
+	private int countDate(Date date1, Date date2) {
+		int res = 0;
+		
+//		int logYear = commitDate.getYear() + 1900;
+//		int logMonth = commitDate.getMonth() + 1;
+//		int logDay = commitDate.getDate();
+//		int year1 = date1.getYear();
+//		int year2 = date2.getYear();
+//		
+//		int month1 = date1.getMonth();
+//		int month2 = date2.getMonth();
+//		
+//		int day1 = date1.getDate();
+//		int day2 = date2.getDate();
+		
+		long time1 = date1.getTime();
+		long time2 = date2.getTime();
+		long temp = time2 - time1;
+		res = (int)(temp / (24 * 60 * 60 * 1000));
+		return res;
 	}
 }

@@ -20,6 +20,7 @@ import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.revwalk.RevWalk;
 import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
+import org.eclipse.jgit.transport.RequestNotYetReadException;
 
 public class gitLogAnalysis {
 
@@ -60,8 +61,8 @@ public class gitLogAnalysis {
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss-SSS");
 		String time1 = df.format(new Date()).toString();//
 		//C:\Users\WangQL\Documents\Code\Java
-		//gitLogAnalysis gas = new gitLogAnalysis("C:/Users/WangQL/Documents/Code/", "Java");
-		gitLogAnalysis gas = new gitLogAnalysis("/Users/WangQL/Documents/git/", "Java");
+		gitLogAnalysis gas = new gitLogAnalysis("C:/Users/WangQL/Documents/Code/", "Java");
+		//gitLogAnalysis gas = new gitLogAnalysis("/Users/WangQL/Documents/git/", "Java");
 
 		//myFirstRep  camel
 		gas.analysis();
@@ -139,14 +140,16 @@ public class gitLogAnalysis {
 			String msg = thisLog.getFullMessage();
 			String regulizedMsg = csvHandlerStr(msg);
 			ObjectId thisID = thisLog.getId();
-
+			
+			//cannot add date info, because the date is reversed
+			//refreshDate(recent_modify.get(committerName));
+			
 			String commitId = getCommitId(thisID.toString()); // get commit ID hashcode																 			thisCommit.setId(numberOfAllCommit); // index
 			thisCommit.setCommitid(commitId); // commitId
-//			int logYear = commitDate.getYear() + 1900;
-//			int logMonth = commitDate.getMonth() + 1;
-//			int logDay = commitDate.getDate();
+			
 			//process message here
-			//System.out.println("message: "+ logMonth + "\n===================\n");
+			//System.out.println(commitDate.toString());
+			
 			
 			if(msg.contains("bug"))
 			{
@@ -176,13 +179,16 @@ public class gitLogAnalysis {
 					spaceNum ++;
 				}
 			}
+			
+			
+			
 			thisCommit.setMsg_length(spaceNum);
 
 			thisCommit.setCommitter(committerName); // committer
 			thisCommit.setTime(commitDate); // date
 			thisCommit.setLabel(0); // label, 0, default ,  1, reverted ,  2, reverting
 			thisCommit.setRevertedId(""); // revertedCommitId default null
-			
+			thisCommit.setDate(commitDate.toString());
 			thisCommit.setMsg(regulizedMsg); // full message
 			//thisCommit.setCommitter(committer);
 			
@@ -292,4 +298,6 @@ public class gitLogAnalysis {
 		}
 		return labeledAllCommits;
 	}
+	
+
 }

@@ -100,7 +100,7 @@ public class readFile {
 	        loader.setNominalAttributes("24");
         
 	        Instances data = loader.getDataSet();
-	        data.setClassIndex(19);
+	        data.setClassIndex(32);
 	        
 	        
 	        // save ARFF
