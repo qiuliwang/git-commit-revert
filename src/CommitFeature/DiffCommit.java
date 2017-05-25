@@ -366,6 +366,7 @@ public class DiffCommit {
 			}
 			
 			//newCommit.setf
+			newCommit.setRecent_change_num(recent_modify.get(commiter).size());
 			newCommit.setChanges_files_modified(file_changes);
 			newCommit.setLanguage_num(codeType.size());
 			newCommit.setFile_type_num(fileType.size());
@@ -542,13 +543,17 @@ public class DiffCommit {
 	
 	private void refreshDate(List<Date> date)
 	{
-		Date head = date.get(0);
-		Date tail = date.get(date.size() - 1);
-		int distance = countDate(head, tail);
-		System.out.println(head.toString() + " " + tail.toString());
-		System.out.println(distance);
+		Date date1 = date.get(0);
+		Date date2 = date.get(date.size() - 1);
+		int distance = countDate(date1, date2);
+		//System.out.println(date1.toString() + " " + date2.toString());
+		//System.out.println(distance);
 		
-		
+		if(distance > 120)
+		{
+			while(date.contains(date1))
+				date.remove(date1);
+		}
 	}
 	
 	//count days given to dates
