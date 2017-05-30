@@ -40,10 +40,6 @@ public class gitLogAnalysis {
 	//NDEV
 	static Integer numOfDevelopers = 0;
 	
-	//static List<String> nameOfDevelopers;
-	
-	//static HashMap<String, Integer> hmp = new HashMap<String, Integer>();
-	
 	public gitLogAnalysis(String homeUrl, String pro) throws IOException
 	{
 		//nameOfDevelopers = new ArrayList<String>();
@@ -52,7 +48,6 @@ public class gitLogAnalysis {
 		projectHome = home+project+"/";
 		outputHome = home+project+"Output/";
 		tempCopyFileHome =outputHome+"tempFiles"; 
-		//this.analysis();
 	}
 	
 	@SuppressWarnings("deprecation")
@@ -121,18 +116,6 @@ public class gitLogAnalysis {
 			
 			RevCommit thisLog = it.next();
 			PersonIdent committer = thisLog.getCommitterIdent();
-
-			//get commit date
-//			        String res;
-//			        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//			        long lt = new Long(thisLog.getCommitTime());
-//			        Date date = new Date(lt * 1000);
-//			        res = simpleDateFormat.format(date);
-//			        res = res.substring(0, res.indexOf(' '));
-			 //1328007600000   
-			 //1377669704
-			//System.out.println(res);
-			//thisCommit.setDate(res);
 			
 			String committerName = committer.getName();
 			
@@ -141,15 +124,11 @@ public class gitLogAnalysis {
 			String regulizedMsg = csvHandlerStr(msg);
 			ObjectId thisID = thisLog.getId();
 			
-			//cannot add date info, because the date is reversed
-			//refreshDate(recent_modify.get(committerName));
-			
+			//cannot add date info, because the date is reversed			
 			String commitId = getCommitId(thisID.toString()); // get commit ID hashcode																 			thisCommit.setId(numberOfAllCommit); // index
 			thisCommit.setCommitid(commitId); // commitId
 			
-			//process message here
-			//System.out.println(commitDate.toString());
-			
+			//process message here			
 			
 			if(msg.contains("bug"))
 			{
@@ -190,7 +169,6 @@ public class gitLogAnalysis {
 			thisCommit.setRevertedId(""); // revertedCommitId default null
 			thisCommit.setDate(commitDate.toString());
 			thisCommit.setMsg(regulizedMsg); // full message
-			//thisCommit.setCommitter(committer);
 			
 			// reverting label, if it is a reverting commit, label as 1
 			if (msg.indexOf("This reverts commit") > 0) {
@@ -198,7 +176,6 @@ public class gitLogAnalysis {
 				numberOfRevertingCommit = numberOfRevertingCommit + 1;
 				String revertedCommitId = getRevertedCommitId(regulizedMsg);
 				thisCommit.setRevertedId(revertedCommitId);
-				// System.out.println(revertedCommitId);
 				revertingCommitIDs.add(thisCommit.getCommitid());
 				revertedCommitIDs.add(thisCommit.getRevertedId());
 			}

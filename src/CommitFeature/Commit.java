@@ -65,7 +65,8 @@ public class Commit {
 	//WangQL 2017/5/23
 	private int changes_files_modified = 0; //number of files in this code change were modified before
 
-	//WangQL 2017/5/25
+	//WangQL 2017/5/30
+	private int file_developer_num = 0; //number of developers who changed files in this code change
 	
 	public int getChanges_files_modified() {
 		return changes_files_modified;

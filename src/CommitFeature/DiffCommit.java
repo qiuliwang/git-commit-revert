@@ -132,8 +132,6 @@ public class DiffCommit {
 		//Integer sexpAns = 0;
 		int dddxxx = 0;
 		for (int i = allCommits.size() - 1; i > 0; i--) {
-		//for(int i = 0; i < allCommits.size() - 1; i ++) {
-			//System.out.println("==================");
 			subSysList.clear();
 			fileList.clear();
 			addNum.clear();
@@ -141,18 +139,11 @@ public class DiffCommit {
 			dirs.clear();
 			fileType.clear();
 			codeType.clear();
-			//sexpAns = 0;
 			
 			Commit oldCommit = allCommits.get(i);
-			Commit newCommit = allCommits.get(i - 1);
-			//Commit oldCommit = allCommits.get(i + 1);
-			//Commit newCommit = allCommits.get(i);
-			
+			Commit newCommit = allCommits.get(i - 1);			
 			String commiter = newCommit.getCommitter();
-			
-			//String time = newCommit.getDate();
-			//System.out.println(time);
-			
+
 			//recent modify records
 			Date commitDate = newCommit.getTime();
 			if(!recent_modify.keySet().contains(commiter))
@@ -289,7 +280,6 @@ public class DiffCommit {
 	            String file = firstFile.substring(firstFile.lastIndexOf("/") + 1);
 	            String dir = firstFile.substring(0, firstFile.lastIndexOf("/"));
 	            String fileTP = file.substring(file.indexOf('.'), file.length());
-	            //System.out.println(fileTP);
 	            
 	            //file type and code type
 	            if(!fileType.contains(fileTP))
@@ -299,7 +289,6 @@ public class DiffCommit {
 	            
 	            if(codeList.contains(fileTP) && !codeType.contains(fileTP))
 	            {
-	            	//System.out.println(fileTP);
 	            	codeType.add(fileTP);
 	            }
 	            
@@ -365,7 +354,7 @@ public class DiffCommit {
 					file_changes += changes_files_modified.get(tmp);
 			}
 			
-			//newCommit.setf
+			//newCommit.set
 			newCommit.setRecent_change_num(recent_modify.get(commiter).size());
 			newCommit.setChanges_files_modified(file_changes);
 			newCommit.setLanguage_num(codeType.size());
@@ -385,15 +374,12 @@ public class DiffCommit {
 			newCommit.setNF(fileList.size());
 			newCommit.setND(dirs.size());
 			newCommit.setEntropy(entropy(addNum, delNum));
-			//System.out.println("zzz   "+getNDEV(fileList, newCommit.getCommitter(), NDEV));
 			newCommit.setNDEV(getNDEV(fileList, newCommit.getCommitter(), NDEV));
 			newCommit.setConf(getConf(fileList));
 			newCommit.setEXP(hmp.get(commiter));
-			//newCommit.setEXP(dddxxx ++);
 			
 			if(fileList.size() == 1)
 			{
-				//System.out.println(fileList.get(0) + "ddd");
 				if(!uniqueChange.containsKey(fileList.get(0)))
 				{
 					uniqueChange.put(fileList.get(0), 1);
@@ -418,8 +404,6 @@ public class DiffCommit {
 		
 		for(int i = 0; i < fileList.size(); i ++)
 		{
-			//if(fileList.get(i).contains(".xml") || fileList.get(i).contains(".classpath")
-			//		 || fileList.get(i).contains(".project"))
 			if(fileList.get(i).contains("pom.xml"))
 			{
 				ans ++;
@@ -493,11 +477,8 @@ public class DiffCommit {
 		double ent = 0;
 		
 		double allLines = sum(addLines) + sum(delLines);
-		//System.out.println("aaaaaaaaaaaaaaaaaaa:"+allLines);
 		if(allLines != 0)
 		{
-			//System.out.println(addLines.size());
-			//System.out.println(delLines.size());
 			if(addLines.size() != 0)
 			{
 				for(int i = 0; i < addLines.size(); i ++)
@@ -546,9 +527,7 @@ public class DiffCommit {
 		Date date1 = date.get(0);
 		Date date2 = date.get(date.size() - 1);
 		int distance = countDate(date1, date2);
-		//System.out.println(date1.toString() + " " + date2.toString());
-		//System.out.println(distance);
-		
+
 		if(distance > 120)
 		{
 			while(date.contains(date1))
@@ -560,19 +539,6 @@ public class DiffCommit {
 	@SuppressWarnings("deprecation")
 	private int countDate(Date date1, Date date2) {
 		int res = 0;
-		
-//		int logYear = commitDate.getYear() + 1900;
-//		int logMonth = commitDate.getMonth() + 1;
-//		int logDay = commitDate.getDate();
-//		int year1 = date1.getYear();
-//		int year2 = date2.getYear();
-//		
-//		int month1 = date1.getMonth();
-//		int month2 = date2.getMonth();
-//		
-//		int day1 = date1.getDate();
-//		int day2 = date2.getDate();
-		
 		long time1 = date1.getTime();
 		long time2 = date2.getTime();
 		long temp = time2 - time1;
