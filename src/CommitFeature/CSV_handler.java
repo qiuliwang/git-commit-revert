@@ -76,6 +76,37 @@ public class CSV_handler {
 		}
 		writeToCsv(file, header, content);
 	}
+	
+	public void writeCommitsMsgsToCsv2(File file, 
+			List<Commit> reverted, List<Commit> reverting) throws IOException {
+		if(reverted.size() != reverting.size())
+		{
+			
+		}
+		else 
+		{
+			List<String[]> content = new ArrayList<String[]>();
+			String[] header = 	{ "id", "commitId","committer", "label", "msg",
+								  "id", "commitId","committer", "label", "msg" };
+			for (int i = 0; i < reverted.size(); i++) {
+				Commit RevertedCommit = reverted.get(i);
+				Commit RevertingCommit = reverting.get(i);
+				String[] thisContent = new String[10];
+				thisContent[0] = "\"" + Integer.toString(RevertedCommit.getId()) + "\""; // index
+				thisContent[1] = "\"" + RevertedCommit.getCommitid() + "\""; // commitId	
+				thisContent[2] = "\"" + RevertedCommit.getCommitter() + "\""; // committer
+				thisContent[3] = "\"" + RevertedCommit.getLabel() + "\""; // label, //
+				thisContent[4] = "\""+RevertedCommit.getMsg()+"\"";
+				thisContent[5] = "\"" + Integer.toString(RevertingCommit.getId()) + "\""; // index
+				thisContent[6] = "\"" + RevertingCommit.getCommitid() + "\""; // commitId	
+				thisContent[7] = "\"" + RevertingCommit.getCommitter() + "\""; // committer
+				thisContent[8] = "\"" + RevertingCommit.getLabel() + "\""; // label, //
+				thisContent[9] = "\""+RevertingCommit.getMsg()+"\"";
+				content.add(thisContent);
+			}
+			writeToCsv(file, header, content);
+		}
+	}
 
 	public void writeCommitsToCsvWithoutMsg(File file,
 			List<Commit> commits) throws IOException {

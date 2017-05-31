@@ -10,6 +10,7 @@ public class Commit {
 	private String committer; // name
 	private Date time;    
 	private int label;  // default 0, reverted 1, reverting 2
+	private int revertingLabel;  //reverting 1
 	private String revertedId; // default null, 
 	private String msg; 
 	private int modifyFiles;  
@@ -68,6 +69,14 @@ public class Commit {
 	//WangQL 2017/5/30
 	private int file_developer_num = 0; //number of developers who changed files in this code change
 	
+	public int getRevertingLabel() {
+		return revertingLabel;
+	}
+
+	public void setRevertingLabel(int revertingLabel) {
+		this.revertingLabel = revertingLabel;
+	}
+
 	public int getChanges_files_modified() {
 		return changes_files_modified;
 	}
