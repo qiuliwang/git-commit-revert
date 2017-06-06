@@ -279,6 +279,8 @@ public class DiffCommit {
 	            
 	            String file = firstFile.substring(firstFile.lastIndexOf("/") + 1);
 	            String dir = firstFile.substring(0, firstFile.lastIndexOf("/"));
+	            if(file.indexOf('.') == -1)
+	            	file += ".unknow";
 	            String fileTP = file.substring(file.indexOf('.'), file.length());
 	            
 	            //file type and code type

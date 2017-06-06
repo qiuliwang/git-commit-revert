@@ -22,7 +22,7 @@ public class head {
 			home="C:/Users/WangQL/Documents/Code/";
 		}
 		String[] projects = new String[] { "Java", "hadoop", "hbase", "hibernate-search", "jenkins", "karaf" };
-		int projectIndex =  0;
+		int projectIndex =  1;
 		String project = projects[projectIndex];
 		double testRate = 0.2;
 
