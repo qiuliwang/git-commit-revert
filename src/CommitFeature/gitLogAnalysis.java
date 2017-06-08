@@ -81,7 +81,8 @@ public class gitLogAnalysis {
 		List<String> revertingCommitIDs = new ArrayList<String>();
 		List<Commit> revertingCommits = new ArrayList<Commit>();	
 		List<String> revertedCommitIDs = new ArrayList<String>();
-		List<Commit> revertedCommits = new ArrayList<Commit>();		
+		List<Commit> revertedCommits = new ArrayList<Commit>();	
+		//HashMap<String id1, String id2> revertInfo = new ()
 		
 		File allCommitCsv = new File(home + "/" + project + "Output/AllCommits.csv");
 		File revertingCommitCsv = new File(home + "/" + project + "Output/RevertingCommits.csv");

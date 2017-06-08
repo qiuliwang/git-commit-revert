@@ -145,18 +145,18 @@ public class CSV_handler {
 			thisContent[17] = Double.toString(logNormalization((thisCommit.getEntropy())));
 			thisContent[18] = Double.toString(logNormalization((thisCommit.getConf())));
 			thisContent[19] = Double.toString(logNormalization((thisCommit.getMsg_length())));
-			thisContent[20] = Double.toString(logNormalization((thisCommit.getTextHasBug())));
-			thisContent[21] = Double.toString(logNormalization((thisCommit.getTestHasFeature())));
-			thisContent[22] = Double.toString(logNormalization((thisCommit.getTextHasImprove())));
-			thisContent[23] = Double.toString(logNormalization((thisCommit.getTextHasDocument())));
-			thisContent[24] = Double.toString(logNormalization((thisCommit.getTextHasRefactor())));
+			thisContent[20] = Double.toString(((thisCommit.getTextHasBug())));
+			thisContent[21] = Double.toString(((thisCommit.getTestHasFeature())));
+			thisContent[22] = Double.toString(((thisCommit.getTextHasImprove())));
+			thisContent[23] = Double.toString(((thisCommit.getTextHasDocument())));
+			thisContent[24] = Double.toString(((thisCommit.getTextHasRefactor())));
 			thisContent[25] = Double.toString(logNormalization((thisCommit.getLanguage_num())));
 			thisContent[26] = Double.toString(logNormalization((thisCommit.getFile_type_num())));
 			thisContent[27] = Double.toString(logNormalization((thisCommit.getSegs_added_num())));
 			thisContent[28] = Double.toString(logNormalization((thisCommit.getSegs_deleted_num())));
 			thisContent[29] = Double.toString(logNormalization((thisCommit.getSegs_update_num())));
 			thisContent[30] = Double.toString(logNormalization((thisCommit.getChanges_files_modified())));
-			thisContent[31] = Double.toString(((thisCommit.getRecent_change_num())));
+			thisContent[31] = Double.toString(logNormalization((thisCommit.getRecent_change_num())));
 
 			thisContent[32] =  Integer.toString(thisCommit.getLabel());
 
