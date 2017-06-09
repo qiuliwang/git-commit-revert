@@ -117,13 +117,13 @@ public class CSV_handler {
 				"NF", "ND","NUC", "Entropy", "Conf","msg_length", "has_bug", "has_feature","has_improve",
 				"has_document", "has_refactor","language_num", "language_num", 
 				"segs_added_num", "segs_deleted_num", "segs_update_num", "changes_files_modified",
-				"recent_change_num", "Label"};
+				"recent_change_num", "time_before_reverted", "Label"};
 		
 		
 		for (int i = 0; i < commits.size(); i++) {
 			Commit thisCommit = commits.get(i);
 			//notice that set the length of the array
-			String[] thisContent = new String[33];
+			String[] thisContent = new String[34];
 			
 			thisContent[0] = Double.toString(logNormalization((thisCommit.getAddFiles()))); 
 			thisContent[1] = Double.toString(logNormalization((thisCommit.getModifyFiles())));
@@ -157,8 +157,8 @@ public class CSV_handler {
 			thisContent[29] = Double.toString(logNormalization((thisCommit.getSegs_update_num())));
 			thisContent[30] = Double.toString(logNormalization((thisCommit.getChanges_files_modified())));
 			thisContent[31] = Double.toString(logNormalization((thisCommit.getRecent_change_num())));
-
-			thisContent[32] =  Integer.toString(thisCommit.getLabel());
+			thisContent[32] = Double.toString(logNormalization((thisCommit.getTime_before_reverted())));
+			thisContent[33] =  Integer.toString(thisCommit.getLabel());
 
 			content.add(thisContent);
 		}

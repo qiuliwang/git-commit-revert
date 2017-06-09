@@ -84,6 +84,9 @@ public class gitLogAnalysis {
 		List<Commit> revertedCommits = new ArrayList<Commit>();	
 		//HashMap<String id1, String id2> revertInfo = new ()
 		
+		HashMap<String,String> revertInfo = new HashMap<String, String>();
+
+		
 		File allCommitCsv = new File(home + "/" + project + "Output/AllCommits.csv");
 		File revertingCommitCsv = new File(home + "/" + project + "Output/RevertingCommits.csv");
 		File revertedCommitCsv = new File(home + "/" + project + "Output/RevertedCommits.csv");
@@ -112,8 +115,14 @@ public class gitLogAnalysis {
 
 		int numberOfAllCommit = 1;
 		int numberOfRevertingCommit = 0;
+		int count = 0;
 		walk.close();
 		while (it.hasNext()) {
+			count ++;
+			if(count == 1500)
+			{
+				break;
+			}
 			Commit thisCommit = new Commit();
 			
 			RevCommit thisLog = it.next();
@@ -182,6 +191,8 @@ public class gitLogAnalysis {
 				thisCommit.setRevertedId(revertedCommitId);
 				revertingCommitIDs.add(thisCommit.getCommitid());
 				revertedCommitIDs.add(thisCommit.getRevertedId());
+				if(revertedCommitId.length() != 0 && thisCommit.getCommitid().length() != 0)
+					revertInfo.put(revertedCommitId, thisCommit.getCommitid());
 			}
 
 			// remove the commit log from svn before migrate to git
@@ -198,6 +209,46 @@ public class gitLogAnalysis {
 		revertedCommits = getSubCommits(featuredAllCommits, revertedCommitIDs);
 		revertingCommits  = getSubCommits(featuredAllCommits, revertingCommitIDs);
 		
+		List<String> revertedIDs = new ArrayList<>();
+		for(String tmp: revertInfo.keySet())
+		{
+			revertedIDs.add(tmp);
+		}
+		List<Commit> revertedCommits2 = getSubCommits(featuredAllCommits, revertedIDs);
+		List<Commit> revertingCommits2;
+		List<String> tempRevertingIds = new ArrayList<>();
+		for(String tmp : revertedIDs)
+		{
+			String reverting = "";
+			if(revertInfo.keySet().contains(tmp))
+			{
+				reverting = revertInfo.get(tmp);
+				tempRevertingIds.add(reverting);
+			}
+		}
+		revertingCommits2 = getSubCommits(featuredAllCommits, tempRevertingIds);
+		
+		//use revertedCommits2 and revertingCommits2 time to set time before reverted
+		for(int i = 0; i < revertedCommits2.size(); i ++)
+		{
+			Commit temp = revertedCommits2.get(i);
+			Date datereverted = temp.getTime();
+			Date datereverting = revertingCommits2.get(i).getTime();
+			int days = countDate(datereverted, datereverting);
+			System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxx");
+			System.out.println(datereverted.toString());
+			System.out.println(datereverting.toString());
+
+			System.out.println(days);
+			for(Commit tmp : featuredAllCommits)
+			{
+				if(tmp.getRevertedId() == temp.getRevertedId())
+				{
+					tmp.setTime_before_reverted(days);
+				}
+			}
+		}
+				
 		operateCsv.writeCommitsToCsvWithoutMsg(allCommitCsv, allCommits);
 		operateCsv.writeCommitsToCsvWithoutMsg(revertingCommitCsv, revertingCommits);
 		operateCsv.writeCommitsToCsvWithoutMsg(revertedCommitCsv, revertedCommits);
@@ -205,7 +256,7 @@ public class gitLogAnalysis {
 		operateCsv.writeCommitsMsgsToCsv(allCommitMessageCsv, allCommits);
 		operateCsv.writeCommitsMsgsToCsv(revertingCommitMessageCsv, revertingCommits);
 		operateCsv.writeCommitsMsgsToCsv(revertedCommitMessageCsv, revertedCommits);
-		operateCsv.writeCommitsMsgsToCsv2(revertCommitCsv, revertedCommits, revertingCommits);
+		operateCsv.writeCommitsMsgsToCsv2(revertCommitCsv, revertedCommits2, revertingCommits2);
 
 		
 		
@@ -282,5 +333,14 @@ public class gitLogAnalysis {
 		return labeledAllCommits;
 	}
 	
-
+	//count days given to dates
+	@SuppressWarnings({ "deprecation", "unused" })
+	private int countDate(Date date1, Date date2) {
+		int res = 0;
+		long time1 = date1.getTime();
+		long time2 = date2.getTime();
+		long temp = time2 - time1;
+		res = (int)(temp / (24 * 60 * 60 * 1000));
+		return res;
+	}
 }
