@@ -107,6 +107,29 @@ public class CSV_handler {
 			writeToCsv(file, header, content);
 		}
 	}
+	
+	public void writeCommitsMsgsToCsv3(File file, 
+			List<String> reverted, List<String> reverting) throws IOException {
+		if(reverted.size() != reverting.size())
+		{
+			
+		}
+		else 
+		{
+			List<String[]> content = new ArrayList<String[]>();
+			String[] header = 	{ "id","id"};
+			for (int i = 0; i < reverted.size(); i++) {
+				String RevertedCommit = reverted.get(i);
+				String RevertingCommit = reverting.get(i);
+				String[] thisContent = new String[10];
+				thisContent[0] = "\"" + RevertedCommit + "\""; // index
+				thisContent[1] = "\"" + RevertingCommit + "\""; // commitId	
+
+				content.add(thisContent);
+			}
+			writeToCsv(file, header, content);
+		}
+	}
 
 	public void writeCommitsToCsvWithoutMsg(File file,
 			List<Commit> commits) throws IOException {
