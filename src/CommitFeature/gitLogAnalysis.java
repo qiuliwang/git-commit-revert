@@ -56,7 +56,7 @@ public class gitLogAnalysis {
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss-SSS");
 		String time1 = df.format(new Date()).toString();//
 		//C:\Users\WangQL\Documents\Code\Java
-		gitLogAnalysis gas = new gitLogAnalysis("C:/Users/WangQL/Documents/Code/", "hbase");
+		gitLogAnalysis gas = new gitLogAnalysis("C:/Users/WangQL/Documents/Code/", "Java");
 		//gitLogAnalysis gas = new gitLogAnalysis("/Users/WangQL/Documents/git/", "Java");
 
 		//myFirstRep  camel
@@ -318,14 +318,13 @@ public class gitLogAnalysis {
 //		}
 		for(int i = 0; i < subCommitIDs.size(); i ++)
 		{
+			String commitid = subCommitIDs.get(i);
 			for(int j = 0; j < allCommits.size(); j ++)
 			{
 				Commit thisCom = allCommits.get(j);
-				String id = thisCom.getCommitid();
-				if(subCommitIDs.get(i) == id)
-				{
+				String thisComId = thisCom.getCommitid();
+				if(commitid.equals(thisComId))
 					subCommits.add(thisCom);
-				}
 			}
 		}
 		return subCommits;
