@@ -180,7 +180,7 @@ public class CSV_handler {
 			thisContent[29] = Double.toString(logNormalization((thisCommit.getSegs_update_num())));
 			thisContent[30] = Double.toString(logNormalization((thisCommit.getChanges_files_modified())));
 			thisContent[31] = Double.toString(logNormalization((thisCommit.getRecent_change_num())));
-			thisContent[32] = Double.toString(logNormalization((thisCommit.getTime_before_reverted())));
+			thisContent[32] = Double.toString(((thisCommit.getTime_before_reverted())));
 			thisContent[33] =  Integer.toString(thisCommit.getLabel());
 
 			content.add(thisContent);

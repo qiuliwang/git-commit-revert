@@ -28,7 +28,7 @@ public class head {
 
 		boolean preprocess = true;
 		boolean modeling = false;
-
+  
 		if (preprocess) {
 			CommitFeature.gitLogAnalysis analysis = new CommitFeature.gitLogAnalysis(home, project);
 			analysis.analysis();
