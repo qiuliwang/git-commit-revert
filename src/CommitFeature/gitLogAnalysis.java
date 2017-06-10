@@ -242,9 +242,9 @@ public class gitLogAnalysis {
 			Date datereverted = temp.getTime();
 			Date datereverting = revertingCommits2.get(i).getTime();
 			int days = countDate(datereverted, datereverting);
-			System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxx");
-			System.out.println(datereverted.toString());
-			System.out.println(datereverting.toString());
+//			System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxx");
+//			System.out.println(datereverted.toString());
+//			System.out.println(datereverting.toString());
 
 			System.out.println(days);
 			for(Commit tmp : featuredAllCommits)
