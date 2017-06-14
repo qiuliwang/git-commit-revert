@@ -70,15 +70,15 @@ public class Commit {
 	private int file_developer_num = 0; //number of developers who changed files in this code change
 	
 	//WangQL 2017/6/8
-	private int time_before_reverted = 0;
+	private double time_before_reverted = 0;
 	
 	
 	
-	public int getTime_before_reverted() {
+	public double getTime_before_reverted() {
 		return time_before_reverted;
 	}
 
-	public void setTime_before_reverted(int time_before_reverted) {
+	public void setTime_before_reverted(double time_before_reverted) {
 		this.time_before_reverted = time_before_reverted;
 	}
 

@@ -241,17 +241,17 @@ public class gitLogAnalysis {
 			Commit temp = revertedCommits2.get(i);
 			Date datereverted = temp.getTime();
 			Date datereverting = revertingCommits2.get(i).getTime();
-			int days = countDate(datereverted, datereverting);
-//			System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxx");
-//			System.out.println(datereverted.toString());
-//			System.out.println(datereverting.toString());
+			double hours = countDate(datereverted, datereverting);
+			System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxx");
+			System.out.println(datereverted.toString());
+			System.out.println(datereverting.toString());
 
-			System.out.println(days);
+			System.out.println(hours);
 			for(Commit tmp : featuredAllCommits)
 			{
 				if(tmp.getRevertedId() == temp.getRevertedId())
 				{
-					tmp.setTime_before_reverted(days);
+					tmp.setTime_before_reverted(hours);
 				}
 			}
 		}
@@ -351,12 +351,12 @@ public class gitLogAnalysis {
 	
 	//count days given to dates
 	@SuppressWarnings({ "deprecation", "unused" })
-	private int countDate(Date date1, Date date2) {
-		int res = 0;
+	private double countDate(Date date1, Date date2) {
+		double res = 0;
 		long time1 = date1.getTime();
 		long time2 = date2.getTime();
 		long temp = time2 - time1;
-		res = (int)(temp / (24 * 60 * 60 * 1000));
+		res = ((double)temp / (60 * 60 * 1000));
 		return res;
 	}
 }
