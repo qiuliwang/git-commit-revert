@@ -23,7 +23,7 @@ public class head {
 		}
 		String[] projects = new String[] { "Java", "hadoop", "hbase", "hibernate-search", "jenkins", "karaf" };
 		int projectIndex =  2;
-		String project = projects[projectIndex];
+		String project = projects[0];
 		double testRate = 0.2;
 
 		boolean preprocess = true;

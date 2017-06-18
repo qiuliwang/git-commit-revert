@@ -86,22 +86,22 @@ public class CSV_handler {
 		else 
 		{
 			List<String[]> content = new ArrayList<String[]>();
-			String[] header = 	{ "id", "commitId","committer", "label", "msg",
-								  "id", "commitId","committer", "label", "msg" };
+			String[] header = 	{ "  ", "commitId","committer", "label", "msg",
+								  "  ", "commitId","committer", "label", "msg" };
 			for (int i = 0; i < reverted.size(); i++) {
 				Commit RevertedCommit = reverted.get(i);
 				Commit RevertingCommit = reverting.get(i);
 				String[] thisContent = new String[10];
-				thisContent[0] = "\"" + Integer.toString(RevertedCommit.getId()) + "\""; // index
-				thisContent[1] = "\"" + RevertedCommit.getCommitid() + "\""; // commitId	
-				thisContent[2] = "\"" + RevertedCommit.getCommitter() + "\""; // committer
-				thisContent[3] = "\"" + RevertedCommit.getLabel() + "\""; // label, //
-				thisContent[4] = "\""+RevertedCommit.getMsg()+"\"";
-				thisContent[5] = "\"" + Integer.toString(RevertingCommit.getId()) + "\""; // index
-				thisContent[6] = "\"" + RevertingCommit.getCommitid() + "\""; // commitId	
-				thisContent[7] = "\"" + RevertingCommit.getCommitter() + "\""; // committer
-				thisContent[8] = "\"" + RevertingCommit.getLabel() + "\""; // label, //
-				thisContent[9] = "\""+RevertingCommit.getMsg()+"\"";
+				thisContent[0] = "  "; // index
+				thisContent[1] = RevertedCommit.getCommitid(); // commitId	
+				thisContent[2] = RevertedCommit.getCommitter(); // committer
+				thisContent[3] = RevertedCommit.getLabel() + ""; // label, //
+				thisContent[4] = RevertedCommit.getMsg();
+				thisContent[5] = "  "; // index
+				thisContent[6] = "" + RevertingCommit.getCommitid(); // commitId	
+				thisContent[7] = "" + RevertingCommit.getCommitter(); // committer
+				thisContent[8] = "" + RevertingCommit.getLabel() + ""; // label, //
+				thisContent[9] = ""+RevertingCommit.getMsg();
 				content.add(thisContent);
 			}
 			writeToCsv(file, header, content);
@@ -182,6 +182,63 @@ public class CSV_handler {
 			thisContent[31] = Double.toString(logNormalization((thisCommit.getRecent_change_num())));
 			thisContent[32] = Double.toString(((thisCommit.getTime_before_reverted())));
 			thisContent[33] =  Integer.toString(thisCommit.getLabel());
+
+			content.add(thisContent);
+		}
+		writeToCsv(file, header, content);
+	}
+	
+	public void writeCommitsToCsvWithoutMsg(File file,
+			List<Commit> commits, String sign) throws IOException {
+		// TODO Auto-generated method stub
+		List<String[]> content = new ArrayList<String[]>();
+		String[] header = 	{"id", "AddFiles", "ModifyFiles","DeleteFiles", "RenameFiles", "CopyFiles","LowLines","MediumLines",
+				"HighLines","CrucialLines","DelLines", "AddLines","SubSystem","EXP","NDEV",
+				"NF", "ND","NUC", "Entropy", "Conf","msg_length", "has_bug", "has_feature","has_improve",
+				"has_document", "has_refactor","language_num", "language_num", 
+				"segs_added_num", "segs_deleted_num", "segs_update_num", "changes_files_modified",
+				"recent_change_num", "time_before_reverted", "Label"};
+		
+		
+		for (int i = 0; i < commits.size(); i++) {
+			Commit thisCommit = commits.get(i);
+			//notice that set the length of the array
+			String[] thisContent = new String[35];
+			thisContent[0] = thisCommit.getCommitid();
+			thisContent[1] = Double.toString(logNormalization((thisCommit.getAddFiles()))); 
+			thisContent[2] = Double.toString(logNormalization((thisCommit.getModifyFiles())));
+			thisContent[3] = Double.toString(logNormalization((thisCommit.getDeleteFiles())));
+			thisContent[4] = Double.toString(logNormalization((thisCommit.getRenameFiles()))); 
+			thisContent[5] = Double.toString(logNormalization((thisCommit.getCopyFiles())));
+			thisContent[6] = Double.toString(logNormalization((thisCommit.getNumberOfLow()))); 
+			thisContent[7] = Double.toString(logNormalization((thisCommit.getNumberOfMedium()))); 
+			thisContent[8] = Double.toString(logNormalization((thisCommit.getNumberOfHigh())));
+			thisContent[9] = Double.toString(logNormalization((thisCommit.getNumberOfCrucial())));
+			thisContent[10] = Double.toString(logNormalization((thisCommit.getDellines())));
+			thisContent[11] = Double.toString(logNormalization((thisCommit.getAddlines())));
+			thisContent[12] = Double.toString(logNormalization((thisCommit.getSubSystemNum())));
+			thisContent[13] = Double.toString(logNormalization((thisCommit.getEXP())));
+			thisContent[14] = Double.toString(logNormalization((thisCommit.getNDEV())));
+			thisContent[15] = Double.toString(logNormalization((thisCommit.getNF())));
+			thisContent[16] = Double.toString(logNormalization((thisCommit.getND())));
+			thisContent[17] = Double.toString(logNormalization((thisCommit.getNUC())));
+			thisContent[18] = Double.toString(logNormalization((thisCommit.getEntropy())));
+			thisContent[19] = Double.toString(logNormalization((thisCommit.getConf())));
+			thisContent[20] = Double.toString(logNormalization((thisCommit.getMsg_length())));
+			thisContent[21] = Double.toString(((thisCommit.getTextHasBug())));
+			thisContent[22] = Double.toString(((thisCommit.getTestHasFeature())));
+			thisContent[23] = Double.toString(((thisCommit.getTextHasImprove())));
+			thisContent[24] = Double.toString(((thisCommit.getTextHasDocument())));
+			thisContent[25] = Double.toString(((thisCommit.getTextHasRefactor())));
+			thisContent[26] = Double.toString(logNormalization((thisCommit.getLanguage_num())));
+			thisContent[27] = Double.toString(logNormalization((thisCommit.getFile_type_num())));
+			thisContent[28] = Double.toString(logNormalization((thisCommit.getSegs_added_num())));
+			thisContent[29] = Double.toString(logNormalization((thisCommit.getSegs_deleted_num())));
+			thisContent[30] = Double.toString(logNormalization((thisCommit.getSegs_update_num())));
+			thisContent[31] = Double.toString(logNormalization((thisCommit.getChanges_files_modified())));
+			thisContent[32] = Double.toString(logNormalization((thisCommit.getRecent_change_num())));
+			thisContent[33] = Double.toString(((thisCommit.getTime_before_reverted())));
+			thisContent[34] =  Integer.toString(thisCommit.getLabel());
 
 			content.add(thisContent);
 		}

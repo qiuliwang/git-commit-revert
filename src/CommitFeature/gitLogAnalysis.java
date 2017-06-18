@@ -92,6 +92,7 @@ public class gitLogAnalysis {
 		File revertedCommitCsv = new File(home + "/" + project + "Output/RevertedCommits.csv");
 		File revertCommitCsv = new File(home + "/" + project + "Output/RevertCommits.csv");
 		File revertTest = new File(home + "/" + project + "Output/RevertTest.csv");
+		File allCommitCsvWithId = new File(home + "/" + project + "Output/AllCommitsWithID.csv");
 
 		File allCommitMessageCsv = new File(home + "/" + project + "Output/AllCommitsMessage.csv");
 		File revertingCommitMessageCsv = new File(home + "/" + project + "Output/RevertingCommitsMessage.csv");
@@ -265,6 +266,7 @@ public class gitLogAnalysis {
 		operateCsv.writeCommitsMsgsToCsv(revertedCommitMessageCsv, revertedCommits);
 		operateCsv.writeCommitsMsgsToCsv2(revertCommitCsv, revertedCommits2, revertingCommits2);
 		//operateCsv.writeCommitsMsgsToCsv3(revertTest, revertedCommitIDs, revertingCommitIDs);
+		operateCsv.writeCommitsToCsvWithoutMsg(allCommitCsvWithId, allCommits, "id");
 		
 		System.out.println("Total commits:"+Integer.toString(numberOfAllCommit-1));
 		System.out.println("Reverting commits:"+numberOfRevertingCommit);
