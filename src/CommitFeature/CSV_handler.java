@@ -138,7 +138,7 @@ public class CSV_handler {
 		String[] header = 	{ "AddFiles", "ModifyFiles","DeleteFiles", "RenameFiles", "CopyFiles","LowLines","MediumLines",
 				"HighLines","CrucialLines","DelLines", "AddLines","SubSystem","EXP","NDEV",
 				"NF", "ND","NUC", "Entropy", "Conf","msg_length", "has_bug", "has_feature","has_improve",
-				"has_document", "has_refactor","language_num", "language_num", 
+				"has_document", "has_refactor","language_num", "file_type_num", 
 				"segs_added_num", "segs_deleted_num", "segs_update_num", "changes_files_modified",
 				"recent_change_num", "time_before_reverted", "Label"};
 		
@@ -148,39 +148,39 @@ public class CSV_handler {
 			//notice that set the length of the array
 			String[] thisContent = new String[34];
 			
-			thisContent[0] = Double.toString(logNormalization((thisCommit.getAddFiles()))); 
-			thisContent[1] = Double.toString(logNormalization((thisCommit.getModifyFiles())));
-			thisContent[2] = Double.toString(logNormalization((thisCommit.getDeleteFiles())));
-			thisContent[3] = Double.toString(logNormalization((thisCommit.getRenameFiles()))); 
-			thisContent[4] = Double.toString(logNormalization((thisCommit.getCopyFiles())));
-			thisContent[5] = Double.toString(logNormalization((thisCommit.getNumberOfLow()))); 
-			thisContent[6] = Double.toString(logNormalization((thisCommit.getNumberOfMedium()))); 
-			thisContent[7] = Double.toString(logNormalization((thisCommit.getNumberOfHigh())));
-			thisContent[8] = Double.toString(logNormalization((thisCommit.getNumberOfCrucial())));
-			thisContent[9] = Double.toString(logNormalization((thisCommit.getDellines())));
-			thisContent[10] = Double.toString(logNormalization((thisCommit.getAddlines())));
-			thisContent[11] = Double.toString(logNormalization((thisCommit.getSubSystemNum())));
-			thisContent[12] = Double.toString(logNormalization((thisCommit.getEXP())));
-			thisContent[13] = Double.toString(logNormalization((thisCommit.getNDEV())));
-			thisContent[14] = Double.toString(logNormalization((thisCommit.getNF())));
-			thisContent[15] = Double.toString(logNormalization((thisCommit.getND())));
-			thisContent[16] = Double.toString(logNormalization((thisCommit.getNUC())));
-			thisContent[17] = Double.toString(logNormalization((thisCommit.getEntropy())));
-			thisContent[18] = Double.toString(logNormalization((thisCommit.getConf())));
-			thisContent[19] = Double.toString(logNormalization((thisCommit.getMsg_length())));
-			thisContent[20] = Double.toString(((thisCommit.getTextHasBug())));
-			thisContent[21] = Double.toString(((thisCommit.getTestHasFeature())));
-			thisContent[22] = Double.toString(((thisCommit.getTextHasImprove())));
-			thisContent[23] = Double.toString(((thisCommit.getTextHasDocument())));
-			thisContent[24] = Double.toString(((thisCommit.getTextHasRefactor())));
-			thisContent[25] = Double.toString(logNormalization((thisCommit.getLanguage_num())));
-			thisContent[26] = Double.toString(logNormalization((thisCommit.getFile_type_num())));
-			thisContent[27] = Double.toString(logNormalization((thisCommit.getSegs_added_num())));
-			thisContent[28] = Double.toString(logNormalization((thisCommit.getSegs_deleted_num())));
-			thisContent[29] = Double.toString(logNormalization((thisCommit.getSegs_update_num())));
-			thisContent[30] = Double.toString(logNormalization((thisCommit.getChanges_files_modified())));
-			thisContent[31] = Double.toString(logNormalization((thisCommit.getRecent_change_num())));
-			thisContent[32] = Double.toString(((thisCommit.getTime_before_reverted())));
+			thisContent[0] = Double.toString((thisCommit.getAddFiles())); 
+			thisContent[1] = Double.toString((thisCommit.getModifyFiles()));
+			thisContent[2] = Double.toString((thisCommit.getDeleteFiles()));
+			thisContent[3] = Double.toString((thisCommit.getRenameFiles())); 
+			thisContent[4] = Double.toString((thisCommit.getCopyFiles()));
+			thisContent[5] = Double.toString((thisCommit.getNumberOfLow())); 
+			thisContent[6] = Double.toString((thisCommit.getNumberOfMedium())); 
+			thisContent[7] = Double.toString((thisCommit.getNumberOfHigh()));
+			thisContent[8] = Double.toString((thisCommit.getNumberOfCrucial()));
+			thisContent[9] = Double.toString((thisCommit.getDellines()));
+			thisContent[10] = Double.toString((thisCommit.getAddlines()));
+			thisContent[11] = Double.toString((thisCommit.getSubSystemNum()));
+			thisContent[12] = Double.toString((thisCommit.getEXP()));
+			thisContent[13] = Double.toString((thisCommit.getNDEV()));
+			thisContent[14] = Double.toString((thisCommit.getNF()));
+			thisContent[15] = Double.toString((thisCommit.getND()));
+			thisContent[16] = Double.toString((thisCommit.getNUC()));
+			thisContent[17] = Double.toString((thisCommit.getEntropy()));
+			thisContent[18] = Double.toString((thisCommit.getConf()));
+			thisContent[19] = Double.toString((thisCommit.getMsg_length()));
+			thisContent[20] = Double.toString((thisCommit.getTextHasBug()));
+			thisContent[21] = Double.toString((thisCommit.getTestHasFeature()));
+			thisContent[22] = Double.toString((thisCommit.getTextHasImprove()));
+			thisContent[23] = Double.toString((thisCommit.getTextHasDocument()));
+			thisContent[24] = Double.toString((thisCommit.getTextHasRefactor()));
+			thisContent[25] = Double.toString((thisCommit.getLanguage_num()));
+			thisContent[26] = Double.toString((thisCommit.getFile_type_num()));
+			thisContent[27] = Double.toString((thisCommit.getSegs_added_num()));
+			thisContent[28] = Double.toString((thisCommit.getSegs_deleted_num()));
+			thisContent[29] = Double.toString((thisCommit.getSegs_update_num()));
+			thisContent[30] = Double.toString((thisCommit.getChanges_files_modified()));
+			thisContent[31] = Double.toString((thisCommit.getRecent_change_num()));
+			thisContent[32] = Double.toString((thisCommit.getTime_before_reverted()));
 			thisContent[33] =  Integer.toString(thisCommit.getLabel());
 
 			content.add(thisContent);

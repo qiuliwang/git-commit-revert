@@ -71,7 +71,7 @@ public class Commit {
 	
 	//WangQL 2017/6/8
 	private double time_before_reverted = 0;
-	
+	private int language_num = 0;  //number of programming languageused in this code change
 	
 	
 	public double getTime_before_reverted() {
@@ -145,7 +145,7 @@ public class Commit {
 	public void setSubsystem_change_num(int subsystem_change_num) {
 		this.subsystem_change_num = subsystem_change_num;
 	}
-	private int language_num = 0;  //number of programming languageused in this code change
+	
 	public int getFile_type_num() {
 		return file_type_num;
 	}

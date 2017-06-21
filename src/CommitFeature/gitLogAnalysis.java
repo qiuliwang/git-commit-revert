@@ -175,7 +175,7 @@ public class gitLogAnalysis {
 			
 			
 			
-			thisCommit.setMsg_length(spaceNum);
+			thisCommit.setMsg_length(spaceNum+1);
 
 			thisCommit.setCommitter(committerName); // committer
 			thisCommit.setTime(commitDate); // date
@@ -248,11 +248,13 @@ public class gitLogAnalysis {
 			System.out.println(datereverting.toString());
 
 			System.out.println(hours);
-			for(Commit tmp : featuredAllCommits)
+			for(int j=0; j<allCommits.size();j++)
 			{
-				if(tmp.getRevertedId() == temp.getRevertedId())
+				Commit tmp = allCommits.get(j);
+				if(tmp.getCommitid().equals(temp.getCommitid()))
 				{
 					tmp.setTime_before_reverted(hours);
+					allCommits.set(j, tmp);
 				}
 			}
 		}
