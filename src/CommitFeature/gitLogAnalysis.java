@@ -56,7 +56,7 @@ public class gitLogAnalysis {
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss-SSS");
 		String time1 = df.format(new Date()).toString();//
 		//C:\Users\WangQL\Documents\Code\Java
-		gitLogAnalysis gas = new gitLogAnalysis("C:/Users/WangQL/Documents/Code/", "Java");
+		gitLogAnalysis gas = new gitLogAnalysis("C:/Users/WangQL/Documents/Code/", "testgit");
 		//gitLogAnalysis gas = new gitLogAnalysis("/Users/WangQL/Documents/git/", "Java");
 
 		//myFirstRep  camel

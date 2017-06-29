@@ -378,8 +378,14 @@ public class DiffCommit {
 			newCommit.setEntropy(entropy(addNum, delNum));
 			newCommit.setNDEV(getNDEV(fileList, newCommit.getCommitter(), NDEV));
 			newCommit.setConf(getConf(fileList));
-			newCommit.setEXP(hmp.get(commiter));
 			
+			// Exp
+			int exp = hmp.get(commiter);
+			if(exp == 0)
+				newCommit.setEXP(0);
+			else
+				newCommit.setEXP(hmp.get(commiter) - 1); // minus 1, we only get info before this commit
+
 			if(fileList.size() == 1)
 			{
 				if(!uniqueChange.containsKey(fileList.get(0)))
