@@ -56,7 +56,7 @@ public class gitLogAnalysis {
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss-SSS");
 		String time1 = df.format(new Date()).toString();//
 		//C:\Users\WangQL\Documents\Code\Java
-		gitLogAnalysis gas = new gitLogAnalysis("C:/Users/WangQL/Documents/Code/", "testgit");
+		gitLogAnalysis gas = new gitLogAnalysis("C:/Users/WangQL/Documents/GitCode/", "testgit");
 		//gitLogAnalysis gas = new gitLogAnalysis("/Users/WangQL/Documents/git/", "Java");
 
 		//myFirstRep  camel
@@ -111,7 +111,7 @@ public class gitLogAnalysis {
 		//RevWalk: Walks a commit graph and produces the matching commits in order.
 		RevWalk walk = new RevWalk(repository);
 		//RevCommit: A commit reference to a commit in the DAG.
-		RevCommit commit = walk.parseCommit(head);
+		//RevCommit commit = walk.parseCommit(head);
 		Iterable<RevCommit> gitLog = git.log().call();
 		Iterator<RevCommit> it = gitLog.iterator();
 
