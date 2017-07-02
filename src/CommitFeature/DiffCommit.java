@@ -307,7 +307,7 @@ public class DiffCommit {
 	            
 	            if(!changes_files_modified.keySet().contains(file))
 	            {
-	            	changes_files_modified.put(file, 1);
+	            	changes_files_modified.put(file, 0);
 	            }
 	            else
 	            {
@@ -335,27 +335,28 @@ public class DiffCommit {
                 }
 			}
 			
-			if(addNum.size() == 0 && delNum.size() != 0)
-			{
-				newCommit.setSegs_deleted_num(sum(delNum));
-			}
-			else if(addNum.size() != 0 && delNum.size() == 0)
-			{
-				newCommit.setSegs_added_num(sum(addNum));
-			}
-			else if(addNum.size() != 0 && delNum.size() != 0)
-			{
-				newCommit.setSegs_update_num(sum(delNum) + sum(addNum));
-			}
+			//if(addNum.size() == 0 && delNum.size() != 0)
+			//{
+				newCommit.setSegs_deleted_num(delNum.size());
+			//}
+			//else if(addNum.size() != 0 && delNum.size() == 0)
+			//{
+				newCommit.setSegs_added_num(addNum.size());
+			//}
+			//else if(addNum.size() != 0 && delNum.size() != 0)
+			//{
+				newCommit.setSegs_update_num(delNum.size() + addNum.size());
+			//}
 			
 			//changes_files_modified
 			int file_changes = 0;
-			
+
 			for(String tmp:fileList){
 				if(changes_files_modified.keySet().contains(tmp))
-					file_changes += changes_files_modified.get(tmp);
+					{
+						file_changes += changes_files_modified.get(tmp);
+					}
 			}
-			
 			//newCommit.set
 			newCommit.setRecent_change_num(recent_modify.get(commiter).size());
 			newCommit.setChanges_files_modified(file_changes);
