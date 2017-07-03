@@ -58,8 +58,6 @@ public class gitLogAnalysis {
 		//C:\Users\WangQL\Documents\Code\Java
 		gitLogAnalysis gas = new gitLogAnalysis("C:/Users/WangQL/Documents/GitCode/", "testgit");
 		//gitLogAnalysis gas = new gitLogAnalysis("/Users/WangQL/Documents/git/", "Java");
-
-		//myFirstRep  camel
 		gas.analysis();
 		
 		String time2 = df.format(new Date()).toString();

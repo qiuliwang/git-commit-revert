@@ -271,10 +271,9 @@ public class DiffCommit {
 	            {
 	            	;
 	            }
-	            
-	            if(!subSysList.contains(subString))
+	            if(!subSysList.contains(firstFile) && firstFile.lastIndexOf('\\') > 0)
 	            {
-	            	subSysList.add(subString);
+	            	subSysList.add(firstFile);
 	            }
 	            
 	            String file = firstFile.substring(firstFile.lastIndexOf("/") + 1);
@@ -358,7 +357,7 @@ public class DiffCommit {
 					}
 			}
 			//newCommit.set
-			newCommit.setRecent_change_num(recent_modify.get(commiter).size());
+			newCommit.setRecent_change_num(recent_modify.get(commiter).size() - 1);
 			newCommit.setChanges_files_modified(file_changes);
 			newCommit.setLanguage_num(codeType.size());
 			newCommit.setFile_type_num(fileType.size());
@@ -387,6 +386,8 @@ public class DiffCommit {
 			else
 				newCommit.setEXP(hmp.get(commiter) - 1); // minus 1, we only get info before this commit
 
+			//WangQL 2017/7/3
+			//setNUC
 			if(fileList.size() == 1)
 			{
 				if(!uniqueChange.containsKey(fileList.get(0)))
@@ -399,9 +400,16 @@ public class DiffCommit {
 				}
 				newCommit.setNUC(uniqueChange.get(fileList.get(0)));
 			}
-			else
+			else if(fileList.size() != 0)
 			{
-				newCommit.setNUC(0);
+				//newCommit.setNUC(0);
+				int count = 0;
+				for(String filename : fileList)
+				{
+					if(uniqueChange.containsKey(filename))
+						count += uniqueChange.get(filename);
+				}
+				newCommit.setNUC(count);
 			}
 		}
 		return allCommits;
@@ -428,7 +436,7 @@ public class DiffCommit {
 	private static Integer getNDEV(List<String> fileList, String commiter, HashMap<String,String> hmp)
 	{
 		//Integer ans = 0;
-		
+		int sign = 0;
 		for(int i = 0; i < fileList.size(); i ++)
 		{
 			String temp = fileList.get(i);
@@ -441,7 +449,7 @@ public class DiffCommit {
 			}
 			else
 			{
-				hmp.put(temp, commiter + "&");
+				hmp.put(temp, "");
 			}
 		}
 
